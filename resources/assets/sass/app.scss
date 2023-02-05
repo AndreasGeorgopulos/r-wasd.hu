@@ -1,0 +1,110 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap/dist/css/bootstrap";
+
+// Cookie consent
+@import "node_modules/cookieconsent/build/cookieconsent.min";
+
+// Font awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Select2
+@import "node_modules/select2/dist/css/select2.min";
+
+@font-face {
+  font-family: "RussoOne Regular";
+  src: url(../fonts/RussoOne-Regular.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Exo2";
+  src: url(../fonts/Exo2-VariableFont_wght.ttf);
+  font-display: swap;
+}
+
+.font-exo-2 {
+  font-family: Exo2;
+}
+
+.font-russo-one {
+  font-family: "RussoOne Regular";
+}
+
+.bg-color-orange {
+  background-color: #fe784f !important;
+}
+
+.color-orange {
+  color: #fe784f;
+}
+
+.color-blue {
+  color: #3396a8;
+}
+
+.color-gray {
+  color: #222222;
+}
+
+.navbar .navbar-brand {
+  font-family: "RussoOne Regular" !important;
+  font-size: 3vw;
+}
+
+.navbar {
+  background-color: #FC7829 !important;
+  opacity: 0.92;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  border-top: solid 14px #343A40;
+}
+
+body {
+  font-family: "Exo2" !important;
+  background-image: url("../images/bg.jpg");
+  /*background-size: 100%;
+  background-attachment: fixed;*/
+  background-size: cover;
+}
+
+main {
+  display: block;
+  /*margin-bottom: 70px;*/
+}
+
+footer {
+  opacity: 0.92;
+  background-color: #44494F;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  z-index: 9999;
+}
+
+.container.index {
+  max-width: 1260px;
+}
+
+.container.index .product-item img {
+  width: 70%;
+}
+
+.container.index .product-item li {
+  color: #3396a8;
+}
+
+@import "cart";

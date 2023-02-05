@@ -1,0 +1,66 @@
+<?php
+
+Route::match(['get'], '/', 'SiteController@index')->name('main-page');
+Route::match(['get'], '/page/{slug}', 'SiteController@page')->name('page');
+Route::match(['get'], '/product/{slug}', 'ProductController@getBySlug')->name('product');
+
+Route::get('/cart', 'CartController@index')->name('cart_index');
+Route::get('/cart/get', 'CartController@get')->name('cart_get');
+/*Route::get('/cart/set', 'CartController@set')->name('cart_set');
+Route::get('/cart/set/{product_id}', 'CartController@set')->name('cart_set');*/
+Route::get('/cart/set/{product_id?}/{amount?}', 'CartController@set')->name('cart_set');
+
+Route::match(['get', 'post'], '/order/checkout', 'OrderController@checkout')->name('order_checkout');
+Route::match(['get', 'post'], '/order/checkout_check', 'OrderController@checkoutCheck')->name('order_checkout_check');
+Route::match(['get', 'post'], '/order/payment', 'OrderController@payment')->name('order_payment');
+Route::match(['get', 'post'], '/order/success_payment/{order_code}', 'OrderController@successPayment')->name('success_payment');
+Route::match(['get', 'post'], '/order/cancel_payment/{order_code}', 'OrderController@cancelPayment')->name('cancel_payment');
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['locale']], function() {
+	Route::match(['get', 'post'], '/', 'IndexController@login')->name('admin_index');
+	Route::match(['get', 'post'], '/login', 'IndexController@login')->name('admin_login');
+	Route::match(['get', 'post'], '/language/{lang}', 'IndexController@changeLanguage')->name('admin_language_change');
+});
+
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'acl', 'locale']], function() {
+	Route::match(['get', 'post'], '/', function () {
+		return redirect(route('admin_dashboard'));
+	})->name('admin_index');
+	Route::match(['get'], '/', 'IndexController@dashboard')->name('admin_dashboard');
+	Route::match(['get'], '/dashboard', 'IndexController@dashboard')->name('admin_dashboard');
+	Route::match(['get','post'], '/logout', 'IndexController@logout')->name('admin_logout');
+
+	// users
+	Route::match(['get', 'post'], '/users', function () {
+		return redirect(route('admin_users_list'));
+	})->name('admin_users_index');
+	Route::match(['get', 'post'], '/users/list', 'UserController@index')->name('admin_users_list');
+	Route::match(['get', 'post', 'put'], '/users/edit/{id?}', 'UserController@edit')->name('admin_users_edit');
+	Route::match(['get'], '/users/delete/{id?}', 'UserController@delete')->name('admin_users_delete');
+	Route::match(['get'], '/users/force_login/{id?}', 'UserController@forceLogin')->name('admin_users_force_login');
+
+	// roles
+	Route::match(['get', 'post'], '/roles', function () {
+		return redirect(route('admin_roles_list'));
+	})->name('admin_roles_index');
+	Route::match(['get', 'post'], '/roles/list', 'RoleController@index')->name('admin_roles_list');
+	Route::match(['get', 'post', 'put'], '/roles/edit/{id?}', 'RoleController@edit')->name('admin_roles_edit');
+	Route::match(['get'], '/roles/delete/{id?}', 'RoleController@delete')->name('admin_roles_delete');
+
+	// contents
+	Route::match(['get', 'post'], '/contents', function () {
+		return redirect(route('admin_contents_list'));
+	})->name('admin_contents_index');
+	Route::match(['get', 'post'], '/contents/list', 'ContentController@index')->name('admin_contents_list');
+	Route::match(['get', 'post', 'put'], '/contents/edit/{id?}', 'ContentController@edit')->name('admin_contents_edit');
+	Route::match(['get'], '/contents/delete/{id?}', 'ContentController@delete')->name('admin_contents_delete');
+
+	// products
+	Route::match(['get', 'post'], '/products', function () {
+		return redirect(route('admin_products_list'));
+	})->name('admin_products_index');
+	Route::match(['get', 'post'], '/products/list', 'ProductController@index')->name('admin_products_list');
+	Route::match(['get', 'post', 'put'], '/products/edit/{id?}', 'ProductController@edit')->name('admin_products_edit');
+	Route::match(['get'], '/products/delete/{id?}', 'ProductController@delete')->name('admin_products_delete');
+});

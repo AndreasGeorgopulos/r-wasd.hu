@@ -1,0 +1,60 @@
+version: '3.8'
+
+networks:
+  laravel:
+
+services:
+  php-apache:
+    #image: php:8.0-apache
+    container_name: r-wasd-web
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./:/var/www/html
+      - ./docker/php-apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    environment:
+        - max_execution_time=600
+    ports:
+      - "30000:80"
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: mariadb:latest
+    container_name: r-wasd-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=aA123456
+      - MYSQL_DATABASE=r_wasd_db
+      - MYSQL_USER=r-wasd-user
+      - MYSQL_PASSWORD=r-wasd-pwd
+      - TZ=Europe/Budapest
+    ports:
+      - "30001:3306"
+    volumes:
+      - ./docker/db:/var/lib/mysql
+    networks:
+      - laravel
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+      ]
+
+  adminer:
+    image: adminer
+    container_name: r-wasd-adminer
+    ports:
+      - "30002:8080"
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      ADMINER_DESIGN: price
+      ADMINER_PLUGINS: dump-date edit-calendar enum-option enum-types sql-log struct-comments tables-filter
+    networks:
+      - laravel
