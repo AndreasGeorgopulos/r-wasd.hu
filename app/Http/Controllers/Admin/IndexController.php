@@ -20,7 +20,7 @@ class IndexController extends Controller
 			]);
 			
 			if ($validator->fails()) {
-				return redirect(route('admin_login'))
+				return redirect(route('login'))
 					->withErrors($validator)
 					->withInput();
 			}
@@ -36,7 +36,7 @@ class IndexController extends Controller
 				{
 					$validator->errors()->add('email', trans('common.Nincs jogosultsága a belépéshez!'));
 					
-					return redirect(route('admin_login'))
+					return redirect(route('login'))
 						->withErrors($validator)
 						->withInput();
 				}
@@ -74,7 +74,7 @@ class IndexController extends Controller
 			} else {
 				$validator->errors()->add('email', trans('common.E-mail cím/Jelszó nem egyezik!'));
 
-				return redirect(route('admin_login'))
+				return redirect(route('login'))
 					->withErrors($validator)
 					->withInput();
 			}
@@ -91,7 +91,7 @@ class IndexController extends Controller
 		
 		$request->session()->regenerate();
 		
-		return redirect(route('admin_login'));
+		return redirect(route('login'));
 	}
 	
 	public function dashboard (Request $request) {

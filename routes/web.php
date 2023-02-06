@@ -16,20 +16,15 @@ Route::match(['get', 'post'], '/order/payment', 'OrderController@payment')->name
 Route::match(['get', 'post'], '/order/success_payment/{order_code}', 'OrderController@successPayment')->name('success_payment');
 Route::match(['get', 'post'], '/order/cancel_payment/{order_code}', 'OrderController@cancelPayment')->name('cancel_payment');
 
-/*Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['locale']], function() {
-	Route::match(['get', 'post'], '/', 'IndexController@login')->name('admin_index');
-	Route::match(['get', 'post'], '/login', 'IndexController@login')->name('admin_login');
-	Route::match(['get', 'post'], '/language/{lang}', 'IndexController@changeLanguage')->name('admin_language_change');
-});*/
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['acl', 'locale']], function() {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 	Route::match(['get'], '/', function () {
-		return redirect(route('admin_login'));
+		return redirect(route('login'));
 	})->name('admin_index');
-	Route::match(['get', 'post'], '/login', 'IndexController@login')->name('admin_login');
+	Route::match(['get', 'post'], '/login', 'IndexController@login')->name('login');
 	Route::match(['get', 'post'], '/language/{lang}', 'IndexController@changeLanguage')->name('admin_language_change');
 
-	Route::group(['middleware' => ['auth']], function() {
+	Route::group(['middleware' => ['auth', 'acl', 'locale']], function() {
 		/*Route::match(['get'], '/', function () {
 			return redirect(route('admin_dashboard'));
 		})->name('admin_index_logged_in');*/
