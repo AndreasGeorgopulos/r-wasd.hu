@@ -106,27 +106,33 @@ return [
     'menu' => [
         [
             'text'        => 'Dashboard',
-            'url'         => 'admin/dashboard',
             'icon'        => 'dashboard',
-	        'route' => 'admin_dashboard'
+	        'route' => 'admin_dashboard',
+	        'active' => ['dashboard'],
         ],
 	    [
-		    'text'        => 'Contents',
-		    'url'         => 'admin/contents/list',
-		    'icon'        => 'file-o',
-		    'route' => 'admin_contents_index'
+		    'text'        => 'Products',
+		    'icon'        => 'trademark',
+		    'route' => 'admin_products_index',
+		    'active' => ['products/*'],
 	    ],
 	    [
-		    'text'        => 'Products',
-		    'url'         => 'admin/products/list',
-		    'icon'        => 'trademark',
-		    'route' => 'admin_products_index'
+		    'text'        => 'Contents',
+		    'icon'        => 'file-o',
+		    'route' => 'admin_contents_index',
+		    'active' => ['contents/*'],
 	    ],
 	    [
 		    'text'        => 'Postal parcels',
-		    'url'         => 'admin/postal_parcels/list',
-		    'icon'        => 'trademark',
-		    'route' => 'admin_postal_parcels_index'
+		    'icon'        => 'map',
+		    'route' => 'admin_postal_parcels_index',
+		    'active' => ['postal_parcels/*'],
+	    ],
+	    [
+		    'text'        => 'Countries',
+		    'icon'        => 'flag',
+		    'route' => 'admin_countries_index',
+		    'active' => ['countries/*'],
 	    ],
 	    /*[
 		    'text'        => 'Users',
@@ -180,7 +186,7 @@ return [
     ],
 
 	'paginator' => [
-		'default_length' => 10,
-		'lengths' => [10, 25, 50, 100]
+		'default_length' => 25,
+		'lengths' => [25, 50, 100]
 	]
 ];

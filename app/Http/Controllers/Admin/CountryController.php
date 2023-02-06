@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PostalParcel;
+use App\Models\Country;
 use App\Models\TModelValidate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class PostalParcelController extends Controller implements ICrudController
+class CountryController extends Controller implements ICrudController
 {
 	use TModelValidate;
 
-    //
 	/**
 	 * @param Request $request
 	 * @return mixed
@@ -27,16 +24,17 @@ class PostalParcelController extends Controller implements ICrudController
 			$searchtext = $request->get('searchtext', '');
 
 			if ($searchtext != '') {
-				$list = PostalParcel::where('id', 'like', '%' . $searchtext . '%')
-					->orWhere('title', 'like', '%' . $searchtext . '%')
+				$list = Country::where('id', 'like', '%' . $searchtext . '%')
+					->where('code', 'like', '%' . $searchtext . '%')
+					->orWhere('name', 'like', '%' . $searchtext . '%')
 					->orderby($sort, $direction)
 					->paginate($length);
 			}
 			else {
-				$list = PostalParcel::orderby($sort, $direction)->paginate($length);
+				$list = Country::orderby($sort, $direction)->paginate($length);
 			}
 
-			return view('admin.postal_parcels.list', [
+			return view('admin.countries.list', [
 				'list' => $list,
 				'sort' => $sort,
 				'direction' => $direction,
@@ -44,7 +42,7 @@ class PostalParcelController extends Controller implements ICrudController
 			]);
 		}
 
-		return view('admin.postal_parcels.index');
+		return view('admin.countries.index');
 	}
 
 	/**
@@ -63,15 +61,15 @@ class PostalParcelController extends Controller implements ICrudController
 	 */
 	public function edit(Request $request, int $id = 0)
 	{
-		$model = PostalParcel::findOrNew($id);
+		$model = Country::findOrNew($id);
 
 		if ($request->isMethod('post')) {
 			// validate
-			$validator = $this->modelValidate($request->all(), PostalParcel::rules(), PostalParcel::niceNames(), PostalParcel::customMessages());
+			$validator = $this->modelValidate($request->all(), Country::rules(), Country::niceNames(), Country::customMessages());
 			if ($validator->fails()) {
-				return redirect(route('admin_postal_parcels_edit', ['id' => $id]))->withErrors($validator)->withInput()->with('form_warning_message', [
+				return redirect(route('admin_countries_edit', ['id' => $id]))->withErrors($validator)->withInput()->with('form_warning_message', [
 					trans('Save failed'),
-					trans('The postal parcel save failed. Errors:')
+					trans('The country save failed. Errors:')
 				]);
 			}
 
@@ -79,17 +77,14 @@ class PostalParcelController extends Controller implements ICrudController
 			$model->fill($request->all());
 			$model->save();
 
-			$model->countries()->sync($request->get('countries'));
-
-			return redirect(route('admin_postal_parcels_edit', ['id' => $model->id]))->with('form_success_message', [
+			return redirect(route('admin_countries_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Save success'),
-				trans('The postal parcel save successfully.'),
+				trans('The country save successfully.'),
 			]);
 		}
 
-		return view('admin.postal_parcels.edit', [
+		return view('admin.countries.edit', [
 			'model' => $model,
-			'countryIds' => $model->countries()->pluck('id')->toArray(),
 		]);
 	}
 
@@ -99,12 +94,11 @@ class PostalParcelController extends Controller implements ICrudController
 	 */
 	public function delete(int $id)
 	{
-		if (($model = PostalParcel::find($id)) && $model->isDeletable()) {
-			$model->countries()->sync([]);
+		if (($model = Country::find($id)) && $model->isDeletable()) {
 			$model->delete();
-			return redirect(route('admin_postal_parcels_list'))->with('form_success_message', [
+			return redirect(route('admin_countries_list'))->with('form_success_message', [
 				trans('Delete success'),
-				trans('The postal parcel delete successfully.')
+				trans('The country delete successfully.')
 			]);
 		}
 	}

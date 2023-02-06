@@ -22,4 +22,11 @@ interface IModelRules
 	 * @return array
 	 */
 	public static function niceNames(): array;
+
+	/**
+	 * A model validálásakor használt egyedi üzenetek
+	 *
+	 * @return array
+	 */
+	public static function customMessages(): array;
 }

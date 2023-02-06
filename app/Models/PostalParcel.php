@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Postai csomag model
+ *
+ * @property int $id
+ * @property string $name
+ * @property float $unit_price
+ * @property bool $is_active
  */
 class PostalParcel extends Model implements IModelRules, IModelDeletable
 {
@@ -32,6 +37,16 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+	 * Model törölhetőségének ellenőrzése
+	 *
+	 * @return bool
+	 */
+	public function isDeletable(): bool
+	{
+		return true;
+	}
+
+	/**
 	 * A model validálásakor használt mező szabályok
 	 *
 	 * @return array
@@ -49,8 +64,13 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 				'numeric',
 				'min:1',
 			],
+			'is_active' => [
+				'required',
+				'boolean',
+			],
 			'countries' => [
 				'required',
+				'array',
 			],
 		];
 	}
@@ -71,12 +91,14 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
-	 * Model törölhetőségének ellenőrzése
+	 * A model validálásakor használt egyedi üzenetek
 	 *
-	 * @return bool
+	 * @return array
 	 */
-	public function isDeletable(): bool
+	public static function customMessages(): array
 	{
-		return true;
+		return [
+			'is_active.boolean' => trans('Is active field must be yes or no.'),
+		];
 	}
 }

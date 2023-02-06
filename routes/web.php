@@ -76,5 +76,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['acl
 		Route::match(['get', 'post'], '/postal_parcels/list', 'PostalParcelController@index')->name('admin_postal_parcels_list');
 		Route::match(['get', 'post', 'put'], '/postal_parcels/edit/{id?}', 'PostalParcelController@edit')->name('admin_postal_parcels_edit');
 		Route::match(['get'], '/postal_parcels/delete/{id?}', 'PostalParcelController@delete')->name('admin_postal_parcels_delete');
+
+		// countries
+		Route::match(['get', 'post'], '/countries', function () {
+			return redirect(route('admin_countries_list'));
+		})->name('admin_countries_index');
+		Route::match(['get', 'post'], '/countries/list', 'CountryController@index')->name('admin_countries_list');
+		Route::match(['get', 'post', 'put'], '/countries/edit/{id?}', 'CountryController@edit')->name('admin_countries_edit');
+		Route::match(['get'], '/countries/delete/{id?}', 'CountryController@delete')->name('admin_countries_delete');
 	});
 });
