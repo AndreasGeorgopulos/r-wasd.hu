@@ -10,6 +10,8 @@ const loadComponent = (componentId, elementId) => {
 	}
 }
 
+$('.select2').select2();
+
 /*import ImageUploadPreviewComponent from "./components/ImageUploader/ImageUploadPreviewComponent"
 (function () {
 	const element = document.getElementById('product_image_area')

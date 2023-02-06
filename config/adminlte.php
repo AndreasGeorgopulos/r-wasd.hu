@@ -122,6 +122,12 @@ return [
 		    'icon'        => 'trademark',
 		    'route' => 'admin_products_index'
 	    ],
+	    [
+		    'text'        => 'Postal parcels',
+		    'url'         => 'admin/postal_parcels/list',
+		    'icon'        => 'trademark',
+		    'route' => 'admin_postal_parcels_index'
+	    ],
 	    /*[
 		    'text'        => 'Users',
 		    'url'         => 'admin/users/list',

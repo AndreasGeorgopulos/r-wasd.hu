@@ -63746,6 +63746,7 @@ var loadComponent = function loadComponent(componentId, elementId) {
     (0,react_dom__WEBPACK_IMPORTED_MODULE_0__.render)(componentId, element);
   }
 };
+$('.select2').select2();
 
 /*import ImageUploadPreviewComponent from "./components/ImageUploader/ImageUploadPreviewComponent"
 (function () {
