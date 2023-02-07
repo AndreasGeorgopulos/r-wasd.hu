@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PostalParcel;
@@ -38,7 +37,7 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
     {
-	    if (!($cartData = $this->getCartData())) {
+	    if (!($cartData = $this->getCartData()) || empty($cartData['cart_items'])) {
 		    return redirect(route('cart_index'));
 	    }
 
@@ -74,7 +73,7 @@ class OrderController extends Controller
 
 	public function checkoutCheck()
 	{
-		if (!($order = $this->getCookieOrder()) || !($cartData = $this->getCartData())) {
+		if (!($order = $this->getCookieOrder()) || !($cartData = $this->getCartData()) || empty($cartData['cart_items'])) {
 			return redirect(route('cart_index'));
 		}
 
@@ -94,7 +93,7 @@ class OrderController extends Controller
 	{
 		$redirect_url = null;
 
-		if (!($order = $this->getCookieOrder()) || !($cartData = $this->getCartData())) {
+		if (!($order = $this->getCookieOrder()) || !($cartData = $this->getCartData()) || empty($cartData['cart_items'])) {
 			return redirect(route('cart_index'));
 		}
 

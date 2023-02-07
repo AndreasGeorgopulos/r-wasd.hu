@@ -94,18 +94,23 @@ trait TCart {
 		];
 
 		$total = 0;
+		$weight = 0;
 		foreach ($data['cart_items'] as &$item) {
 			$product = Product::find($item['product_id']);
 			$item['name'] = $product->getTitle();
 			$item['description'] = $product->getLead();
 			$item['url'] = url(route('product', ['slug' => $product->getSlug()]));
+			$item['weight'] = $product->weight;
+			$item['weight_total'] = $product->weight * $item['amount'];
 			$item['price'] = $product->price;
 			$item['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
 			$item['total'] = (round($product->price) * $item['amount']);
 			$item['total_formated'] = $this->priceFormat((float) $item['total'], '€', '', 2);
 			$total += (round($product->price) * $item['amount']);
+			$weight += $product->weight * $item['amount'];
 		}
 
+		$data['weight'] = $weight;
 		$data['total'] = $total;
 		$data['total_formated'] = $this->priceFormat($total, '€', '', 2);
 
