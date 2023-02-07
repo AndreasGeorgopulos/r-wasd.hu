@@ -1,0 +1,40 @@
+.order_steps {
+  .step {
+	padding-top: 9px;
+  }
+
+  .step:first-child {
+	border-right: solid 1px #ffffff;
+  }
+
+  .step:last-child {
+	border-left: solid 1px #ffffff;
+  }
+
+  .step h3 {
+	color: #ffffff;
+	font-size: 24px;
+  }
+
+  .step.active {
+	background-color: #0fc9e7;
+  }
+
+  .step.locked {
+	background-color: #666666;
+  }
+
+  .step.unlocked {
+	background-color: #666666;
+  }
+
+  @media (max-width: 600px) {
+	.step,
+	.step:first-child,
+	.step:last-child {
+	  border-bottom: solid 1px #ffffff;
+	  border-left: none;
+	  border-right: none;
+	}
+  }
+}

@@ -15230,3 +15230,35 @@ a {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+.order_steps .step {
+  padding-top: 9px;
+}
+.order_steps .step:first-child {
+  border-right: solid 1px #ffffff;
+}
+.order_steps .step:last-child {
+  border-left: solid 1px #ffffff;
+}
+.order_steps .step h3 {
+  color: #ffffff;
+  font-size: 24px;
+}
+.order_steps .step.active {
+  background-color: #0fc9e7;
+}
+.order_steps .step.locked {
+  background-color: #666666;
+}
+.order_steps .step.unlocked {
+  background-color: #666666;
+}
+@media (max-width: 600px) {
+  .order_steps .step,
+  .order_steps .step:first-child,
+  .order_steps .step:last-child {
+    border-bottom: solid 1px #ffffff;
+    border-left: none;
+    border-right: none;
+  }
+}

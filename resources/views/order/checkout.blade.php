@@ -20,12 +20,14 @@
 
 			<hr />
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-6 p-4">
 					@include('order._products')
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 p-4">
+					<h2>{{trans('Contact')}}</h2>
+
 					<div class="form-group mb-3">
-						<label>{{trans('Name')}} *</label>
+						<label>{{trans('Full name')}} *</label>
 						<input type="text" name="name" class="form-control" value="{{ old('name', $model->name) }}" required="required" />
 						<span class="error text-red"></span>
 					</div>
@@ -49,6 +51,8 @@
 						<input type="text" name="phone" class="form-control" value="{{ old('phone', $model->phone) }}" required="required" />
 						<span class="error text-red"></span>
 					</div>
+
+					<h2 class="mt-5">{{trans('Shipping address')}}</h2>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Country')}} *</label>
@@ -79,9 +83,9 @@
 						<span class="error text-red"></span>
 					</div>
 
+					<h2 class="mt-5">{{trans('Notice')}}</h2>
 					<div class="form-group mb-3">
-						<label>{{trans('Notice')}}</label>
-						<textarea name="notice" class="form-control">{{old('notice', $model->notice)}}</textarea>
+						<textarea name="notice" class="form-control" rows="6">{{old('notice', $model->notice)}}</textarea>
 						<span class="error text-red"></span>
 					</div>
 
