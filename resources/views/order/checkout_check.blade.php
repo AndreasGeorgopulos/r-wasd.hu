@@ -13,49 +13,49 @@
 					<div class="form-group mb-3">
 						<label>{{trans('Name')}} *</label>
 						<br/>
-						{{$order['name']}}
+						{{$model->name}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('E-mail')}} *</label>
 						<br/>
-						{{$order['email']}}
+						{{$model->email}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Phone')}} *</label>
 						<br/>
-						{{$order['phone']}}
+						{{$model->phone}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Country')}} *</label>
 						<br/>
-						{{$order['shipping_country_id']}}
+						{{$model->shipping_country->name}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Zip')}} *</label>
 						<br/>
-						{{$order['shipping_zip']}}
+						{{$model->shipping_zip}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('City')}} *</label>
 						<br/>
-						{{$order['shipping_city']}}
+						{{$model->shipping_city}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Address')}} *</label>
 						<br/>
-						{{$order['shipping_address']}}
+						{{$model->shipping_address}}
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Notice')}}</label>
 						<br/>
-						{{$order['notice']}}
+						{{$model->notice}}
 					</div>
 				</div>
 			</div>

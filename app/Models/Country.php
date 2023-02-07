@@ -52,12 +52,20 @@ class Country extends Model implements IModelDeletable, IModelRules
 	/**
 	 * Dropdown items of active countries
 	 *
+	 * @param bool $hasPostalParcel
 	 * @return mixed
 	 */
-	public static function getDropdownItems()
+	public static function getDropdownItems($hasPostalParcel = false)
 	{
 		return static::select(['id', 'name'])
-			->where('is_active', true)
+			->where(function ($q) use($hasPostalParcel) {
+				$q->where('is_active', true);
+				if ($hasPostalParcel) {
+					$q->whereHas('postal_parcels', function ($q) {
+						$q->where('postal_parcels.is_active', true);
+					});
+				}
+			})
 			->orderBy('name', 'asc')
 			->get()
 			->toArray();

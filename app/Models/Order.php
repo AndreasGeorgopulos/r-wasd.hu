@@ -17,7 +17,7 @@ class Order extends Model implements IModelDeletable, IModelRules
 	protected $table = 'orders';
 
 	protected $fillable = [
-		//'postal_parcel_id',
+		'postal_parcel_id',
 		'shipping_country_id',
 		'shipping_zip',
 		'shipping_city',
@@ -84,6 +84,16 @@ class Order extends Model implements IModelDeletable, IModelRules
 	 * @return array
 	 */
 	public static function niceNames(): array
+	{
+		return [];
+	}
+
+	/**
+	 * A model validálásakor használt egyedi üzenetek
+	 *
+	 * @return array
+	 */
+	public static function customMessages(): array
 	{
 		return [];
 	}

@@ -16,7 +16,7 @@
 	@include('order._steps')
 		<form method="post">
 			{{csrf_field()}}
-			<input type="" name="recaptcha_token" id="recaptcha_token" />
+			<input type="hidden" name="recaptcha_token" id="recaptcha_token" />
 
 			<hr />
 			<div class="row">
@@ -54,7 +54,7 @@
 						<label>{{trans('Country')}} *</label>
 						<select name="shipping_country_id" class="form-control select2" required="required">
 							<option value="0"></option>
-							@foreach(\App\Models\Country::getDropdownItems() as $country)
+							@foreach(\App\Models\Country::getDropdownItems(true) as $country)
 								<option value="{{ $country['id'] }}" @if(old('shipping_country_id', $model->shipping_country_id) == $country['id']) selected="selected" @endif>{{ $country['name'] }}</option>
 							@endforeach
 						</select>

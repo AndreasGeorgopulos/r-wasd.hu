@@ -44,4 +44,14 @@ class OrderItem extends Model implements IModelRules
 	{
 		return [];
 	}
+
+	/**
+	 * A model validálásakor használt egyedi üzenetek
+	 *
+	 * @return array
+	 */
+	public static function customMessages(): array
+	{
+		return [];
+	}
 }

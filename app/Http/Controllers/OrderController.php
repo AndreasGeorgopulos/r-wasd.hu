@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\PostalParcel;
 use App\Traits\TCart;
 use App\Traits\TDbTransaction;
 use Illuminate\Http\Request;
@@ -76,7 +78,10 @@ class OrderController extends Controller
 			return redirect(route('cart_index'));
 		}
 
+		$model = (new Order())->fill($order);
+
 		return view('order.checkout_check', [
+			'model' => $model,
 			'order' => $order,
 			'cartData' => $cartData,
 			'meta_data' => [
@@ -226,6 +231,7 @@ class OrderController extends Controller
 	private function getCookieOrder()
 	{
 		$orderData = unserialize(base64_decode(Cookie::get('order')));
+
 		return is_array($orderData) ? $orderData : [];
 	}
 
@@ -235,6 +241,13 @@ class OrderController extends Controller
 			Cookie::queue(Cookie::forget('order'));
 			return;
 		}
+
+		// set postal parcel
+		$postalParcel = PostalParcel::whereHas('countries', function ($q) use($model) {
+			$q->where('countries.id', $model->shipping_country_id);
+		})->first();
+
+		$model->postal_parcel_id = !empty($postalParcel) ? $postalParcel->id : null;
 
 		Cookie::queue(Cookie::make('order', base64_encode(serialize($model->toArray())), 3600));
 	}
