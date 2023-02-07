@@ -20,7 +20,7 @@ class Country extends Model implements IModelDeletable, IModelRules
 
     protected $table = 'countries';
 
-	protected $fillable = ['code', 'name', 'is_active'];
+	protected $fillable = ['id', 'code', 'name', 'is_active'];
 
 	protected $casts = [
 		'is_active' => 'bool',
