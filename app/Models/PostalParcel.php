@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property string $name
- * @property float $unit_price
  * @property bool $is_active
  */
 class PostalParcel extends Model implements IModelRules, IModelDeletable
@@ -20,7 +19,7 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 
 	protected $table = 'postal_parcels';
 
-	protected $fillable = ['name', 'unit_price', 'is_active'];
+	protected $fillable = ['name', 'is_active'];
 
 	protected $casts = [
 		'is_active' => 'bool',
@@ -59,11 +58,6 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 				'min:3',
 				'max:100',
 			],
-			'unit_price' => [
-				'required',
-				'numeric',
-				'min:1',
-			],
 			'is_active' => [
 				'required',
 				'boolean',
@@ -84,7 +78,6 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 	{
 		return [
 			'name' => trans('Name'),
-			'unit_price' => trans('Unit price'),
 			'is_active' => trans('Is active'),
 			'countries' => trans('Countries'),
 		];

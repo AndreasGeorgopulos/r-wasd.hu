@@ -8,7 +8,6 @@
 					<tr role="row">
 						<th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
 						<th class="@if($sort == 'name') sorting_{{$direction}} @else sorting @endif" data-column="name">{{trans('Name')}}</th>
-						<th class="@if($sort == 'unit_price') sorting_{{$direction}} @else sorting @endif" data-column="unit_price">{{trans('Unit price')}} ($)</th>
 						<th class="text-center">{{trans('Count of countries')}}</th>
 						<th class="text-center @if($sort == 'is_active') sorting_{{$direction}} @else sorting @endif" data-column="is_active">{{trans('Active')}}</th>
 						<th>
@@ -21,7 +20,6 @@
 						<tr role="row" class="odd">
 							<td>{{$model->id}}</td>
 							<td>{{$model->name}}</td>
-							<td>{{$model->unit_price}}</td>
 							<td class="text-center">{{$model->countries->count()}}</td>
 							<td class="text-center"><i class="fa @if($model->is_active) fa-check text-green @else fa-lock text-red @endif"></i></td>
 							<td>

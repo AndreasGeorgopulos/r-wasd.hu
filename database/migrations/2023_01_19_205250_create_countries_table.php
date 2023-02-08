@@ -29,7 +29,6 @@ class CreateCountriesTable extends Migration
 	    Schema::create(self::TABLE_POSTAL_PARCELS, function (Blueprint $table) {
 		    $table->bigIncrements('id');
 		    $table->string('name', 100);
-			$table->double('unit_price');
 		    $table->boolean('is_active');
 		    $table->timestamps();
 		    $table->softDeletes();

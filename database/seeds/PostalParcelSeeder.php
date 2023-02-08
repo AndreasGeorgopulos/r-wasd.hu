@@ -23,11 +23,10 @@ class PostalParcelSeeder extends Seeder
 		    $model->fill([
 			    'id' => $row[0],
 			    'name' => $row[1],
-			    'unit_price' => $row[2],
-			    'is_active' => $row[3],
+			    'is_active' => $row[2],
 		    ]);
 			$model->save();
-			$model->countries()->sync(!empty($row[4]) ? explode(',', $row[4]) : []);
+			$model->countries()->sync(!empty($row[3]) ? explode(',', $row[3]) : []);
 	    }
 
 		fclose($fp);

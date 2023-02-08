@@ -17,11 +17,6 @@
 						</div>
 
 						<div class="form-group">
-							<label>{{trans('Unit price')}}*:</label>
-							<input type="number" class="form-control" name="unit_price" value="{{old('unit_price', $model->unit_price)}}" />
-						</div>
-
-						<div class="form-group">
 							<label>{{trans('Active')}}:</label>
 							<select name="is_active" class="form-control select2">
 								<option value="1" @if(old('is_active', $model->is_active) == 1) selected="selected" @endif>{{trans('Yes')}}</option>
