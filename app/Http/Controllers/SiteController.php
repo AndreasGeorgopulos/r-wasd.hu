@@ -41,7 +41,7 @@ class SiteController extends Controller
 			'keywords' => $model->meta_keywords,
 		];
 
-		return view('product', [
+		return view('page', [
 			'model' => $model,
 			'meta_data' => $meta_data,
 		]);

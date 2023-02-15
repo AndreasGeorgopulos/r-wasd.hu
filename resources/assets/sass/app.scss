@@ -97,14 +97,23 @@ a {
 
 .container.index {
   max-width: 1260px;
+  .product-item {
+    img {
+      width: 70%;
+    }
+    li {
+      color: #3396a8;
+    }
+  }
 }
 
-.container.index .product-item img {
-  width: 70%;
-}
-
-.container.index .product-item li {
-  color: #3396a8;
+.container.page {
+  margin-top: 50px;
+  .content {
+    background-color: #ffffff;
+    padding: 20px 70px 20px 70px;
+    margin-bottom: 70px;
+  }
 }
 
 // Cart
