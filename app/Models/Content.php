@@ -36,9 +36,9 @@ class Content extends Model
 	public static function getTypeDropdownItems($selected): array
 	{
 		return [
-			['value' => self::TYPE_SITE, 'title' => trans('Site'), 'selected' => (bool) $selected === self::TYPE_SITE],
-			['value' => self::TYPE_BLOCK, 'title' => trans('Block'), 'selected' => (bool) $selected === self::TYPE_BLOCK],
-			['value' => self::TYPE_EMAIL, 'title' => trans('E-mail'), 'selected' => (bool) $selected === self::TYPE_EMAIL],
+			['value' => self::TYPE_SITE, 'title' => trans('Site'), 'selected' => (bool) ($selected == self::TYPE_SITE)],
+			['value' => self::TYPE_BLOCK, 'title' => trans('Block'), 'selected' => (bool) ($selected == self::TYPE_BLOCK)],
+			['value' => self::TYPE_EMAIL, 'title' => trans('E-mail'), 'selected' => (bool) ($selected == self::TYPE_EMAIL)],
 		];
 	}
 
@@ -98,5 +98,20 @@ class Content extends Model
 		}
 
 		return $this->currentTranslate;
+	}
+
+	/**
+	 * @param $id
+	 * @return null
+	 */
+	public static function getBlockContent($id)
+	{
+		$model = static::where(function ($q) use($id) {
+			$q->where('id', $id);
+			$q->where('active', 1);
+			$q->where('type', static::TYPE_BLOCK);
+		})->first();
+
+		return !empty($model) ? $model->getBody() : null;
 	}
 }

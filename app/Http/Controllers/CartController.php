@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\Product;
 use App\Traits\TCart;
 use Illuminate\Support\Str;
@@ -10,12 +11,17 @@ class CartController extends Controller
 {
 	use TCart;
 
-	public function index () {
+	public function index ()
+	{
+		$pageContentBlock_1 = Content::getBlockContent(5);
+		$pageContentBlock_2 = Content::getBlockContent(6);
 
 		return view('order.cart', [
 			'meta_data' => [
 				'title' => 'r-Wasd.com',
 			],
+			'pageContentBlock_1' => $pageContentBlock_1,
+			'pageContentBlock_2' => $pageContentBlock_2,
 		]);
 	}
 
