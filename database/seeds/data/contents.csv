@@ -1,0 +1,17 @@
+id;title;description;type;active
+1;Home page 1;Kezdőlap felső szöveges blokk;2;0
+2;Home page 2;Kezdőlap alsó szöveges blokk;2;0
+3;Terms and conditions;Terms and conditions oldal;1;0
+4;Cookie policy;Cookie policy oldal;1;0
+5;Cart page 1;Kosár oldal felső szöveg;2;0
+6;Cart page 2;Kosár oldal alsó szöveg;2;0
+7;Checkout form page 1;Rendelés űrlap oldal felső szöveg;2;0
+8;Checkout form page 2;Rendelés űrlap oldal alsó szöveg;2;0
+9;Checkout check page 1;Rendelés ellenőrző oldal felső szöveg;2;0
+10;Checkout check page 2;Rendelés ellenőrző oldal alsó szöveg;2;0
+11;Payment page;Fizetés előtti oldal szöveg;2;0
+12;Success payment;Sikeres Paypal fizetés utáni szövegblokk;2;0
+13;Canceled payment;Megszakított Paypal fizetés utáni szövegblokk;2;0
+14;Order email to customer;Rendelés után visszaigazoló email a vásárlónak.;3;0
+15;Order email to admin;Rendelés után visszaigazoló email nekünk.;3;0
+16;Postal tracking code email;Csomag postára adáskor email.;3;0

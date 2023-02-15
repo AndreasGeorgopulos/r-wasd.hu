@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Content extends Model
 {
@@ -39,5 +40,63 @@ class Content extends Model
 			['value' => self::TYPE_BLOCK, 'title' => trans('Block'), 'selected' => (bool) $selected === self::TYPE_BLOCK],
 			['value' => self::TYPE_EMAIL, 'title' => trans('E-mail'), 'selected' => (bool) $selected === self::TYPE_EMAIL],
 		];
+	}
+
+	/**
+	 * @return bool|void|null
+	 * @throws \Exception
+	 */
+	public function delete()
+	{
+		if ($this->deletable) {
+			return parent::delete();
+		}
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getTitle()
+	{
+		return $this->getCurrentTranslate()->meta_title;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getSlug()
+	{
+		return $this->getCurrentTranslate()->slug;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getLead()
+	{
+		return $this->getCurrentTranslate()->lead;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getBody()
+	{
+		return $this->getCurrentTranslate()->body;
+	}
+
+	/**
+	 * @return Model|HasMany|object|null
+	 */
+	private function getCurrentTranslate()
+	{
+		if (empty($this->currentTranslate)) {
+			$this->currentTranslate = $this->translates()->where('language_code', app()->getLocale())->first();
+			if (empty($this->currentTranslate)) {
+				throw new NotFoundHttpException('Product not found.');
+			}
+		}
+
+		return $this->currentTranslate;
 	}
 }

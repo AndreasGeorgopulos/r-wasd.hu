@@ -42,11 +42,12 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{url(route('admin_contents_edit', ['id' => $model->id]))}}"><i class="fa fa-edit"></i> {{trans('Edit')}}</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="{{url(route('admin_contents_delete', ['id' => $model->id]))}}" class="confirm"><i class="fa fa-trash"></i> {{trans('Delete')}}</a></li>
+                                        @if($model->deletable)
+                                            <li class="divider"></li>
+                                            <li><a href="{{url(route('admin_contents_delete', ['id' => $model->id]))}}" class="confirm"><i class="fa fa-trash"></i> {{trans('Delete')}}</a></li>
+                                        @endif
                                     </ul>
                                 </div>
-
                             </td>
                         </tr>
                     @endforeach

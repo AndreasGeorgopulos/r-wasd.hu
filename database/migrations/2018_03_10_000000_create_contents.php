@@ -21,6 +21,7 @@ class CreateContents extends Migration
             $table->text('description')->comment('Leírás')->nullable();
             $table->tinyInteger('type')->default('1')->comment('Típus: 1 - Site, 2 - Block, 3 - E-mail');
             $table->tinyInteger('active')->comment('Aktív');
+            $table->tinyInteger('deletable')->comment('Törölhető');
             $table->softDeletes();
             $table->timestamps();
         });
