@@ -61,7 +61,6 @@ class ContentController extends Controller implements ICrudController
 			// data save
 			$model->fill($request->all());
 			$model->category = Content::CATEGORY_PAGE;
-			$model->active = 1;
 			$model->save();
 
 			// Translates save

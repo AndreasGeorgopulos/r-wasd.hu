@@ -11,7 +11,6 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#general_data" data-toggle="tab" aria-expanded="true">{{trans('General data')}}</a></li>
-
                     @foreach (config('app.languages') as $lang)
                         <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
                     @endforeach

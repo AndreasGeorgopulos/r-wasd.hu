@@ -7,7 +7,10 @@
                     <thead>
                     <tr role="row">
                         <th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
-                        <th class="@if($sort == 'title') sorting_{{$direction}} @else sorting @endif" data-column="key">{{trans('Title')}}</th>
+                        <th class="@if($sort == 'title') sorting_{{$direction}} @else sorting @endif" data-column="title">{{trans('Title')}}</th>
+                        <th class="">{{trans('Description')}}</th>
+                        <th class="@if($sort == 'type') sorting_{{$direction}} @else sorting @endif" data-column="type">{{trans('Type')}}</th>
+                        <th class="@if($sort == 'active') sorting_{{$direction}} @else sorting @endif text-center" data-column="active">{{trans('Active')}}</th>
                         <th>
                             <a href="{{url(route('admin_contents_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Add new content')}}</a>
                         </th>
@@ -19,6 +22,17 @@
                         <tr role="row" class="odd">
                             <td>{{$model->id}}</td>
                             <td>{{$model->title}}</td>
+                            <td>{{\Illuminate\Support\Str::limit($model->description, 50, '...')}}</td>
+                            <td>
+                                @if($model->type === \App\Models\Content::TYPE_SITE){{trans('Site')}}
+                                @elseif($model->type === \App\Models\Content::TYPE_BLOCK){{trans('Block')}}
+                                @elseif($model->type === \App\Models\Content::TYPE_EMAIL){{trans('E-mail')}}
+                                @else n/a
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <i class="fa @if($model->active == 1) fa-check @else fa-lock @endif"></i>
+                            </td>
                             <td>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-primary btn-sm">{{trans('Operations')}}</button>
