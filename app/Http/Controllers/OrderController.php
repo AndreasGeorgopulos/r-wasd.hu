@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PostalParcel;
@@ -61,6 +62,9 @@ class OrderController extends Controller
 			return redirect(route('order_checkout_check'));
 		}
 
+	    $pageContentBlock_1 = Content::getBlockContent(7);
+	    $pageContentBlock_2 = Content::getBlockContent(8);
+
 	    return view('order.checkout', [
 			'model' => $model,
 			'cartData' => $this->getCartData(),
@@ -68,6 +72,8 @@ class OrderController extends Controller
 		    'meta_data' => [
 			    'title' => 'r-Wasd.com',
 		    ],
+		    'pageContentBlock_1' => $pageContentBlock_1,
+		    'pageContentBlock_2' => $pageContentBlock_2,
 	    ]);
     }
 
@@ -79,6 +85,9 @@ class OrderController extends Controller
 
 		$model = (new Order())->fill($order);
 
+		$pageContentBlock_1 = Content::getBlockContent(9);
+		$pageContentBlock_2 = Content::getBlockContent(10);
+
 		return view('order.checkout_check', [
 			'model' => $model,
 			'order' => $order,
@@ -86,6 +95,8 @@ class OrderController extends Controller
 			'meta_data' => [
 				'title' => 'r-Wasd.com',
 			],
+			'pageContentBlock_1' => $pageContentBlock_1,
+			'pageContentBlock_2' => $pageContentBlock_2,
 		]);
 	}
 
@@ -177,12 +188,15 @@ class OrderController extends Controller
 			}
 		}
 
+		$pageContentBlock = Content::getBlockContent(11);
+
 		return view('order.payment', [
 			'order' => $order,
 			'cartData' => $cartData,
 			'meta_data' => [
 				'title' => 'r-Wasd.com',
 			],
+			'pageContentBlock' => $pageContentBlock,
 		]);
 	}
 
@@ -200,11 +214,14 @@ class OrderController extends Controller
 		$model->paypal_response = $request->get('paymentId', null);
 		$model->save();
 
+		$pageContentBlock = Content::getBlockContent(12);
+
 		return view('order.finish', [
 			'model' => $model,
 			'meta_data' => [
 				'title' => 'r-Wasd.com',
 			],
+			'pageContentBlock' => $pageContentBlock,
 		]);
 	}
 
@@ -219,11 +236,14 @@ class OrderController extends Controller
 			throw new NotFoundHttpException('Order not found');
 		}
 
+		$pageContentBlock = Content::getBlockContent(13);
+
 		return view('order.cancel_payment', [
 			'model' => $model,
 			'meta_data' => [
 				'title' => 'r-Wasd.com',
 			],
+			'pageContentBlock' => $pageContentBlock,
 		]);
 	}
 

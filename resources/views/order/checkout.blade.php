@@ -19,6 +19,11 @@
 			<input type="hidden" name="recaptcha_token" id="recaptcha_token" />
 
 			<hr />
+			@if(!empty($pageContentBlock_1))
+				<div class="">{!! $pageContentBlock_1 !!}</div>
+				<hr />
+			@endif
+
 			<div class="row">
 				<div class="col-sm-6 p-4">
 					@include('order._products')
@@ -98,6 +103,11 @@
 			</div>
 
 			<hr />
+			@if(!empty($pageContentBlock_2))
+				<div class="">{!! $pageContentBlock_2 !!}</div>
+				<hr />
+			@endif
+
 			<div class="pt-3 pb-4">
 				<div class="row">
 					<div class="col-6 text-center">
