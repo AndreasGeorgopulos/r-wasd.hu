@@ -31,7 +31,7 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <i class="fa @if($model->active == 1) fa-check @else fa-lock @endif"></i>
+                                <i class="fa @if($model->active == 1) fa-check text-green @else fa-lock text-red @endif"></i>
                             </td>
                             <td>
                                 <div class="btn-group pull-right">

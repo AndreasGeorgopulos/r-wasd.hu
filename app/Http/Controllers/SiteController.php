@@ -16,11 +16,16 @@ class SiteController extends Controller
 			'keywords' => '',
 		];
 
-		$contents = Product::where('active', 1)->get();
+		$pageContentBlock_1 = Content::getBlockContent(1);
+		$pageContentBlock_2 = Content::getBlockContent(2);
+
+		$products = Product::where('active', 1)->get();
 
 		return view('index', [
-			'products' => $contents,
+			'products' => $products,
 			'meta_data' => $meta_data,
+			'pageContentBlock_1' => $pageContentBlock_1,
+			'pageContentBlock_2' => $pageContentBlock_2,
 		]);
 	}
 
@@ -29,7 +34,9 @@ class SiteController extends Controller
 		$content = Content::whereHas('translates', function ($q) use($slug) {
 				$q->where('content_translates.slug', '=', $slug);
 				$q->where('contents.category', '=', Content::CATEGORY_PAGE);
-			})->first();
+			})
+			->where('active', 1)
+			->first();
 
 		if (empty($content) || !($model = $content->translates->where('language_code', app()->getLocale())->first())) {
 			throw new NotFoundHttpException('Page not found');
