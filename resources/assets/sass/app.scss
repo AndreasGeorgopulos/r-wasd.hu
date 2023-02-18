@@ -153,7 +153,8 @@ a {
   }
 }
 
-.container.page {
+.container.page,
+.container.product {
   margin-top: 50px;
   .content {
     background-color: #ffffff;
