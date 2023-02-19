@@ -61,6 +61,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
 
+@if(config('adminlte.plugins.tinymce'))
+    <!-- TinyMce -->
+<!--    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>-->
+    <script src="{{asset('js/tinymce/tinymce.js')}}"></script>
+    <script>
+        tinymce.init({
+            selector:'textarea.tinymce'
+        });
+    </script>
+@endif
+
 @yield('adminlte_js')
 
 </body>
