@@ -6,8 +6,10 @@ use App\Models\Content;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PostalParcel;
+use App\Rules\ReCaptchaRule;
 use App\Traits\TCart;
 use App\Traits\TDbTransaction;
+use App\Traits\TModelValidate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -25,7 +27,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrderController extends Controller
 {
-	use TCart, TDbTransaction;
+	use TCart, TDbTransaction, TModelValidate;
 
 	private $_api_context;
 
@@ -47,14 +49,15 @@ class OrderController extends Controller
 		$model->fill($order);
 
 	    if ($request->isMethod('post')) {
-			$model->fill($request->all());
-		    $validator = Validator::make($request->all(), Order::rules());
-		    $validator->setAttributeNames(Order::niceNames());
+		    $model->fill($request->all());
+			$rules = Order::rules();
+			$rules['recaptcha_token'] = ['required', new ReCaptchaRule($request->get('recaptcha_token'))];
+		    $validator = $this->modelValidate($request->all(), $rules, Order::niceNames(), Order::customMessages());
 		    if ($validator->fails()) {
-			    /*return redirect(route('admin_contents_edit', ['id' => $id]))->withErrors($validator)->withInput()->with('form_warning_message', [
-				    trans('Sikertelen mentés'),
-				    trans('A tartalom adatainak rögzítése nem sikerült a következő hibák miatt:')
-			    ]);*/
+			    return redirect(route('order_checkout'))->withErrors($validator)->withInput()->with('form_warning_message', [
+				    'title' => trans('Checkout failed'),
+				    'lead' => trans('The form save fail. Errors:'),
+			    ]);
 		    }
 
 			$this->setCookieOrder($model);

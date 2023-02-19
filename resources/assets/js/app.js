@@ -40,3 +40,12 @@ import Cart from "./components/Cart/Cart"
 	const set_url = element.getAttribute('data-set-url')
 	loadComponent(<Cart load_url={load_url} set_url={set_url} />, 'cart-page')
 })()
+
+$('#order-form').on('submit', function (e) {
+	const email_input = $('#order-form input[name="email"]')
+	const confirm_email_input = $('#order-form input[name="confirm_email"]')
+	if (confirm_email_input && email_input.val() != confirm_email_input.val()) {
+		email_input.focus()
+		return false
+	}
+});

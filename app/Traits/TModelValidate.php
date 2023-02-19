@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Traits;
 
 use Illuminate\Support\Facades\Validator;
 
@@ -14,12 +14,12 @@ trait TModelValidate
 	 * @param array $rules
 	 * @param array $niceNames
 	 * @param array $customMessages
+	 * @return mixed
 	 */
 	public function modelValidate(array $attributes, array $rules, array $niceNames, array $customMessages)
 	{
 		$validator = Validator::make($attributes, $rules, $customMessages);
 		$validator->setAttributeNames($niceNames);
-		//dd($validator);
 		return $validator;
 	}
 }

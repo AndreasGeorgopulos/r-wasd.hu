@@ -14,14 +14,28 @@
 @section('content')
 	<section class="container cart">
 	@include('order._steps')
-		<form method="post">
+		<form method="post" id="order-form">
 			{{csrf_field()}}
-			<input type="hidden" name="recaptcha_token" id="recaptcha_token" />
 
 			<hr />
 			@if(!empty($pageContentBlock_1))
 				<div class="">{!! $pageContentBlock_1 !!}</div>
 				<hr />
+			@endif
+
+			@if (session('form_warning_message'))
+				@php($arr = session('form_warning_message'))
+				<div class="alert alert-warning alert-dismissible">
+					<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
+					<p>{{$arr['lead']}}</p>
+					@if (isset($errors) && count($errors->all()))
+						<ul>
+							@foreach ($errors->all() as $field => $error)
+								<li>{{$error}}</li>
+							@endforeach
+						</ul>
+					@endif
+				</div>
 			@endif
 
 			<div class="row">
@@ -33,27 +47,27 @@
 
 					<div class="form-group mb-3">
 						<label>{{trans('Full name')}} *</label>
-						<input type="text" name="name" class="form-control" value="{{ old('name', $model->name) }}" required="required" />
+						<input type="text" name="name" class="form-control" value="{{ old('name', $model->name) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('E-mail')}} *</label>
-						<input type="text" name="email" class="form-control" value="{{ old('email', $model->email) }}" required="required" />
+						<input type="text" name="email" class="form-control" value="{{ old('email', $model->email) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
 					@if(!$accepted_terms_and_conditions)
 						<div class="form-group mb-3">
 							<label>{{trans('Confirm e-mail')}} *</label>
-							<input type="text" name="confirm_email" class="form-control" value="{{ old('confirm_email', $model->confirm_email) }}" required="required" />
+							<input type="text" name="confirm_email" class="form-control" value="{{ old('confirm_email', $model->confirm_email) }}"  />
 							<span class="error text-red"></span>
 						</div>
 					@endif
 
 					<div class="form-group mb-3">
 						<label>{{trans('Phone')}} *</label>
-						<input type="text" name="phone" class="form-control" value="{{ old('phone', $model->phone) }}" required="required" />
+						<input type="text" name="phone" class="form-control" value="{{ old('phone', $model->phone) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
@@ -61,7 +75,7 @@
 
 					<div class="form-group mb-3">
 						<label>{{trans('Country')}} *</label>
-						<select name="shipping_country_id" class="form-control select2" required="required">
+						<select name="shipping_country_id" class="form-control select2" >
 							<option value="0"></option>
 							@foreach(\App\Models\Country::getDropdownItems(true) as $country)
 								<option value="{{ $country['id'] }}" @if(old('shipping_country_id', $model->shipping_country_id) == $country['id']) selected="selected" @endif>{{ $country['name'] }}</option>
@@ -72,19 +86,19 @@
 
 					<div class="form-group mb-3">
 						<label>{{trans('Zip')}} *</label>
-						<input type="text" name="shipping_zip" class="form-control" value="{{ old('shipping_zip', $model->shipping_zip) }}" required="required" />
+						<input type="text" name="shipping_zip" class="form-control" value="{{ old('shipping_zip', $model->shipping_zip) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('City')}} *</label>
-						<input type="text" name="shipping_city" class="form-control" value="{{ old('shipping_city', $model->shipping_city) }}" required="required" />
+						<input type="text" name="shipping_city" class="form-control" value="{{ old('shipping_city', $model->shipping_city) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Address')}} *</label>
-						<input type="text" name="shipping_address" class="form-control" value="{{ old('shipping_address', $model->shipping_address) }}" required="required" />
+						<input type="text" name="shipping_address" class="form-control" value="{{ old('shipping_address', $model->shipping_address) }}"  />
 						<span class="error text-red"></span>
 					</div>
 
@@ -96,9 +110,11 @@
 
 					@if(!$accepted_terms_and_conditions)
 						<div class="form-group mb-3">
-							<label><input type="checkbox" required="required" /> {{trans('I accept Terms and conditions')}}</label>
+							<label><input type="checkbox" name="accept_term_and_conditions" /> {{trans('I accept Terms and conditions')}}</label>
 						</div>
 					@endif
+
+					<input type="hidden" name="recaptcha_token" id="recaptcha_token" />
 				</div>
 			</div>
 

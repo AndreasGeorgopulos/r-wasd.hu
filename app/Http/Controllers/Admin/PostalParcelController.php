@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PostalParcel;
-use App\Models\TModelValidate;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use App\Models\PostalParcel;
+use App\Traits\TModelValidate;
+use Illuminate\Http\Request;
 
 class PostalParcelController extends Controller implements ICrudController
 {
