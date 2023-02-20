@@ -10,10 +10,14 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                     <li class="nav-item ml-auto">
-                        <a class="nav-link @if(url()->current() === url('/')) active @endif" href="{{url('/')}}#products">{{trans('Products')}}</a>
+                        <a class="nav-link @if(url()->current() === url('/')) active @endif" href="{{url('/')}}#products">
+                            <i class="fa fa-trademark"></i> {{trans('Products')}}
+                        </a>
                     </li>
                     <li class="nav-item ml-md-2 ">
-                        <a class="nav-link @if(url()->current() === url('/page/terms-and-conditions')) active @endif" href="{{url(route('page', ['slug' => 'terms-and-conditions']))}}">{{trans('Terms and conditions')}}</a>
+                        <a class="nav-link @if(url()->current() === url('/page/terms-and-conditions')) active @endif" href="{{url(route('page', ['slug' => 'terms-and-conditions']))}}">
+                            {{trans('Terms and conditions')}}
+                        </a>
                     </li>
                     <li class="nav-item ml-md-2">
                         <a class="nav-link @if(url()->current() === url('/cart')) active @endif" href="{{url('/cart')}}" tabindex="-1" aria-disabled="true">
