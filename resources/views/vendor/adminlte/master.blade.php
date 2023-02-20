@@ -63,11 +63,20 @@
 
 @if(config('adminlte.plugins.tinymce'))
     <!-- TinyMce -->
-<!--    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"></script>-->
     <script src="{{asset('js/tinymce/tinymce.js')}}"></script>
     <script>
         tinymce.init({
-            selector:'textarea.tinymce'
+            selector:'textarea.tinymce',
+            menubar:false,
+            toolbar: 'code|bold italic underline strikethrough superscript subscript|forecolor backcolor|alignleft aligncenter alignright alignjustify|numlist bullist|link anchor|charmap|image media',
+            plugins: 'code lists link anchor charmap image media textcolor',
+            color_map: [
+                "000000", "Black",
+                "ffffff", "White",
+                "fe784f", "Orange",
+                "3396a8", "Blue",
+                "222222", "Gray",
+            ]
         });
     </script>
 @endif
