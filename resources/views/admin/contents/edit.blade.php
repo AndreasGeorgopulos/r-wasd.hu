@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         @include('admin.layout.messages')
         <div class="box">
@@ -14,10 +14,12 @@
                     @foreach (config('app.languages') as $lang)
                         <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
                     @endforeach
+                    <li class=""><a href="#images_data" data-toggle="tab" aria-expanded="false">{{trans('Images')}}</a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.contents.tab_general')
                     @include('admin.contents.tab_translates')
+                    @include('admin.contents.tab_images')
                 </div>
             </div>
 

@@ -41,7 +41,9 @@
                     <div class="product-item">
                         <div class="row">
                             <div class="col-sm-5 text-center">
-                                <img src="{{asset('images/img_2.png')}}" class="img-responsive" />
+                                @if($model->hasIndexImage())
+                                    <img src="{{$model->getIndexImageFileUrl()}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                @endif
                             </div>
                             <div class="col-sm-7 pt-3">
                                 <h2 class="font-russo-one color-orange">{{$model->getTitle()}}</h2>
@@ -71,7 +73,9 @@
                                 </p>
                             </div>
                             <div class="col-sm-5 text-center">
-                                <img src="{{asset('images/img_1.png')}}" class="img-responsive" />
+                                @if($model->hasIndexImage())
+                                    <img src="{{$model->getIndexImageFileUrl()}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                @endif
                             </div>
                         </div>
                     </div>

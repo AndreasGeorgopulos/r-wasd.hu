@@ -75,6 +75,12 @@ class ProductController extends Controller implements ICrudController
 				$translate->save();
 			}
 
+			// Index images
+			if ($request->get('delete_index_image')) {
+				$model->deleteIndexImageFile();
+			}
+			$model->saveIndexImageFile($request->file('index_image'));
+
 			return redirect(route('admin_products_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Sikeres mentés'),
 				trans('A tartalom adatai sikeresen rögzítve lettek.'),

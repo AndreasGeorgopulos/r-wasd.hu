@@ -16,7 +16,7 @@ class CreateContents extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->increments('id')->comment('Egyedi azonosító')->unique();
             $table->string('title')->comment('Megnevezés');
-            $table->string('picture')->comment('Oldal kép')->nullable();
+            $table->string('index_image_file_name')->comment('Index kép')->nullable();
             $table->integer('category')->comment('Kategória')->nullable();
             $table->text('description')->comment('Leírás')->nullable();
             $table->tinyInteger('type')->default('1')->comment('Típus: 1 - Site, 2 - Block, 3 - E-mail');

@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         @include('admin.layout.messages')
         <div class="box">
@@ -16,16 +16,12 @@
                         <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
                     @endforeach
 
-                    @if(!empty($model->id))
-                        <li><a href="#image_data" data-toggle="tab" aria-expanded="true">{{trans('Images')}}</a></li>
-                    @endif
+                    <li><a href="#images_data" data-toggle="tab" aria-expanded="true">{{trans('Images')}}</a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.products.tab_general')
                     @include('admin.products.tab_translates')
-                    @if(!empty($model->id))
-                        @include('admin.products.tab_images')
-                    @endif
+                    @include('admin.products.tab_images')
                 </div>
             </div>
 

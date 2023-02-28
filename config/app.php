@@ -2,6 +2,48 @@
 
 return [
 
+	'contents' => [
+		'image_path' => 'uploads/contents/index_images/',
+		'resizes' => [
+			'thumb' => [
+				'width' => 80,
+				'height' => 80,
+				'enabled' => false,
+			],
+			'md' => [
+				'width' => 200,
+				'height' => 200,
+				'enabled' => false,
+			],
+			'lg' => [
+				'width' => 400,
+				'height' => 400,
+				'enabled' => false,
+			],
+		],
+	],
+
+	'products' => [
+		'image_path' => 'uploads/products/index_images/',
+		'resizes' => [
+			'thumb' => [
+				'width' => 80,
+				'height' => 80,
+				'enabled' => false,
+			],
+			'md' => [
+				'width' => 200,
+				'height' => 200,
+				'enabled' => false,
+			],
+			'lg' => [
+				'width' => 400,
+				'height' => 400,
+				'enabled' => false,
+			],
+		],
+	],
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

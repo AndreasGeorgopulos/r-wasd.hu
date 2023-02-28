@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\TModelIndexImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,17 +10,26 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Content extends Model
 {
+	use SoftDeletes, TModelIndexImage;
+
 	const TYPE_SITE = 1;
 	const TYPE_BLOCK = 2;
 	const TYPE_EMAIL = 3;
-
-	use SoftDeletes;
 
 	const CATEGORY_PAGE = 1;
 
 	protected $table = 'contents';
 
 	protected $fillable = ['title', 'description', 'type', 'category', 'active'];
+
+	/**
+	 * @param array $attributes
+	 */
+	function __construct(array $attributes = [])
+	{
+		$this->loadIndexImageConfig(config('app.contents'));
+		parent::__construct($attributes);
+	}
 
 	/**
 	 * @return HasMany

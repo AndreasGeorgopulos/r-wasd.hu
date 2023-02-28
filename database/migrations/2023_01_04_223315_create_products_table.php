@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
 	        $table->bigIncrements('id')->comment('Egyedi azonosító');
 	        $table->string('title')->comment('Megnevezés');
-	        $table->string('picture')->comment('Oldal kép')->nullable();
+	        $table->string('index_image_file_name')->comment('Index kép')->nullable();
 	        $table->double('price')->comment('Ár')->nullable();
 	        $table->double('weight')->comment('Súly')->nullable();
 	        $table->tinyInteger('active')->comment('Aktív');

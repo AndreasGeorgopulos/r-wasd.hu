@@ -2,19 +2,26 @@
 
 namespace App\Models;
 
+use App\Traits\TModelIndexImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Product extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, TModelIndexImage;
 
 	private $currentTranslate;
 
 	protected $table = 'products';
 
 	protected $fillable = ['title', 'price'];
+
+	function __construct(array $attributes = [])
+	{
+		$this->loadIndexImageConfig(config('app.products'));
+		parent::__construct($attributes);
+	}
 
 	public function translates () {
 		return $this->hasMany('App\Models\Product_Translate');

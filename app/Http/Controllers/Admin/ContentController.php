@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ICrudController;
 use App\Models\Content;
 use App\Models\Content_Translate;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -75,6 +76,12 @@ class ContentController extends Controller implements ICrudController
 				$translate->slug = Str::slug($translate->meta_title);
 				$translate->save();
 			}
+
+			// Index images
+			if ($request->get('delete_index_image')) {
+				$model->deleteIndexImageFile();
+			}
+			$model->saveIndexImageFile($request->file('index_image'));
 
 			return redirect(route('admin_contents_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Sikeres mentés'),
