@@ -25,9 +25,6 @@
     </div>
     <!-- End -->
 
-
-    AAAAAAAAA
-
     <a id="products"></a>
     @if(!empty($pageContentBlock_1))
         <section class="wrapper bg-light pt-5 pb-5">
