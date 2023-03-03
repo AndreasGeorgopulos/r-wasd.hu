@@ -97,6 +97,7 @@ class ContentController extends Controller implements ICrudController
 	public function delete (int $id) {
 		if ($model = Content::find($id)) {
 			$model->translates()->delete();
+			$model->deleteIndexImageFile();
 			$model->delete();
 			return redirect(route('admin_contents_list'))->with('form_success_message', [
 				trans('Sikeres törlés'),
@@ -108,5 +109,24 @@ class ContentController extends Controller implements ICrudController
 	public function view(int $id)
 	{
 		// TODO: Implement view() method.
+	}
+
+	public function resizeIndexImages($id = null)
+	{
+		$models = Content::where(function ($q) use($id) {
+			$q->where('active', true);
+			if ($id !== null) {
+				$q->where('id', $id);
+			}
+		})->get();
+
+		foreach ($models as $model) {
+			$model->resizeIndexImage();
+		}
+
+		return redirect(route('admin_contents_list'))->with('form_success_message', [
+			trans('Sikeres kép átméretezés'),
+			trans('Az index képek sikeresen át lettek méretezve.')
+		]);
 	}
 }

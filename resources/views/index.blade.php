@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-sm-5 text-center">
                                 @if($model->hasIndexImage())
-                                    <img src="{{$model->getIndexImageFileUrl()}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
                                 @endif
                             </div>
                             <div class="col-sm-7 pt-3">
@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-sm-5 text-center">
                                 @if($model->hasIndexImage())
-                                    <img src="{{$model->getIndexImageFileUrl()}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
                                 @endif
                             </div>
                         </div>

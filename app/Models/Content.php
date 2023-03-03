@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Content extends Model
+class Content extends Model implements IModelIndexImage
 {
 	use SoftDeletes, TModelIndexImage;
 
@@ -27,7 +27,7 @@ class Content extends Model
 	 */
 	function __construct(array $attributes = [])
 	{
-		$this->loadIndexImageConfig(config('app.contents'));
+		$this->loadIndexImageConfig(config('app.contents.index_images'));
 		parent::__construct($attributes);
 	}
 

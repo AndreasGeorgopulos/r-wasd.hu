@@ -1,4 +1,11 @@
 <div class="box-body">
+    <div class="text-right">
+        <a href="{{url(route('admin_contents_resize_index_images'))}}" class="btn btn-default">
+            <i class="fa fa-arrows-alt"></i> {{trans('Resize index images')}}
+        </a>
+        <hr />
+    </div>
+
     <div class="dataTables_wrapper form-inline dt-bootstrap">
         @include('admin.layout.table.header')
         <div class="row">

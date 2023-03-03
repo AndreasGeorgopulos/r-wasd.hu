@@ -18,6 +18,9 @@ RUN apt install -y g++
 RUN apt install -y nodejs
 RUN apt install -y npm
 #RUN apt install -y oniguruma
+RUN apt install -y libfreetype6-dev
+RUN apt install -y libjpeg62-turbo-dev
+RUN apt install -y libpng-dev
 
 RUN docker-php-ext-install bz2
 RUN docker-php-ext-install intl
@@ -28,6 +31,10 @@ RUN docker-php-ext-install calendar
 #RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install gd
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install -j$(nproc) gd
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 

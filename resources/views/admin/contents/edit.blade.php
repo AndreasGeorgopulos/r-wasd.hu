@@ -14,12 +14,11 @@
                     @foreach (config('app.languages') as $lang)
                         <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
                     @endforeach
-                    <li class=""><a href="#images_data" data-toggle="tab" aria-expanded="false">{{trans('Images')}}</a></li>
+                    <li><a href="#gallery_data" data-toggle="tab" aria-expanded="true">{{trans('Gallery')}}</a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.contents.tab_general')
                     @include('admin.contents.tab_translates')
-                    @include('admin.contents.tab_images')
                 </div>
             </div>
 

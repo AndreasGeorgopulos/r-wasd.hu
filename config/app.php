@@ -3,43 +3,84 @@
 return [
 
 	'contents' => [
-		'image_path' => 'uploads/contents/index_images/',
-		'resizes' => [
-			'thumb' => [
-				'width' => 80,
-				'height' => 80,
-				'enabled' => false,
-			],
-			'md' => [
-				'width' => 200,
-				'height' => 200,
-				'enabled' => false,
-			],
-			'lg' => [
-				'width' => 400,
-				'height' => 400,
-				'enabled' => false,
+		'index_images' => [
+			'image_path' => 'uploads/contents/index_images/',
+			'watermark_path' => 'images/watermark.png',
+			'resizes' => [
+				'page' => [
+					'enabled' => true,
+					'width' => 1024,
+					'height' => 1024,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => true,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
 			],
 		],
 	],
 
 	'products' => [
-		'image_path' => 'uploads/products/index_images/',
-		'resizes' => [
-			'thumb' => [
-				'width' => 80,
-				'height' => 80,
-				'enabled' => false,
-			],
-			'md' => [
-				'width' => 200,
-				'height' => 200,
-				'enabled' => false,
-			],
-			'lg' => [
-				'width' => 400,
-				'height' => 400,
-				'enabled' => false,
+		'index_images' => [
+			'image_path' => 'uploads/products/index_images/',
+			'watermark_path' => 'images/watermark.png',
+			'resizes' => [
+				'thumb_admin' => [
+					'enabled' => true,
+					'width' => 50,
+					'height' => 50,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => false,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
+				'thumb_cart' => [
+					'enabled' => true,
+					'width' => 100,
+					'height' => 100,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => false,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
+				'index' => [
+					'enabled' => true,
+					'width' => 400,
+					'height' => 400,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => true,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
+				'page' => [
+					'enabled' => true,
+					'width' => 1024,
+					'height' => 1024,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => true,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
 			],
 		],
 	],
@@ -221,6 +262,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 	
 		JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+
+	    Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -269,6 +312,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+	    'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

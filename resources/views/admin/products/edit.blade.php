@@ -16,12 +16,11 @@
                         <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
                     @endforeach
 
-                    <li><a href="#images_data" data-toggle="tab" aria-expanded="true">{{trans('Images')}}</a></li>
+                    <li><a href="#gallery_data" data-toggle="tab" aria-expanded="true">{{trans('Gallery')}}</a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.products.tab_general')
                     @include('admin.products.tab_translates')
-                    @include('admin.products.tab_images')
                 </div>
             </div>
 

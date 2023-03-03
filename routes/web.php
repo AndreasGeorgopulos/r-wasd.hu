@@ -57,6 +57,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::match(['get', 'post'], '/contents/list', 'ContentController@index')->name('admin_contents_list');
 		Route::match(['get', 'post', 'put'], '/contents/edit/{id?}', 'ContentController@edit')->name('admin_contents_edit');
 		Route::match(['get'], '/contents/delete/{id?}', 'ContentController@delete')->name('admin_contents_delete');
+		Route::match(['get'], '/contents/resize_index_images/{id?}', 'ContentController@resizeIndexImages')->name('admin_contents_resize_index_images');
 
 		// products
 		Route::match(['get', 'post'], '/products', function () {
@@ -65,6 +66,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::match(['get', 'post'], '/products/list', 'ProductController@index')->name('admin_products_list');
 		Route::match(['get', 'post', 'put'], '/products/edit/{id?}', 'ProductController@edit')->name('admin_products_edit');
 		Route::match(['get'], '/products/delete/{id?}', 'ProductController@delete')->name('admin_products_delete');
+		Route::match(['get'], '/products/resize_index_images/{id?}', 'ProductController@resizeIndexImages')->name('admin_products_resize_index_images');
 
 		// postal parcels
 		Route::match(['get', 'post'], '/postal_parcels', function () {

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Product extends Model
+class Product extends Model implements IModelIndexImage
 {
 	use SoftDeletes, TModelIndexImage;
 
@@ -19,7 +19,7 @@ class Product extends Model
 
 	function __construct(array $attributes = [])
 	{
-		$this->loadIndexImageConfig(config('app.products'));
+		$this->loadIndexImageConfig(config('app.products.index_images'));
 		parent::__construct($attributes);
 	}
 

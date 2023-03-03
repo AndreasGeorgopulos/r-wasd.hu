@@ -1,4 +1,11 @@
 <div class="box-body">
+    <div class="text-right">
+        <a href="{{url(route('admin_products_resize_index_images'))}}" class="btn btn-default">
+            <i class="fa fa-arrows-alt"></i> {{trans('Resize index images')}}
+        </a>
+        <hr />
+    </div>
+
     <div class="dataTables_wrapper form-inline dt-bootstrap">
         @include('admin.layout.table.header')
         <div class="row">
@@ -18,7 +25,11 @@
                     @foreach ($list as $model)
                         <?php $translate = $model->translates()->where('language_code', App::getLocale())->first(); ?>
                         <tr role="row" class="odd">
-                            <td>{{$model->id}}</td>
+                            <td class="text-center">
+                                @if($model->hasIndexImage())
+                                    <img src="{{$model->getIndexImageFileUrl('thumb_admin')}}" alt="{{$model->getTitle()}}" />
+                                @endif
+                            </td>
                             <td>{{$model->title}}</td>
                             <td>€{{number_format($model->price, 2, '.', ',')}}</td>
                             <td>
