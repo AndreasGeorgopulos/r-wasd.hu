@@ -30,7 +30,7 @@
     <link href="{{asset(config('app.frontend_gzip.js.path')) . '?t=' . time()}}" rel="preload" as="script" />--}}
 
     <!-- Styles -->
-    <link href="{{asset('css/app.css') . '?t=' . time()}}" rel="preload" as="style" />
+    <link href="{{asset('css/app.css') . '?t=' . time()}}" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{config('app.google.analytics-tracking-code')}}"></script>
