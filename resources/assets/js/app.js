@@ -1,5 +1,6 @@
-//require('jquery/dist/jquery.min');
-require('bootstrap/dist/js/bootstrap');
+window.$ = window.jQuery = require('jquery');
+require('bootstrap');
+
 require('cookieconsent/build/cookieconsent.min');
 require('./link_to_top');
 
