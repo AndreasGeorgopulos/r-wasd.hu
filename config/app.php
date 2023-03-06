@@ -64,8 +64,8 @@ return [
 					'watermark' => [
 						'enabled' => true,
 						'position' => 'bottom-right',
-						'pos_x' => 0,
-						'pos_y' => 0,
+						'pos_x' => 20,
+						'pos_y' => 20,
 					],
 				],
 				'page' => [
@@ -77,8 +77,8 @@ return [
 					'watermark' => [
 						'enabled' => true,
 						'position' => 'bottom-right',
-						'pos_x' => 0,
-						'pos_y' => 0,
+						'pos_x' => 20,
+						'pos_y' => 20,
 					],
 				],
 			],

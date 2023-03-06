@@ -1,7 +1,9 @@
 <header>
     <nav class="navbar navbar-dark navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}">r-WASD</a>
+            <a class="navbar-brand" href="{{url('/')}}">
+                <img src="{{asset('/images/logo.png')}}" alt="r-wasd.com" class="img-responsive" />
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
