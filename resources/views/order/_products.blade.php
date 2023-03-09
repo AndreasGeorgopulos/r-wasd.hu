@@ -1,12 +1,19 @@
-<h2>{{trans('Products')}}</h2>
+<h2 class="color-blue">{{trans('Products')}}</h2>
 @foreach($cartData['cart_items'] as $item)
 	<div class="card mb-4">
 		<div class="card-header">
-			<h5>{{$item['name']}}</h5>
+			<h5 class="color-orange">{{$item['name']}}</h5>
 		</div>
 
 		<div class="card-body">
-			{!! $item['description'] !!}
+			<div class="row">
+				<div class="col-3">
+					@if(!empty($item['image']))
+						<img src="{{$item['image']}}" class="img-thumbnail" alt="{{$item['name']}}" />
+					@endif
+				</div>
+				<div class="col-9">{!! $item['description'] !!}</div>
+			</div>
 		</div>
 
 		<div class="card-footer">

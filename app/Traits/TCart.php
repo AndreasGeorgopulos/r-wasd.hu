@@ -96,8 +96,10 @@ trait TCart {
 		$total = 0;
 		$weight = 0;
 		foreach ($data['cart_items'] as &$item) {
+			/** @var Product $product */
 			$product = Product::find($item['product_id']);
 			$item['name'] = $product->getTitle();
+			$item['image'] = $product->getIndexImageFileUrl('thumb_cart');
 			$item['description'] = $product->getLead();
 			$item['url'] = url(route('product', ['slug' => $product->getSlug()]));
 			$item['weight'] = $product->weight;

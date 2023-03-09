@@ -40,15 +40,15 @@
                 <section class="container index">
                     <div class="product-item">
                         <div class="row">
-                            <div class="col-sm-5 text-center">
+                            <div class="col-md-5 text-center">
                                 @if($model->hasIndexImage())
                                     <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
                                 @endif
                             </div>
-                            <div class="col-sm-7 pt-3">
-                                <h2 class="font-russo-one color-orange">{{$model->getTitle()}}</h2>
+                            <div class="col-md-7 pt-3">
+                                <h2 class="font-russo-one color-orange text-center text-md-start">{{$model->getTitle()}}</h2>
                                 <p class="font-exo-2 color-blue">{!! $model->getLead() !!}</p>
-                                <p class="">
+                                <p class="text-center text-md-start">
                                     <a href="{{url(route('product', ['slug' => $model->getSlug()]))}}" class="btn bg-color-orange text-white">
                                         {{trans('More info')}}
                                     </a>
@@ -63,19 +63,19 @@
                 <section class="container index">
                     <div class="product-item">
                         <div class="row">
-                            <div class="col-sm-7 pt-3">
-                                <h2 class="font-russo-one color-orange">{{$model->getTitle()}}</h2>
+                            <div class="col-md-5 text-center order-md-last">
+                                @if($model->hasIndexImage())
+                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                @endif
+                            </div>
+                            <div class="col-md-7 pt-3">
+                                <h2 class="font-russo-one color-orange text-center text-md-start">{{$model->getTitle()}}</h2>
                                 <p class="font-exo-2 color-blue">{!! $model->getLead() !!}</p>
-                                <p class="">
+                                <p class="text-center text-md-start">
                                     <a href="{{url(route('product', ['slug' => $model->getSlug()]))}}" class="btn bg-color-orange text-white">
                                         {{trans('More info')}}
                                     </a>
                                 </p>
-                            </div>
-                            <div class="col-sm-5 text-center">
-                                @if($model->hasIndexImage())
-                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
-                                @endif
                             </div>
                         </div>
                     </div>

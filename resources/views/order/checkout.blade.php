@@ -43,69 +43,60 @@
 					@include('order._products')
 				</div>
 				<div class="col-sm-6 p-4">
-					<h2>{{trans('Contact')}}</h2>
+					<h2 class="color-blue">{{trans('Contact')}}</h2>
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="name" class="form-control color-blue" value="{{ old('name', $model->name) }}"  />
 						<label>{{trans('Full name')}} *</label>
-						<input type="text" name="name" class="form-control" value="{{ old('name', $model->name) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="email" class="form-control color-blue" value="{{ old('email', $model->email) }}"  />
 						<label>{{trans('E-mail')}} *</label>
-						<input type="text" name="email" class="form-control" value="{{ old('email', $model->email) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
 					@if(!$accepted_terms_and_conditions)
-						<div class="form-group mb-3">
+						<div class="form-floating mb-3">
+							<input type="text" name="confirm_email" class="form-control color-blue" value="{{ old('confirm_email', $model->confirm_email) }}"  />
 							<label>{{trans('Confirm e-mail')}} *</label>
-							<input type="text" name="confirm_email" class="form-control" value="{{ old('confirm_email', $model->confirm_email) }}"  />
-							<span class="error text-red"></span>
 						</div>
 					@endif
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="phone" class="form-control color-blue" value="{{ old('phone', $model->phone) }}"  />
 						<label>{{trans('Phone')}} *</label>
-						<input type="text" name="phone" class="form-control" value="{{ old('phone', $model->phone) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
-					<h2 class="mt-5">{{trans('Shipping address')}}</h2>
+					<h2 class="mt-5 color-blue">{{trans('Shipping address')}}</h2>
 
-					<div class="form-group mb-3">
-						<label>{{trans('Country')}} *</label>
-						<select name="shipping_country_id" class="form-control select2" >
+					<div class="form-floating mb-3">
+						<select name="shipping_country_id" class="form-control color-blue select2">
 							<option value="0"></option>
 							@foreach(\App\Models\Country::getDropdownItems(true) as $country)
 								<option value="{{ $country['id'] }}" @if(old('shipping_country_id', $model->shipping_country_id) == $country['id']) selected="selected" @endif>{{ $country['name'] }}</option>
 							@endforeach
 						</select>
-						<span class="error text-red"></span>
+						<label>{{trans('Country')}} *</label>
 					</div>
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="shipping_zip" class="form-control color-blue" value="{{ old('shipping_zip', $model->shipping_zip) }}"  />
 						<label>{{trans('Zip')}} *</label>
-						<input type="text" name="shipping_zip" class="form-control" value="{{ old('shipping_zip', $model->shipping_zip) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="shipping_city" class="form-control color-blue" value="{{ old('shipping_city', $model->shipping_city) }}"  />
 						<label>{{trans('City')}} *</label>
-						<input type="text" name="shipping_city" class="form-control" value="{{ old('shipping_city', $model->shipping_city) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
-					<div class="form-group mb-3">
+					<div class="form-floating mb-3">
+						<input type="text" name="shipping_address" class="form-control color-blue" value="{{ old('shipping_address', $model->shipping_address) }}"  />
 						<label>{{trans('Address')}} *</label>
-						<input type="text" name="shipping_address" class="form-control" value="{{ old('shipping_address', $model->shipping_address) }}"  />
-						<span class="error text-red"></span>
 					</div>
 
-					<h2 class="mt-5">{{trans('Notice')}}</h2>
+					<h2 class="mt-5 color-blue">{{trans('Notice')}}</h2>
 					<div class="form-group mb-3">
-						<textarea name="notice" class="form-control" rows="6">{{old('notice', $model->notice)}}</textarea>
-						<span class="error text-red"></span>
+						<textarea name="notice" class="form-control color-blue" rows="8">{{old('notice', $model->notice)}}</textarea>
 					</div>
 
 					@if(!$accepted_terms_and_conditions)

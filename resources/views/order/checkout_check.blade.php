@@ -15,55 +15,55 @@
 					@include('order._products')
 				</div>
 				<div class="col-sm-6 p-4">
-					<h2>{{trans('Contact')}}</h2>
+					<h2 class="color-blue">{{trans('Contact')}}</h2>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Full name')}}</label>
 						<br/>
-						{{$model->name}}
+						<span class="color-blue">{{$model->name}}</span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('E-mail')}}</label>
 						<br/>
-						{{$model->email}}
+						<span class="color-blue">{{$model->email}}</span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Phone')}}</label>
 						<br/>
-						{{$model->phone}}
+						<span class="color-blue">{{$model->phone}}</span>
 					</div>
 
-					<h2 class="mt-5">{{trans('Shipping address')}}</h2>
+					<h2 class="mt-5 color-blue">{{trans('Shipping address')}}</h2>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Country')}}</label>
 						<br/>
-						{{$model->shipping_country->name}}
+						<span class="color-blue">{{$model->shipping_country->name}}</span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Zip')}}</label>
 						<br/>
-						{{$model->shipping_zip}}
+						<span class="color-blue">{{$model->shipping_zip}}</span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('City')}}</label>
 						<br/>
-						{{$model->shipping_city}}
+						<span class="color-blue">{{$model->shipping_city}}</span>
 					</div>
 
 					<div class="form-group mb-3">
 						<label>{{trans('Address')}}</label>
 						<br/>
-						{{$model->shipping_address}}
+						<span class="color-blue">{{$model->shipping_address}}</span>
 					</div>
 
-					<h2 class="mt-5">{{trans('Notice')}}</h2>
+					<h2 class="mt-5 color-blue">{{trans('Notice')}}</h2>
 
-					<div class="form-group mb-3">
+					<div class="form-group mb-3 color-blue">
 						{{$model->notice}}
 					</div>
 				</div>
