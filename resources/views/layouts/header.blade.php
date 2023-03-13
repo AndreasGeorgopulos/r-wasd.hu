@@ -21,11 +21,17 @@
                             {{trans('Terms and conditions')}}
                         </a>
                     </li>
+                    <li class="nav-item ml-md-2 ">
+                        <a class="nav-link @if(url()->current() === url('/contact')) active @endif" href="{{url(route('contact'))}}">
+                            {{trans('Contact')}}
+                        </a>
+                    </li>
                     <li class="nav-item ml-md-2">
                         <a class="nav-link @if(url()->current() === url('/cart')) active @endif" href="{{url('/cart')}}" tabindex="-1" aria-disabled="true">
                             <i class="fa fa-shopping-cart"></i> {{trans('Cart')}}
                         </a>
                     </li>
+
                 </ul>
             </div>
         </div>

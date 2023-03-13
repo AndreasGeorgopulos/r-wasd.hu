@@ -16,6 +16,7 @@ Route::match(['get', 'post'], '/order/payment', 'OrderController@payment')->name
 Route::match(['get', 'post'], '/order/success_payment/{order_code}', 'OrderController@successPayment')->name('success_payment');
 Route::match(['get', 'post'], '/order/cancel_payment/{order_code}', 'OrderController@cancelPayment')->name('cancel_payment');
 
+Route::match(['get', 'post'], '/contact', 'SiteController@contact')->name('contact');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 	Route::match(['get'], '/', function () {
