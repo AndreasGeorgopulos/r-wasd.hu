@@ -2,7 +2,7 @@
 @foreach($cartData['cart_items'] as $item)
 	<div class="card mb-4">
 		<div class="card-header">
-			<h5 class="color-orange">{{$item['name']}}</h5>
+			<h5 class="color-orange text-center text-md-start">{{$item['name']}}</h5>
 		</div>
 
 		<div class="card-body">

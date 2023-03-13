@@ -8,9 +8,7 @@ Route::match(['get'], '/product/{slug}', 'ProductController@getBySlug')->name('p
 
 Route::get('/cart', 'CartController@index')->name('cart_index');
 Route::get('/cart/get', 'CartController@get')->name('cart_get');
-/*Route::get('/cart/set', 'CartController@set')->name('cart_set');
-Route::get('/cart/set/{product_id}', 'CartController@set')->name('cart_set');*/
-Route::get('/cart/set/{product_id?}/{amount?}', 'CartController@set')->name('cart_set');
+Route::post('/cart/set', 'CartController@set')->name('cart_set');
 
 Route::match(['get', 'post'], '/order/checkout', 'OrderController@checkout')->name('order_checkout');
 Route::match(['get', 'post'], '/order/checkout_check', 'OrderController@checkoutCheck')->name('order_checkout_check');

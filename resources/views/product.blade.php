@@ -12,21 +12,31 @@
 				</div>
 				<div class="col-md-6 font-exo-2 color-gray">
 					{!! $model->getLead() !!}
-					<p class="font-exo-2 color-gray">€{!! number_format($model->price, 2, '.', ',') !!}</p>
+
+					<form method="post" action="{{url(route('cart_set'))}}">
+						{{csrf_field()}}
+						<input type="hidden" name="product_id" value="{{$model->id}}" >
+
+						<div class="row mt-5 mb-5">
+							<div class="col-3">
+								<input type="number" name="amount" value="1" class="form-control" />
+							</div>
+							<div class="col-4">
+								<button type="submit" class="btn btn-default">
+									<i class="fa fa-cart-plus"></i> Add to cart
+								</button>
+							</div>
+							<div class="col-5 font-exo-2 color-orange text-end p-2">
+								€{!! number_format($model->price, 2, '.', ',') !!}
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="col-12 font-exo-2 color-gray">{!! $model->getBody() !!}</div>
 			</div>
-
-
-
-			<div id="add-to-cart"
-			     data-product-id="{{$model->id}}"
-			     data-csrf-token="{{@csrf_token()}}"
-			     data-add-url="{{url(route('cart_set'))}}"
-			></div>
 		</div>
 	</section>
 @endsection

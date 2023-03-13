@@ -23,26 +23,28 @@
 				<hr />
 			@endif
 
-			@if (session('form_warning_message'))
-				@php($arr = session('form_warning_message'))
-				<div class="alert alert-warning alert-dismissible">
-					<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
-					<p>{{$arr['lead']}}</p>
-					@if (isset($errors) && count($errors->all()))
-						<ul>
-							@foreach ($errors->all() as $field => $error)
-								<li>{{$error}}</li>
-							@endforeach
-						</ul>
-					@endif
-				</div>
-			@endif
-
 			<div class="row">
-				<div class="col-sm-6 p-4">
+				<div class="col-md-6 p-4">
 					@include('order._products')
 				</div>
-				<div class="col-sm-6 p-4">
+				<div class="col-md-6 p-4">
+					<a id="error">
+					@if (session('form_warning_message'))
+						@php($arr = session('form_warning_message'))
+						<div class="alert alert-warning alert-dismissible">
+							<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
+							<p>{{$arr['lead']}}</p>
+							@if (isset($errors) && count($errors->all()))
+								<ul>
+									@foreach ($errors->all() as $field => $error)
+										<li>{{$error}}</li>
+									@endforeach
+								</ul>
+							@endif
+						</div>
+					@endif
+					</a>
+
 					<h2 class="color-blue">{{trans('Contact')}}</h2>
 
 					<div class="form-floating mb-3">
@@ -100,8 +102,9 @@
 					</div>
 
 					@if(!$accepted_terms_and_conditions)
-						<div class="form-group mb-3">
-							<label><input type="checkbox" name="accept_term_and_conditions" /> {{trans('I accept Terms and conditions')}}</label>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" name="accept_term_and_conditions" id="accept_term_and_conditions" />
+							<label class="form-check-label" for="accept_term_and_conditions">{{trans('I accept Terms and conditions')}}</label>
 						</div>
 					@endif
 

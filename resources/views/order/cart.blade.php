@@ -7,10 +7,9 @@
 			<div class="">{!! $pageContentBlock_1 !!}</div>
 			<hr />
 		@endif
-		<div id="cart-page"
-			data-load-url="{{url(route('cart_get'))}}"
-			data-set-url="{{url(route('cart_set'))}}">
-		</div>
+
+		@include('order._cart_items')
+
 		<hr />
 		@if(!empty($pageContentBlock_2))
 			<div class="">{!! $pageContentBlock_2 !!}</div>

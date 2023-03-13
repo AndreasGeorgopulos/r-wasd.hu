@@ -54,7 +54,7 @@ class OrderController extends Controller
 			$rules['recaptcha_token'] = ['required', new ReCaptchaRule($request->get('recaptcha_token'))];
 		    $validator = $this->modelValidate($request->all(), $rules, Order::niceNames(), Order::customMessages());
 		    if ($validator->fails()) {
-			    return redirect(route('order_checkout'))->withErrors($validator)->withInput()->with('form_warning_message', [
+			    return redirect(route('order_checkout') . '#error')->withErrors($validator)->withInput()->with('form_warning_message', [
 				    'title' => trans('Checkout failed'),
 				    'lead' => trans('The form save fail. Errors:'),
 			    ]);

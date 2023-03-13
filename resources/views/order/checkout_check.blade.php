@@ -11,10 +11,10 @@
 			@endif
 
 			<div class="row">
-				<div class="col-sm-6 p-4">
+				<div class="col-md-6 p-4">
 					@include('order._products')
 				</div>
-				<div class="col-sm-6 p-4">
+				<div class="col-md-6 p-4">
 					<h2 class="color-blue">{{trans('Contact')}}</h2>
 
 					<div class="form-group mb-3">
