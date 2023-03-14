@@ -61,8 +61,6 @@
 .navbar {
   background-color: #FC7829 !important;
   opacity: 0.92;
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
   border-top: solid 14px #343A40;
 }
 
@@ -75,9 +73,9 @@ body {
   background-size: cover;
 }
 
-main {
+main{
   display: block;
-  margin-top: 130px;
+  /*padding-top:60px;*/
 }
 
 footer {
