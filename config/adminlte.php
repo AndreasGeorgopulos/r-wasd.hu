@@ -134,6 +134,12 @@ return [
 		    'route' => 'admin_countries_index',
 		    'active' => ['countries/*'],
 	    ],
+	    [
+		    'text'        => 'Contact messages',
+		    'icon'        => 'envelope',
+		    'route' => 'admin_contacts_index',
+		    'active' => ['contacts/*'],
+	    ],
 	    /*[
 		    'text'        => 'Users',
 		    'url'         => 'admin/users/list',

@@ -16,22 +16,21 @@
                             <i class="fa fa-trademark"></i> {{trans('Products')}}
                         </a>
                     </li>
-                    <li class="nav-item ml-md-2 ">
+                    <li class="nav-item ml-auto">
                         <a class="nav-link @if(url()->current() === url('/page/terms-and-conditions')) active @endif" href="{{url(route('page', ['slug' => 'terms-and-conditions']))}}">
-                            {{trans('Terms and conditions')}}
+                            <i class="fa fa-check"></i> {{trans('Terms and conditions')}}
                         </a>
                     </li>
-                    <li class="nav-item ml-md-2 ">
+                    <li class="nav-item ml-auto">
                         <a class="nav-link @if(url()->current() === url('/contact')) active @endif" href="{{url(route('contact'))}}">
-                            {{trans('Contact')}}
+                            <i class="fa fa-envelope"></i> {{trans('Contact')}}
                         </a>
                     </li>
-                    <li class="nav-item ml-md-2">
+                    <li class="nav-item ml-auto">
                         <a class="nav-link @if(url()->current() === url('/cart')) active @endif" href="{{url('/cart')}}" tabindex="-1" aria-disabled="true">
                             <i class="fa fa-shopping-cart"></i> {{trans('Cart')}}
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>

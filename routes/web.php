@@ -82,5 +82,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::match(['get', 'post'], '/countries/list', 'CountryController@index')->name('admin_countries_list');
 		Route::match(['get', 'post', 'put'], '/countries/edit/{id?}', 'CountryController@edit')->name('admin_countries_edit');
 		Route::match(['get'], '/countries/delete/{id?}', 'CountryController@delete')->name('admin_countries_delete');
+
+		// contacts
+		Route::match(['get', 'post'], '/contacts', function () {
+			return redirect(route('admin_contacts_list'));
+		})->name('admin_contacts_index');
+		Route::match(['get', 'post'], '/contacts/list', 'ContactController@index')->name('admin_contacts_list');
+		Route::match(['get'], '/contacts/view/{id?}', 'ContactController@view')->name('admin_contacts_view');
+		Route::match(['get'], '/contacts/delete/{id?}', 'ContactController@delete')->name('admin_contacts_delete');
 	});
 });
