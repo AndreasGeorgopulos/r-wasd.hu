@@ -6,7 +6,7 @@ require('./link_to_top');
 
 function setTopPadding()
 {
-	let top = parseInt($('nav.navbar').height()) + 20;
+	let top = parseInt($('nav.navbar').height()) + 14;
 	$('main').css({ paddingTop: top });
 }
 

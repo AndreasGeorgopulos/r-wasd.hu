@@ -3260,7 +3260,7 @@ __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap
 __webpack_require__(/*! cookieconsent/build/cookieconsent.min */ "./node_modules/cookieconsent/build/cookieconsent.min.js");
 __webpack_require__(/*! ./link_to_top */ "./resources/assets/js/link_to_top.js");
 function setTopPadding() {
-  var top = parseInt($('nav.navbar').height()) + 20;
+  var top = parseInt($('nav.navbar').height()) + 14;
   $('main').css({
     paddingTop: top
   });
