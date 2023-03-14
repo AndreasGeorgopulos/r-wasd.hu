@@ -91,4 +91,37 @@ class SiteController extends Controller
 			'meta_data' => $meta_data,
 		]);
 	}
+
+	public function sitemap()
+	{
+		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . chr(13);
+		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . chr(13);
+
+		// Main and contact pages
+		$xml .= '<url><loc>' . url(route('main-page')) . '</loc></url>' . chr(13);
+		$xml .= '<url><loc>' . url(route('contact')) . '</loc></url>' . chr(13);
+
+		// Pages
+		$contents = Content::where(function ($q) {
+			$q->where('active', true);
+			$q->where('type', Content::TYPE_SITE);
+		})->get();
+		foreach ($contents as $model) {
+			$xml .= '<url><loc>' . url(route('page', ['slug' => $model->getSlug()])) . '</loc></url>' . chr(13);
+		}
+
+		// Products
+		$products = Product::where(function ($q) {
+			$q->where('active', true);
+		})->get();
+		foreach ($products as $model) {
+			$xml .= '<url><loc>' . url(route('product', ['slug' => $model->getSlug()])) . '</loc></url>' . chr(13);
+		}
+
+		$xml .= '</urlset>';
+
+		header('Content-type: application/xml');
+		echo $xml;
+		exit;
+	}
 }
