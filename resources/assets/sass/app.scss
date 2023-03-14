@@ -69,9 +69,10 @@
 body {
   font-family: "Exo2" !important;
   background-image: url("../images/bg.jpg");
-  /*background-size: 100%;
-  background-attachment: fixed;*/
-  background-size: cover;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /*background-size: cover;*/
 }
 
 main {
@@ -100,6 +101,10 @@ a {
   position: absolute;
   margin: 0 auto;
   z-index:9999;
+}
+
+.contact-input label {
+  margin-left: 12px;
 }
 
 .video-background-holder {

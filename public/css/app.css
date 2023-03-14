@@ -15186,10 +15186,11 @@ textarea.form-control-lg {
 
 body {
   font-family: "Exo2" !important;
-  background-image: url(/images/bg.jpg?cd430fa9ec65fa7dd89096bb2ba5005f);
-  /*background-size: 100%;
-  background-attachment: fixed;*/
-  background-size: cover;
+  background-image: url(/images/bg.jpg?18d666a243ebc67048e0c28815b5adcf);
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /*background-size: cover;*/
 }
 
 main {
@@ -15218,6 +15219,10 @@ a {
   position: absolute;
   margin: 0 auto;
   z-index: 9999;
+}
+
+.contact-input label {
+  margin-left: 12px;
 }
 
 .video-background-holder {
