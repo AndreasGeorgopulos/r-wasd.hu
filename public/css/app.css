@@ -15195,7 +15195,7 @@ body {
 
 main {
   display: block;
-  /*margin-top: 130px;*/
+  margin-top: 130px;
 }
 
 footer {
@@ -15279,6 +15279,11 @@ a {
   background-color: #ffffff;
   /*padding: 20px 70px 20px 70px;*/
   margin-bottom: 70px;
+}
+
+.grecaptcha-badge {
+  visibility: visible;
+  bottom: 90px !important;
 }
 
 .container.cart {

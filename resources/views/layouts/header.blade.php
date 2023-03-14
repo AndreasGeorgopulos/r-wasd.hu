@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-dark navbar-expand-lg">
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{url('/')}}">
                 <img src="{{asset('/images/logo.png')}}" alt="r-wasd.com" class="img-responsive" />

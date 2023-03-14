@@ -9,8 +9,9 @@
 
             <section class="col-lg-6">
                 <h2 class="text-size-3-2-vmax">Contact</h2>
-                <p class="mb-2">r-wasd.com</p>
-                <p class="mb-2">Email: info@r-wasd.com</p>
+                <p class="mb-2">
+                    <a href="{{url(route('contact'))}}">{{trans('Write us')}}</a>
+                </p>
             </section>
         </div>
 
