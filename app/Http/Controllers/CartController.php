@@ -105,7 +105,7 @@ class CartController extends Controller
 			$data['name'] = $product->getTitle();
 			$data['description'] = $product->getLead();
 			$data['url'] = url(route('product', ['slug' => $product->getSlug()]));
-			$data['index_image'] = $product->hasIndexImage() ? $product->getIndexImageFileUrl('thumb_cart') : null;
+			$data['index_image'] = $product->hasIndexImage() ? $product->getIndexImageFileUrl('index') : null;
 			$data['price'] = $product->price;
 			$data['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
 
