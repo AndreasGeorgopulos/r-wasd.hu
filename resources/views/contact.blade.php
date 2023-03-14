@@ -24,22 +24,7 @@
 					<form method="post" action="{{url(route('contact'))}}">
 						{{csrf_field()}}
 
-						<a id="error">
-							@if (session('form_warning_message'))
-								@php($arr = session('form_warning_message'))
-								<div class="alert alert-warning alert-dismissible">
-									<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
-									<p>{{$arr['lead']}}</p>
-									@if (isset($errors) && count($errors->all()))
-										<ul>
-											@foreach ($errors->all() as $field => $error)
-												<li>{{$error}}</li>
-											@endforeach
-										</ul>
-									@endif
-								</div>
-							@endif
-						</a>
+						@include('layouts.form_errors')
 
 						<div class="form-floating mb-4">
 							<input type="text" name="name" class="form-control color-blue" value="{{ old('name', '') }}"  />
@@ -63,7 +48,7 @@
 									<option value="{{$item['value']}}" @if($item['selected']) selected="selected" @endif>{{$item['title']}}</option>
 								@endforeach
 							</select>
-							<label>{{trans('Subject')}}</label>
+							<label>{{trans('Subject')}} *</label>
 						</div>
 
 						<div class="form-floating mb-4">

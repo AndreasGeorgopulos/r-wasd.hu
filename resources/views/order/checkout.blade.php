@@ -28,22 +28,7 @@
 					@include('order._products')
 				</div>
 				<div class="col-md-6 p-4">
-					<a id="error">
-					@if (session('form_warning_message'))
-						@php($arr = session('form_warning_message'))
-						<div class="alert alert-warning alert-dismissible">
-							<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
-							<p>{{$arr['lead']}}</p>
-							@if (isset($errors) && count($errors->all()))
-								<ul>
-									@foreach ($errors->all() as $field => $error)
-										<li>{{$error}}</li>
-									@endforeach
-								</ul>
-							@endif
-						</div>
-					@endif
-					</a>
+					@include('layouts.form_errors')
 
 					<h2 class="color-blue">{{trans('Contact')}}</h2>
 
