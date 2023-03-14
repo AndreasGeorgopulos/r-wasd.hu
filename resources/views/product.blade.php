@@ -3,7 +3,7 @@
 	<section class="container-fluid container-md product">
 		<h1 class="font-russo-one color-orange text-center text-md-start">{{$model->getTitle()}}</h1>
 
-		<div class="content p-3 p-md-5">
+		<div class="content p-3 p-md-5 rounded">
 			<div class="row">
 				<div class="col-md-6 mb-2">
 					@if($model->hasIndexImage())

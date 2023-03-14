@@ -15,7 +15,7 @@
 	<section class="container-fluid container-md page">
 		<h1 class="font-russo-one color-orange text-center text-md-start">{{trans('Contact')}}</h1>
 
-		<div class="content p-3 p-md-5 row">
+		<div class="content p-3 p-md-5 row rounded">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 				@if(session('send_success'))
