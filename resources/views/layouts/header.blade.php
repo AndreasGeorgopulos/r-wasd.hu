@@ -17,8 +17,8 @@
                         </a>
                     </li>
                     <li class="nav-item ml-auto">
-                        <a class="nav-link @if(url()->current() === url('/page/terms-and-conditions')) active @endif" href="{{url(route('page', ['slug' => 'terms-and-conditions']))}}">
-                            {{trans('Terms and conditions')}}
+                        <a class="nav-link @if(url()->current() === url('/page/about-us')) active @endif" href="{{url(route('page', ['slug' => 'about-us']))}}">
+                            {{trans('About us')}}
                         </a>
                     </li>
                     <li class="nav-item ml-auto">

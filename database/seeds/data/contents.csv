@@ -15,3 +15,4 @@ id;title;description;type;active
 14;Order email to customer;Rendelés után visszaigazoló email a vásárlónak.;3;0
 15;Order email to admin;Rendelés után visszaigazoló email nekünk.;3;0
 16;Postal tracking code email;Csomag postára adáskor email.;3;0
+17;About us;About us oldal;1;0
