@@ -44,8 +44,8 @@ return [
 				],
 				'thumb_cart' => [
 					'enabled' => true,
-					'width' => 100,
-					'height' => 100,
+					'width' => 400,
+					'height' => 400,
 					'aspect_ratio' => true,
 					'crop' => false,
 					'watermark' => [

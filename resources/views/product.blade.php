@@ -29,15 +29,13 @@
 						<input type="hidden" name="product_id" value="{{$model->id}}" >
 
 						<div class="row mt-5 mb-5">
-							<div class="col-4">
-								<input type="number" name="amount" value="1" min="1" max="1" class="form-control" />
-							</div>
-							<div class="col-5">
-								<button type="submit" class="btn btn-default">
+							<div class="col-8">
+								<input type="number" name="amount" value="1" min="1" max="1" class="form-control hidden" />
+								<button type="submit" class="btn btn-default color-blue">
 									<i class="fa fa-cart-plus"></i> Add to cart
 								</button>
 							</div>
-							<div class="col-3 font-exo-2 color-orange text-end p-2">
+							<div class="col-4 font-exo-2 color-orange text-end p-2">
 								€{!! number_format($model->price, 2, '.', ',') !!}
 							</div>
 						</div>
