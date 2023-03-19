@@ -91,5 +91,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::match(['get', 'post'], '/contacts/list', 'ContactController@index')->name('admin_contacts_list');
 		Route::match(['get'], '/contacts/view/{id?}', 'ContactController@view')->name('admin_contacts_view');
 		Route::match(['get'], '/contacts/delete/{id?}', 'ContactController@delete')->name('admin_contacts_delete');
+
+		// orders
+		Route::match(['get', 'post'], '/orders', function () {
+			return redirect(route('admin_orders_list'));
+		})->name('admin_orders_index');
+		Route::match(['get', 'post'], '/orders/list', 'OrderController@index')->name('admin_orders_list');
+		Route::match(['get', 'post'], '/orders/edit/{id?}', 'OrderController@edit')->name('admin_orders_edit');
+		Route::match(['get'], '/orders/delete/{id?}', 'OrderController@delete')->name('admin_orders_delete');
 	});
 });

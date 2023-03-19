@@ -4,6 +4,8 @@ require('bootstrap');
 require('cookieconsent/build/cookieconsent.min');
 require('./link_to_top');
 
+require('fslightbox');
+
 function setTopPadding()
 {
 	let top = parseInt($('nav.navbar').height()) + 14;

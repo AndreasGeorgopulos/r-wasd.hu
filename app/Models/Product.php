@@ -23,8 +23,14 @@ class Product extends Model implements IModelIndexImage
 		parent::__construct($attributes);
 	}
 
-	public function translates () {
-		return $this->hasMany('App\Models\Product_Translate');
+	public function translates ()
+	{
+		return $this->hasMany(Product_Translate::class);
+	}
+
+	public function images()
+	{
+		return $this->hasMany(ProductImage::class);
 	}
 
 	public function getTitle()

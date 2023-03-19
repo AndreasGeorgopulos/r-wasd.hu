@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Product_Translate;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -81,6 +82,24 @@ class ProductController extends Controller implements ICrudController
 			}
 			$model->saveIndexImageFile($request->file('index_image'));
 
+			// Gallery Images
+			$deleteImageIds = $request->get('delete_image', []);
+			//dd($deleteImageIds);
+			foreach ($deleteImageIds as $id) {
+				if (!($productImage = ProductImage::where('id', $id)->first())) {
+					continue;
+				}
+				$productImage->deleteImageFile();
+			}
+
+			$uploadedFiles = $request->file('images', []);
+			foreach ($uploadedFiles as $file) {
+				$productImage = new ProductImage();
+				$productImage->product_id = $model->id;
+				$productImage->save();
+				$productImage->saveImageFile($file);
+			}
+
 			return redirect(route('admin_products_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Sikeres mentés'),
 				trans('A tartalom adatai sikeresen rögzítve lettek.'),
@@ -96,6 +115,9 @@ class ProductController extends Controller implements ICrudController
 		if ($model = Product::find($id)) {
 			$model->translates()->delete();
 			$model->deleteIndexImageFile();
+			foreach ($model->images as $productImage) {
+				$productImage->deleteImageFile();
+			}
 			$model->delete();
 			return redirect(route('admin_products_list'))->with('form_success_message', [
 				trans('Sikeres törlés'),
@@ -120,11 +142,14 @@ class ProductController extends Controller implements ICrudController
 
 		foreach ($models as $model) {
 			$model->resizeIndexImage();
+			foreach ($model->images as $productImage) {
+				$productImage->resizeImage();
+			}
 		}
 
 		return redirect(route('admin_products_list'))->with('form_success_message', [
 			trans('Sikeres kép átméretezés'),
-			trans('Az index képek sikeresen át lettek méretezve.')
+			trans('A termék képek sikeresen át lettek méretezve.')
 		]);
 	}
 }

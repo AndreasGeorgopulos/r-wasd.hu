@@ -7,7 +7,16 @@
 			<div class="row">
 				<div class="col-md-6 mb-2">
 					@if($model->hasIndexImage())
-						<img src="{{$model->getIndexImageFileUrl('page')}}" class="img-fluid" alt="{{$model->getTitle()}}" />
+						<a data-fslightbox="gallery" href="{{$model->getIndexImageFileUrl('original')}}">
+							<img src="{{$model->getIndexImageFileUrl('page')}}" class="img-fluid" alt="{{$model->getTitle()}}" />
+						</a>
+					@endif
+
+					@if($model->images->count())
+						@foreach($model->images as $productImage)
+							<a data-fslightbox="gallery" href="{{$productImage->getImageFileUrl('page')}}" class="hidden">
+							</a>
+						@endforeach
 					@endif
 				</div>
 				<div class="col-md-6 font-exo-2 color-gray">
@@ -19,7 +28,7 @@
 
 						<div class="row mt-5 mb-5">
 							<div class="col-4">
-								<input type="number" name="amount" value="1" class="form-control" />
+								<input type="number" name="amount" value="1" min="1" max="1" class="form-control" />
 							</div>
 							<div class="col-5">
 								<button type="submit" class="btn btn-default">

@@ -9,19 +9,19 @@ use Intervention\Image\ImageManagerStatic as Image;
 /**
  * Trait
  * <p>
- * Index képek kezelése
+ * Model képek kezelése
  */
-trait TModelIndexImage
+trait TModelImage
 {
-	public $indexImageConfig;
+	public $imageConfig;
 
 	/**
 	 * @param array $config
 	 * @return void
 	 */
-	public function loadIndexImageConfig(array $config): void
+	public function loadImageConfig(array $config): void
 	{
-		$this->indexImageConfig = $config;
+		$this->imageConfig = $config;
 	}
 
 	/**
@@ -29,13 +29,13 @@ trait TModelIndexImage
 	 * @param bool $createdFolder
 	 * @return string
 	 */
-	protected function getIndexImagePath(string $resize = null, bool $createdFolder = true): string
+	protected function getImagePath(string $resize = null, bool $createdFolder = true): string
 	{
 		if ($resize === null) {
 			$resize = 'original';
 		}
 
-		$path = public_path($this->indexImageConfig['image_path']) . $this->id . '/' . ($resize ? ($resize . '/') : '');
+		$path = public_path($this->imageConfig['image_path']) . $this->product_id . '/' . $this->id . '/' . ($resize ? ($resize . '/') : '');
 		if (!file_exists($path) && $createdFolder) {
 			mkdir($path, 0777, true);
 		}
@@ -48,26 +48,26 @@ trait TModelIndexImage
 	 * @param bool $createdFolder
 	 * @return string|null
 	 */
-	public function getIndexImageFilePath(string $resize = null, bool $createdFolder = true): ?string
+	public function getImageFilePath(string $resize = null, bool $createdFolder = true): ?string
 	{
-		if (empty($this->id) || empty($this->index_image_file_name)) {
+		if (empty($this->id) || empty($this->file_name)) {
 			return null;
 		}
 
-		if (!array_key_exists($resize, $this->indexImageConfig['resizes'])) {
+		if (!array_key_exists($resize, $this->imageConfig['resizes'])) {
 			$resize = null;
 		}
 
-		return $this->getIndexImagePath($resize, $createdFolder) . $this->index_image_file_name;
+		return $this->getImagePath($resize, $createdFolder) . $this->file_name;
 	}
 
 	/**
 	 * @param string|null $resize
 	 * @return string|null
 	 */
-	public function getIndexImageFileUrl(string $resize = null): ?string
+	public function getImageFileUrl(string $resize = null): ?string
 	{
-		if (empty($this->id) || empty($this->index_image_file_name)) {
+		if (empty($this->id) || empty($this->file_name)) {
 			return null;
 		}
 
@@ -75,76 +75,77 @@ trait TModelIndexImage
 			$resize = 'original';
 		}
 
-		return url($this->indexImageConfig['image_path']) . '/' . $this->id . '/' . ($resize ? ($resize . '/') : '/') . $this->index_image_file_name . '?ts=' . time();
+		return url($this->imageConfig['image_path']) . '/' . $this->product_id . '/' . $this->id . '/' . ($resize ? ($resize . '/') : '/') . $this->file_name . '?ts=' . time();
 	}
 
 	/**
 	 * @param UploadedFile|null $uploadedFile
 	 * @return void
 	 */
-	public function saveIndexImageFile(UploadedFile $uploadedFile = null): void
+	public function saveImageFile(UploadedFile $uploadedFile = null): void
 	{
 		if (!$this->id || $uploadedFile === null) {
 			return;
 		}
 
 		// korábbi file törlése
-		$this->deleteIndexImageFile();
+		$this->deleteImageFile();
 
-		$this->index_image_file_name = $uploadedFile->getClientOriginalName();
+		$this->file_name = $uploadedFile->getClientOriginalName();
+		$this->file_type = $uploadedFile->getClientMimeType();
 		$this->save();
 
-		$path = $this->getIndexImagePath();
+		$path = $this->getImagePath();
 		$uploadedFile->move($path, $uploadedFile->getClientOriginalName());
 
-		$this->resizeIndexImage();
+		$this->resizeImage();
 	}
 
 	/**
 	 * @return void
+	 * @throws \Exception
 	 */
-	public function deleteIndexImageFile(): void
+	public function deleteImageFile(): void
 	{
-		if (empty($this->index_image_file_name)) {
+		if (empty($this->file_name)) {
 			return;
 		}
 
 		$this->deleteResizedImages();
 
-		$filePath = $this->getIndexImageFilePath();
-		$dirPath = str_replace('/original/' . $this->index_image_file_name, '', $filePath);
+		$filePath = $this->getImageFilePath();
+		$dirPath = str_replace('/original/' . $this->file_name, '', $filePath);
 		if (file_exists($filePath)) {
 			File::delete($filePath);
 			File::deleteDirectory($dirPath);
 		}
 
-		$this->index_image_file_name = null;
-		$this->save();
+		$this->delete();
 	}
 
 	/**
 	 * @return void
 	 */
-	public function resizeIndexImage(): void
+	public function resizeImage(): void
 	{
-		if (!$this->hasIndexImage()) {
+		if (!$this->hasImage()) {
 			return;
 		}
 
 		$this->deleteResizedImages();
 
-		$originalFilename = $this->index_image_file_name;
-		$originalFilePath = $this->getIndexImageFilePath();
-		$watermarkSource = $this->indexImageConfig['watermark_path'];
+		$originalFilename = $this->file_name;
+		$originalFilePath = $this->getImageFilePath();
+		$watermarkSource = $this->imageConfig['watermark_path'];
 
-		$enabledResizes = collect($this->indexImageConfig['resizes'])->where('enabled', true)->toArray();
+		$enabledResizes = collect($this->imageConfig['resizes'])->where('enabled', true)->toArray();
 		foreach ($enabledResizes as $key => $config) {
-			$path = $this->getIndexImagePath($key, false);
+			$path = $this->getImagePath($key, false);
 			if (file_exists($path)) {
 				unlink($path);
 			}
 
-			$path = $this->getIndexImagePath($key, true);
+			$path = $this->getImagePath($key, true);
 
 			// Make image from original
 			$image = Image::make($originalFilePath);
@@ -178,13 +179,13 @@ trait TModelIndexImage
 	/**
 	 * @return bool
 	 */
-	public function hasIndexImage(): bool
+	public function hasImage(): bool
 	{
-		if (empty($this->id) || empty($this->index_image_file_name)) {
+		if (empty($this->id) || empty($this->file_name)) {
 			return false;
 		}
 
-		return (bool) file_exists($this->getIndexImageFilePath());
+		return (bool) file_exists($this->getImageFilePath());
 	}
 
 	/**
@@ -193,8 +194,8 @@ trait TModelIndexImage
 	final protected function deleteResizedImages(): void
 	{
 		// Delete all files and folders except original
-		$dirname = $this->indexImageConfig['image_path'] . $this->id;
-		if (!$this->hasIndexImage()) {
+		$dirname = $this->imageConfig['image_path'] . $this->product_id . '/' . $this->id;
+		if (!$this->hasImage()) {
 			return;
 		}
 

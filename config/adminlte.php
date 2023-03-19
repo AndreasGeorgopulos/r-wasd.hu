@@ -111,6 +111,18 @@ return [
 	        'active' => ['dashboard'],
         ],
 	    [
+		    'text'        => 'Orders',
+		    'icon'        => 'shopping-cart',
+		    'route' => 'admin_orders_index',
+		    'active' => ['orders/*'],
+	    ],
+	    [
+		    'text'        => 'Contact messages',
+		    'icon'        => 'envelope',
+		    'route' => 'admin_contacts_index',
+		    'active' => ['contacts/*'],
+	    ],
+	    [
 		    'text'        => 'Products',
 		    'icon'        => 'trademark',
 		    'route' => 'admin_products_index',
@@ -133,12 +145,6 @@ return [
 		    'icon'        => 'flag',
 		    'route' => 'admin_countries_index',
 		    'active' => ['countries/*'],
-	    ],
-	    [
-		    'text'        => 'Contact messages',
-		    'icon'        => 'envelope',
-		    'route' => 'admin_contacts_index',
-		    'active' => ['contacts/*'],
 	    ],
 	    /*[
 		    'text'        => 'Users',

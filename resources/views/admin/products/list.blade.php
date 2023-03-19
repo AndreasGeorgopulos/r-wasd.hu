@@ -1,7 +1,7 @@
 <div class="box-body">
     <div class="text-right">
         <a href="{{url(route('admin_products_resize_index_images'))}}" class="btn btn-default">
-            <i class="fa fa-arrows-alt"></i> {{trans('Resize index images')}}
+            <i class="fa fa-arrows-alt"></i> {{trans('Resize images')}}
         </a>
         <hr />
     </div>

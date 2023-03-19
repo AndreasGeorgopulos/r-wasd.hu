@@ -83,6 +83,64 @@ return [
 				],
 			],
 		],
+		'images' => [
+			'image_path' => 'uploads/products/images/',
+			'watermark_path' => 'images/watermark.png',
+			'resizes' => [
+				'thumb_admin' => [
+					'enabled' => true,
+					'width' => 50,
+					'height' => 50,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => false,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
+				'thumb_cart' => [
+					'enabled' => true,
+					'width' => 100,
+					'height' => 100,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => false,
+						'position' => 'bottom-right',
+						'pos_x' => 0,
+						'pos_y' => 0,
+					],
+				],
+				'index' => [
+					'enabled' => true,
+					'width' => 400,
+					'height' => 400,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => true,
+						'position' => 'bottom-right',
+						'pos_x' => 20,
+						'pos_y' => 20,
+					],
+				],
+				'page' => [
+					'enabled' => true,
+					'width' => 1200,
+					'height' => 1200,
+					'aspect_ratio' => true,
+					'crop' => false,
+					'watermark' => [
+						'enabled' => true,
+						'position' => 'bottom-right',
+						'pos_x' => 20,
+						'pos_y' => 20,
+					],
+				],
+			],
+		],
 	],
 
     /*

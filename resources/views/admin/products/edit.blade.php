@@ -13,14 +13,15 @@
                     <li class="active"><a href="#general_data" data-toggle="tab" aria-expanded="true">{{trans('General data')}}</a></li>
 
                     @foreach (config('app.languages') as $lang)
-                        <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans('' . $lang)}}</a></li>
+                        <li class=""><a href="#{{$lang}}_data" data-toggle="tab" aria-expanded="false">{{trans($lang)}} {{trans('content')}}</a></li>
                     @endforeach
 
-                    <li><a href="#gallery_data" data-toggle="tab" aria-expanded="true">{{trans('Gallery')}}</a></li>
+                    <li><a href="#gallery_data" data-toggle="tab" aria-expanded="true">{{trans('Images')}}</a></li>
                 </ul>
                 <div class="tab-content">
                     @include('admin.products.tab_general')
                     @include('admin.products.tab_translates')
+                    @include('admin.products.tab_gallery')
                 </div>
             </div>
 
@@ -30,10 +31,4 @@
             </div>
         </div>
     </form>
-@endsection
-
-@section('adminlte_js')
-    <script type="text/javascript">
-        //$('textarea.wysig').wysihtml5();
-    </script>
 @endsection
