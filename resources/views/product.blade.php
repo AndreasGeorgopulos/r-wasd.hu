@@ -5,17 +5,19 @@
 
 		<div class="content p-3 p-md-5 rounded">
 			<div class="row">
-				<div class="col-md-6 mb-2">
+				<div class="col-md-6 mb-2 container position-relative">
 					@if($model->hasIndexImage())
-						<a data-fslightbox="gallery" href="{{$model->getIndexImageFileUrl('original')}}">
-							<img src="{{$model->getIndexImageFileUrl('page')}}" class="img-fluid" alt="{{$model->getTitle()}}" />
+						<a data-fslightbox="gallery" href="{{$model->getIndexImageFileUrl('image_viewer')}}">
+							<div class="position-absolute opacity-50" style="font-size: 50px; top:calc(50% - 30px); padding-left: calc(50% - 30px); ">
+								<i class="fa fa-search color-blue"></i>
+							</div>
+							<img src="{{$model->getIndexImageFileUrl('page')}}" class="img-fluid w-100" alt="{{$model->getTitle()}}" />
 						</a>
 					@endif
 
 					@if($model->images->count())
 						@foreach($model->images as $productImage)
-							<a data-fslightbox="gallery" href="{{$productImage->getImageFileUrl('page')}}" class="hidden">
-							</a>
+							<a data-fslightbox="gallery" href="{{$productImage->getImageFileUrl('image_viewer')}}" class="hidden"></a>
 						@endforeach
 					@endif
 				</div>
