@@ -15,7 +15,7 @@
 							</div>
 
 							<div class="col-4 pt-3 text-center">
-								<span class="color-orange">{{trans('Total: ')}} {{$item['total_formated']}}</span>
+								<span class="color-orange price">{{$item['total_formated']}}</span>
 							</div>
 							<div class="col-8">
 								<form method="post" action="{{url(route('cart_set'))}}" class="text-end">
@@ -23,7 +23,7 @@
 									<input type="hidden" name="product_id" value="{{$item['product_id']}}" >
 									<input type="hidden" name="amount" value="0" class="form-control" />
 									<button type="submit" class="btn btn-danger">
-										<i class="fa fa-minus"></i>
+										<i class="fa fa-remove"></i>
 									</button>
 								</form>
 							</div>

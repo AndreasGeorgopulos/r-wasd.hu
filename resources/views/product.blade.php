@@ -27,16 +27,16 @@
 					<form method="post" action="{{url(route('cart_set'))}}">
 						{{csrf_field()}}
 						<input type="hidden" name="product_id" value="{{$model->id}}" >
+						<input type="number" name="amount" value="1" min="1" max="1" class="form-control hidden" />
 
-						<div class="row mt-5 mb-5">
-							<div class="col-8">
-								<input type="number" name="amount" value="1" min="1" max="1" class="form-control hidden" />
-								<button type="submit" class="btn btn-default color-blue">
+						<div class="row mt-5 mb-5 text-end justify-content-center align-items-center">
+							<div class="col-6 col-md-10 text-center text-md-end">
+								<button type="submit" class="btn btn-default color-blue add-to-cart">
 									<i class="fa fa-cart-plus"></i> Add to cart
 								</button>
 							</div>
-							<div class="col-4 font-exo-2 color-orange text-end p-2">
-								€{!! number_format($model->price, 2, '.', ',') !!}
+							<div class="col-6 col-md-2 text-center text-md-start">
+								<span class="price font-exo-2 color-orange">€{!! number_format($model->price, 2, '.', ',') !!}</span>
 							</div>
 						</div>
 					</form>

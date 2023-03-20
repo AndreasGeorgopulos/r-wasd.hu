@@ -176,6 +176,21 @@ a {
       padding: 0px 8px 2px 10px;
     }
   }
+  .price {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .add-to-cart {
+    font-size: 20px;
+    font-weight: bold;
+  }
+}
+
+.container.cart {
+  .price {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 .grecaptcha-badge {

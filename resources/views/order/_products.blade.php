@@ -19,13 +19,13 @@
 		<div class="card-footer">
 			<div class="row">
 				<div class="col-4 text-center">
-					{{$item['price_formated']}}
+
 				</div>
 				<div class="col-4 text-center">
-					{{$item['amount']}} {{trans('pieces')}}
+
 				</div>
 				<div class="col-4 text-center">
-					{{$item['total_formated']}}
+					<span class="price color-orange">{{$item['total_formated']}}</span>
 				</div>
 			</div>
 		</div>
