@@ -5,10 +5,10 @@
 				<div class="card mb-4">
 					<div class="card-body">
 						<div class="row">
-							<div class="col-4">
+							<div class="col-md-4 text-center pb-3 pb-md-0">
 								<img src="{{$item['product']['index_image']}}" class="img-thumbnail" alt="{{$item['product']['name']}}" />
 							</div>
-							<div class="col-8">
+							<div class="col-md-8">
 								<h5 class="color-orange text-center text-md-start">{{$item['product']['name']}}</h5>
 								{!! $item['product']['description'] !!}
 								{!! $item['product']['description'] !!}
@@ -17,7 +17,7 @@
 							<div class="col-4 pt-3 text-center">
 								<span class="color-orange price">{{$item['total_formated']}}</span>
 							</div>
-							<div class="col-8">
+							<div class="col-8 pt-3">
 								<form method="post" action="{{url(route('cart_set'))}}" class="text-end">
 									{{csrf_field()}}
 									<input type="hidden" name="product_id" value="{{$item['product_id']}}" >

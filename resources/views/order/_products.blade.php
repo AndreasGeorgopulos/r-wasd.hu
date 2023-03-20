@@ -7,12 +7,12 @@
 
 		<div class="card-body">
 			<div class="row">
-				<div class="col-3">
+				<div class="col-md-3 pb-3 pb-md-0">
 					@if(!empty($item['image']))
 						<img src="{{$item['image']}}" class="img-thumbnail" alt="{{$item['name']}}" />
 					@endif
 				</div>
-				<div class="col-9">{!! $item['description'] !!}</div>
+				<div class="col-md-9">{!! $item['description'] !!}</div>
 			</div>
 		</div>
 
@@ -31,3 +31,19 @@
 		</div>
 	</div>
 @endforeach
+@if(empty($cartData['postal_fee']))
+	<div class="text-center price color-blue">
+		{{trans('Total pay')}}: <span class="color-orange">{{$cartData['total_formated']}}</span> + {{trans('postal fee')}}*
+	</div>
+
+	<div class="text-center color-blue mt-3">
+		* {{trans('The postal fee depends on the selected country.')}}
+	</div>
+@else
+	<div class="text-center price color-blue">
+		{{trans('Total pay')}}: <span class="color-orange">{{$cartData['total_formated']}}</span> + {{trans('postal fee')}}*
+	</div>
+	<div class="text-center color-blue mt-3">
+		* {{trans('Postal fee')}}:
+	</div>
+@endif
