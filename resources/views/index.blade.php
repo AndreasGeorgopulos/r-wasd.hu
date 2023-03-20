@@ -16,8 +16,9 @@
                             <u>Bootstrapious</u></a>
                     </p>
                     <p>
-                        <a href="{{url(route('main-page'))}}#products" class="text-white">
-                            <u>Link to products</u></a>
+                        <a href="{{url(route('main-page'))}}#products" class="text-white products-link">
+                            <i class="fa fa-angle-double-down"></i>
+                        </a>
                     </p>
                 </div>
             </div>

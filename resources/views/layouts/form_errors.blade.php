@@ -1,5 +1,5 @@
-<a id="error">
-	@if (session('form_warning_message'))
+@if (session('form_warning_message'))
+	<a id="error">
 		@php($arr = session('form_warning_message'))
 		<div class="alert alert-warning alert-dismissible">
 			<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
@@ -12,5 +12,5 @@
 				</ul>
 			@endif
 		</div>
-	@endif
-</a>
+	</a>
+@endif
