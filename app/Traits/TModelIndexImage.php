@@ -150,7 +150,7 @@ trait TModelIndexImage
 			$image = Image::make($originalFilePath);
 
 			// Resize image
-			$image->resize($config['width'], $config['height'], function ($constraint) use($config) {
+			$image->resize($config['width'], null, function ($constraint) use($config) {
 				if ($config['aspect_ratio'] === true) {
 					$constraint->aspectRatio();
 				}
