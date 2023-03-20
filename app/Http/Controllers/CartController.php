@@ -34,7 +34,7 @@ class CartController extends Controller
 				'title' => 'r-Wasd.com',
 			],
 			'pageContentBlock_1' => $pageContentBlock_1,
-			'pageContentBlock_1' => $pageContentBlock_1,
+			'pageContentBlock_2' => $pageContentBlock_2,
 			'emptyContentBlock' => $emptyContentBlock,
 			'cart_items' => $cart_items,
 			'cart_item_count' => $cart_items_count,
