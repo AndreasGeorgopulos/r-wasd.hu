@@ -10,11 +10,8 @@
         <div class="video-background-content container h-100">
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">
-                    <h1 class="display-4">{{trans('Welcome to R-WASD site')}}</h1>
-                    <p class="lead mb-0">With HTML5 Video and Bootstrap 4</p>
-                    <p class="lead">Snippet by <a href="https://bootstrapious.com/snippets" class="text-white">
-                            <u>Bootstrapious</u></a>
-                    </p>
+                    <h1 class="display-4">{{strip_tags($indexTitleContentBlock)}}</h1>
+                    <p class="lead mb-0 mt-4">{!! $indexLeadContentBlock !!}</p>
                     <p>
                         <a href="{{url(route('main-page'))}}#products" class="text-white products-link">
                             <i class="fa fa-angle-double-down"></i>

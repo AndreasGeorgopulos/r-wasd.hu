@@ -24,6 +24,8 @@ class SiteController extends Controller
 
 		$pageContentBlock_1 = Content::getBlockContent(1);
 		$pageContentBlock_2 = Content::getBlockContent(2);
+		$indexTitleContentBlock = Content::getBlockContent(19);
+		$indexLeadContentBlock = Content::getBlockContent(20);
 
 		$products = Product::where('active', 1)->get();
 
@@ -32,6 +34,8 @@ class SiteController extends Controller
 			'meta_data' => $meta_data,
 			'pageContentBlock_1' => $pageContentBlock_1,
 			'pageContentBlock_2' => $pageContentBlock_2,
+			'indexTitleContentBlock' => $indexTitleContentBlock,
+			'indexLeadContentBlock' => $indexLeadContentBlock,
 		]);
 	}
 

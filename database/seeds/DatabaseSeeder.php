@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //$this->call(DefaultDataSeeder::class);
-        $this->call(CountrySeeder::class);
-        $this->call(PostalParcelSeeder::class);
+        //$this->call(CountrySeeder::class);
+        //$this->call(PostalParcelSeeder::class);
         $this->call(ContentSeeder::class);
     }
 }

@@ -16,3 +16,6 @@ id;title;description;type;active
 15;Order email to admin;Rendelés után visszaigazoló email nekünk.;3;0
 16;Postal tracking code email;Csomag postára adáskor email.;3;0
 17;About us;About us oldal;1;0
+18;Cart page empty;Kosár oldal üres kosár szöveg;2;0
+19;Home page index title;Kezdőlap cím a videón;2;0
+20;Home page index lead;Kezdőlap rövid bevezető a videón;2;0
