@@ -23,8 +23,6 @@
 								<option value="0" @if(old('is_active', $model->is_active) == 0) selected="selected" @endif>{{trans('No')}}</option>
 							</select>
 						</div>
-					</div>
-					<div class="col-sm-6">
 						<div class="form-group">
 							<label>{{trans('Countries')}}*:</label>
 							<select name="countries[]" class="form-control select2" multiple>
@@ -33,6 +31,9 @@
 								@endforeach
 							</select>
 						</div>
+					</div>
+					<div class="col-sm-6">
+						@include('admin.postal_parcels._fees')
 					</div>
 				</div>
 			</div>
@@ -48,5 +49,62 @@
 @section('adminlte_js')
 	<script type="text/javascript">
 		$('.select2').select2();
+
+		const Fees = {
+			table: null,
+
+			init: function () {
+				this.table = $('#fee-table');
+				this.eventHandlers();
+			},
+
+			eventHandlers: function () {
+				const $this = this;
+
+				$this.table.find('button.btn-add').off('click');
+				$this.table.find('button.btn-add').on('click', function () {
+					$this.addNewRow();
+				});
+
+				$this.table.find('button.btn-remove').off('click');
+				$this.table.find('button.btn-remove').on('click', function () {
+					$this.removeRow($(this));
+				});
+			},
+
+			addNewRow: function () {
+				const rowIndex = this.table.find('tbody tr').length;
+
+				let td, tr = $('<tr>');
+
+				td = $('<td>');
+				td.append($('<input type="text" name="postal_parcels_fees[' + rowIndex + '][weight_from]" class="form-control input-sm" value="" />'))
+				tr.append(td);
+
+				td = $('<td>');
+				td.append($('<input type="text" name="postal_parcels_fees[' + rowIndex + '][weight_to]" class="form-control input-sm" value="" />'))
+				tr.append(td);
+
+				td = $('<td>');
+				td.append($('<input type="text" name="postal_parcels_fees[' + rowIndex + '][fee]" class="form-control input-sm" value="" />'))
+				tr.append(td);
+
+				td = $('<td class="text-center">');
+				td.append('<button type="button" class="btn btn-danger btn-remove btn-sm"><i class="fa fa-minus"></i></button>');
+				tr.append(td);
+
+				this.table.find('tbody').append(tr);
+
+				this.eventHandlers();
+			},
+
+			removeRow: function (button) {
+				button.closest('tr').remove();
+				this.eventHandlers();
+			},
+		};
+
+		Fees.init();
+
 	</script>
 @endsection

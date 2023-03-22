@@ -36,6 +36,14 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 	}
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function fees()
+	{
+		return $this->hasMany(PostalParcelFee::class)->orderBy('weight_from', 'asc');
+	}
+
+	/**
 	 * Model törölhetőségének ellenőrzése
 	 *
 	 * @return bool
@@ -93,5 +101,16 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 		return [
 			'is_active.boolean' => trans('Is active field must be yes or no.'),
 		];
+	}
+
+	/**
+	 * @param $countryId
+	 * @return mixed
+	 */
+	public static function findByCountry($countryId)
+	{
+		return static::whereHas('countries', function ($q) use($countryId) {
+			$q->where('countries.id', $countryId);
+		})->first();
 	}
 }

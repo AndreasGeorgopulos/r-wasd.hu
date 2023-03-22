@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\PostalParcel;
+use App\Models\PostalParcelFee;
 use App\Traits\TModelValidate;
 use Illuminate\Http\Request;
 
@@ -78,6 +79,21 @@ class PostalParcelController extends Controller implements ICrudController
 			$model->save();
 
 			$model->countries()->sync($request->get('countries'));
+
+			$fees = $request->get('postal_parcels_fees', []);
+			foreach ($fees as $item) {
+				if (empty($item['id']) || !($feeModal = PostalParcelFee::where('id', $item['id'])->first())) {
+					$feeModal = new PostalParcelFee();
+					$feeModal->postal_parcel_id = $model->id;
+				}
+
+				if (!empty($item['_delete']) && $feeModal->id) {
+					$feeModal->delete();
+					continue;
+				}
+
+				$feeModal->fill($item)->save();
+			}
 
 			return redirect(route('admin_postal_parcels_edit', ['id' => $model->id]))->with('form_success_message', [
 				trans('Save success'),

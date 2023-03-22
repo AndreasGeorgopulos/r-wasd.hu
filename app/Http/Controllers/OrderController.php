@@ -265,9 +265,7 @@ class OrderController extends Controller
 		}
 
 		// set postal parcel
-		$postalParcel = PostalParcel::whereHas('countries', function ($q) use($model) {
-			$q->where('countries.id', $model->shipping_country_id);
-		})->first();
+		$postalParcel = PostalParcel::findByCountry($model->shipping_country_id);
 
 		$model->postal_parcel_id = !empty($postalParcel) ? $postalParcel->id : null;
 
