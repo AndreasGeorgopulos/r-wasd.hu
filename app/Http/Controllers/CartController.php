@@ -31,7 +31,7 @@ class CartController extends Controller
 
 		return view('order.cart', [
 			'meta_data' => [
-				'title' => 'r-Wasd.com',
+				'title' => 'я-WASD',
 			],
 			'pageContentBlock_1' => $pageContentBlock_1,
 			'pageContentBlock_2' => $pageContentBlock_2,

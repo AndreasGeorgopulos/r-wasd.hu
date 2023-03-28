@@ -73,7 +73,7 @@ class OrderController extends Controller
 			'cartData' => $this->getCartData(),
 			'accepted_terms_and_conditions' => (bool) !empty($order),
 		    'meta_data' => [
-			    'title' => 'r-Wasd.com',
+			    'title' => 'я-WASD',
 		    ],
 		    'pageContentBlock_1' => $pageContentBlock_1,
 		    'pageContentBlock_2' => $pageContentBlock_2,
@@ -96,7 +96,7 @@ class OrderController extends Controller
 			'order' => $order,
 			'cartData' => $cartData,
 			'meta_data' => [
-				'title' => 'r-Wasd.com',
+				'title' => 'я-WASD',
 			],
 			'pageContentBlock_1' => $pageContentBlock_1,
 			'pageContentBlock_2' => $pageContentBlock_2,
@@ -197,7 +197,7 @@ class OrderController extends Controller
 			'order' => $order,
 			'cartData' => $cartData,
 			'meta_data' => [
-				'title' => 'r-Wasd.com',
+				'title' => 'я-WASD',
 			],
 			'pageContentBlock' => $pageContentBlock,
 		]);
@@ -222,7 +222,7 @@ class OrderController extends Controller
 		return view('order.finish', [
 			'model' => $model,
 			'meta_data' => [
-				'title' => 'r-Wasd.com',
+				'title' => 'я-WASD',
 			],
 			'pageContentBlock' => $pageContentBlock,
 		]);
@@ -244,7 +244,7 @@ class OrderController extends Controller
 		return view('order.cancel_payment', [
 			'model' => $model,
 			'meta_data' => [
-				'title' => 'r-Wasd.com',
+				'title' => 'я-WASD',
 			],
 			'pageContentBlock' => $pageContentBlock,
 		]);

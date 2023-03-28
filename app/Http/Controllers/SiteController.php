@@ -86,7 +86,7 @@ class SiteController extends Controller
 		}
 
 		$meta_data = [
-			'title' => '',
+			'title' => trans('Contact'),
 			'description' => '',
 			'keywords' => '',
 		];

@@ -89,7 +89,7 @@
 					@if(!$accepted_terms_and_conditions)
 						<div class="form-check form-switch">
 							<input class="form-check-input" type="checkbox" name="accept_term_and_conditions" id="accept_term_and_conditions" />
-							<label class="form-check-label" for="accept_term_and_conditions">{{trans('I accept Terms and conditions')}}</label>
+							<label class="form-check-label" for="accept_term_and_conditions">{{trans('I accept')}} <a href="{{url(route('page', ['slug' => 'terms-and-conditions']))}}" target="_blank">{{trans('Terms and conditions')}}</a></label>
 						</div>
 					@endif
 
