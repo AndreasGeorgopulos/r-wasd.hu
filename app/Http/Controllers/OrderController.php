@@ -139,16 +139,22 @@ class OrderController extends Controller
 
 					$items[] = (new Item())->setName($cartItem['name'])
 						->setDescription($cartItem['description'])
-						->setCurrency('EUR')
+						->setCurrency('USD')
 						->setQuantity($cartItem['amount'])
 						->setPrice($cartItem['price']);
 				}
+
+				$items[] = (new Item())->setName('Postal fee')
+					->setDescription('')
+					->setCurrency('USD')
+					->setQuantity(1)
+					->setPrice($cartData['postal_fee']);
 
 				$item_list = new ItemList();
 				$item_list->setItems($items);
 
 				$amount = new Amount();
-				$amount->setCurrency('EUR')->setTotal($cartData['total']);
+				$amount->setCurrency('USD')->setTotal((float)$cartData['total']);
 
 				$transaction = new Transaction();
 				$transaction->setAmount($amount)
@@ -180,11 +186,11 @@ class OrderController extends Controller
 					}
 
 				} catch (\PayPal\Exception\PPConnectionException $ex) {
-					throw new Exception($ex->getMessage());
+					throw new Exception($ex->getMessage() . ' on ' . $ex->getFile() . ' line ' . $ex->getLine());
 				}
 
 			}, function ($exception) use(&$redirect_url) {
-				Session::put('error', $exception->getMessage());
+				Session::put('error', $exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
 				$redirect_url = url(route('order_payment'));
 			});
 
@@ -264,16 +270,16 @@ class OrderController extends Controller
 			throw new Exception('Fee model (Country ID: ' . $countryModel->id  . ', Weight: ' . $cartData['weight'] . ') not found');
 		}
 
-		$fee = round($feeModel->fee / config('app.eur_rate'), 2);
+		$fee = round($feeModel->fee / config('app.usd_rate'), 2);
 		$total = $cartData['subtotal'] + $fee;
 
 		return [
 			'country' => $countryModel->name,
 			'weight' => $cartData['weight'],
 			'fee' => $fee,
-			'fee_formated' => $this->priceFormat($fee, '€', '', 2),
+			'fee_formated' => $this->priceFormat($fee, '$', '', 2),
 			'total' => $total,
-			'total_formated' => $this->priceFormat($total, '€', '', 2),
+			'total_formated' => $this->priceFormat($total, '$', '', 2),
 		];
 	}
 

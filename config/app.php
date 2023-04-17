@@ -2,6 +2,7 @@
 
 return [
 	'eur_rate' => 400,
+	'usd_rate' => 360,
 	'contents' => [
 		'index_images' => [
 			'image_path' => 'uploads/contents/index_images/',

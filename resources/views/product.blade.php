@@ -36,7 +36,7 @@
 								</button>
 							</div>
 							<div class="col-6 col-md-2 text-center text-md-start">
-								<span class="price font-exo-2 color-orange">€{!! number_format($model->price, 2, '.', ',') !!}</span>
+								<span class="price font-exo-2 color-orange">${!! number_format($model->price, 2, '.', ',') !!}</span>
 							</div>
 						</div>
 					</form>

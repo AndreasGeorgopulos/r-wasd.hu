@@ -31,7 +31,7 @@
                                 @endif
                             </td>
                             <td>{{$model->title}}</td>
-                            <td>€{{number_format($model->price, 2, '.', ',')}}</td>
+                            <td>${{number_format($model->price, 2, '.', ',')}}</td>
                             <td>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-primary btn-sm">{{trans('Operations')}}</button>

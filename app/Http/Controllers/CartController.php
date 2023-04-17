@@ -57,11 +57,11 @@ class CartController extends Controller
 			$data['name'] = $product->getTitle();
 			$data['url'] = url(route('product', ['slug' => $product->getSlug()]));
 			$data['price'] = $product->price;
-			$data['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
+			$data['price_formated'] = $this->priceFormat($product->price, '$', '', 2);
 
 			$item['product'] = $data;
 			$item['total'] = (round($product->price) * $item['amount']);
-			$item['total_formated'] = $this->priceFormat((float) $item['total'], '€', '', 2);
+			$item['total_formated'] = $this->priceFormat((float) $item['total'], '$', '', 2);
 			$total += (round($product->price) * $item['amount']);
 		}
 
@@ -69,7 +69,7 @@ class CartController extends Controller
 			'cart_items' => $cart_items,
 			'cart_item_count' => count($cart_items),
 			'total' => $total,
-			'total_formated' => $this->priceFormat($total, '€', '', 2),
+			'total_formated' => $this->priceFormat($total, '$', '', 2),
 		]);
 	}
 
@@ -109,11 +109,11 @@ class CartController extends Controller
 			$data['url'] = url(route('product', ['slug' => $product->getSlug()]));
 			$data['index_image'] = $product->hasIndexImage() ? $product->getIndexImageFileUrl('index') : null;
 			$data['price'] = $product->price;
-			$data['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
+			$data['price_formated'] = $this->priceFormat($product->price, '$', '', 2);
 
 			$item['product'] = $data;
 			$item['total'] = (round($product->price) * $item['amount']);
-			$item['total_formated'] = $this->priceFormat((float) $item['total'], '€', '', 2);
+			$item['total_formated'] = $this->priceFormat((float) $item['total'], '$', '', 2);
 			$total += (round($product->price) * $item['amount']);
 		}
 
@@ -121,7 +121,7 @@ class CartController extends Controller
 			$cart_items,
 			count($cart_items),
 			$total,
-			$this->priceFormat($total, '€', '', 2),
+			$this->priceFormat($total, '$', '', 2),
 		];
 	}
 }

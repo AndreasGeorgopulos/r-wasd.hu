@@ -79,7 +79,7 @@ trait TCart {
 	 * @param string $thousands_sep
 	 * @return string
 	 */
-	protected function priceFormat (float $price, string $pre_tag = '€', string $post_tag = '', int $decimals = 0, string $dec_point = '.', string $thousands_sep = ' '): string
+	protected function priceFormat (float $price, string $pre_tag = '$', string $post_tag = '', int $decimals = 0, string $dec_point = '.', string $thousands_sep = ' '): string
 	{
 		return $pre_tag . number_format(round($price, 2), $decimals, $dec_point, $thousands_sep) . $post_tag;
 	}
@@ -106,24 +106,24 @@ trait TCart {
 			$item['weight'] = $product->weight;
 			$item['weight_total'] = $product->weight * $item['amount'];
 			$item['price'] = $product->price;
-			$item['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
+			$item['price_formated'] = $this->priceFormat($product->price, '$', '', 2);
 			$item['total'] = (round($product->price) * $item['amount']);
-			$item['total_formated'] = $this->priceFormat((float) $item['total'], '€', '', 2);
+			$item['total_formated'] = $this->priceFormat((float) $item['total'], '$', '', 2);
 			$subtotal += (round($product->price) * $item['amount']);
 			$weight += $product->weight * $item['amount'];
 		}
 
 		$data['weight'] = $weight;
 		$data['subtotal'] = $subtotal;
-		$data['subtotal_formated'] = $this->priceFormat($subtotal, '€', '', 2);
+		$data['subtotal_formated'] = $this->priceFormat($subtotal, '$', '', 2);
 
 		if (!empty($order['postal_fee'])) {
-			$fee = round(($order['postal_fee'])->fee / config('app.eur_rate'), 2);
+			$fee = round(($order['postal_fee'])->fee / config('app.usd_rate'), 2);
 			$total = $subtotal + $fee;
 			$data['postal_fee'] = $fee;
-			$data['postal_fee_formated'] = $this->priceFormat((float) $fee, '€', '', 2);
+			$data['postal_fee_formated'] = $this->priceFormat((float) $fee, '$', '', 2);
 			$data['total'] = $total;
-			$data['total_formated'] = $this->priceFormat((float) $total, '€', '', 2);
+			$data['total_formated'] = $this->priceFormat((float) $total, '$', '', 2);
 		}
 
 		return $data;
