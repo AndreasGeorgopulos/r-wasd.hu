@@ -184,7 +184,6 @@ class OrderController extends Controller
 				}
 
 			}, function ($exception) use(&$redirect_url) {
-				echo $exception->getMessage(); exit;
 				Session::put('error', $exception->getMessage());
 				$redirect_url = url(route('order_payment'));
 			});

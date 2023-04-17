@@ -5,7 +5,7 @@
 		<form method="post">
 			{{csrf_field()}}
 			<hr />
-			@if (($message = Session::get('error') !== null))
+			@if (($message = Session::get('error')) !== null)
 				<div class="alert alert-danger" role="alert">
 					{!! $message !!}
 				</div>
