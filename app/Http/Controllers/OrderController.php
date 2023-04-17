@@ -169,8 +169,8 @@ class OrderController extends Controller
 					$payment->create($this->_api_context);
 
 					// cookie-k törlése
-					//$this->setCookieOrder(null);
-					//$this->eraseCartItems();
+					$this->setCookieOrder(null);
+					$this->eraseCartItems();
 
 					foreach($payment->getLinks() as $link) {
 						if($link->getRel() == 'approval_url') {
