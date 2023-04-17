@@ -117,7 +117,6 @@ trait TCart {
 		$data['subtotal'] = $subtotal;
 		$data['subtotal_formated'] = $this->priceFormat($subtotal, '€', '', 2);
 
-		//dd($order['postal_fee']);
 		if (!empty($order['postal_fee'])) {
 			$fee = round(($order['postal_fee'])->fee / config('app.eur_rate'), 2);
 			$total = $subtotal + $fee;
