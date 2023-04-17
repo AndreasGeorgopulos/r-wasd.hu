@@ -31,19 +31,30 @@
 		</div>
 	</div>
 @endforeach
-@if(empty($cartData['postal_fee']))
-	<div class="text-center price color-blue">
-		{{trans('Total pay')}}: <span class="color-orange">{{$cartData['total_formated']}}</span> + {{trans('postal fee')}}*
-	</div>
 
-	<div class="text-center color-blue mt-3">
-		* {{trans('The postal fee depends on the selected country.')}}
+<div class="row">
+	<div class="col-6 text-end color-blue price p-1">
+		{{trans('Subtotal')}}:
 	</div>
-@else
-	<div class="text-center price color-blue">
-		{{trans('Total pay')}}: <span class="color-orange">{{$cartData['total_formated']}}</span> + {{trans('postal fee')}}*
+	<div class="col-6 text-start color-orange price p-1">
+		<span class="color-orange">{{$cartData['subtotal_formated']}}</span>
 	</div>
-	<div class="text-center color-blue mt-3">
-		* {{trans('Postal fee')}}:
+</div>
+
+<div class="row">
+	<div class="col-6 text-end color-blue price p-1">
+		{{trans('Postal fee')}}:
 	</div>
-@endif
+	<div class="col-6 text-start color-orange price p-1" id="payment-postal-fee">
+		@if(!empty($cartData['postal_fee'])){{$cartData['postal_fee_formated']}}@endif
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-6 text-end color-blue price p-1">
+		{{trans('Total')}}:
+	</div>
+	<div class="col-6 text-start color-orange price p-1" id="payment-total">
+		@if(!empty($cartData['total'])){{$cartData['total_formated']}}@endif
+	</div>
+</div>

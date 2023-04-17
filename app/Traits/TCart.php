@@ -89,11 +89,12 @@ trait TCart {
 	 */
 	private function getCartData()
 	{
+		$order = $this->getCookieOrder();
 		$data = [
 			'cart_items' => $this->getCartItems(),
 		];
 
-		$total = 0;
+		$subtotal = 0;
 		$weight = 0;
 		foreach ($data['cart_items'] as &$item) {
 			/** @var Product $product */
@@ -108,13 +109,23 @@ trait TCart {
 			$item['price_formated'] = $this->priceFormat($product->price, '€', '', 2);
 			$item['total'] = (round($product->price) * $item['amount']);
 			$item['total_formated'] = $this->priceFormat((float) $item['total'], '€', '', 2);
-			$total += (round($product->price) * $item['amount']);
+			$subtotal += (round($product->price) * $item['amount']);
 			$weight += $product->weight * $item['amount'];
 		}
 
 		$data['weight'] = $weight;
-		$data['total'] = $total;
-		$data['total_formated'] = $this->priceFormat($total, '€', '', 2);
+		$data['subtotal'] = $subtotal;
+		$data['subtotal_formated'] = $this->priceFormat($subtotal, '€', '', 2);
+
+		//dd($order['postal_fee']);
+		if ($order['postal_fee']) {
+			$fee = round(($order['postal_fee'])->fee / config('app.eur_rate'), 2);
+			$total = $subtotal + $fee;
+			$data['postal_fee'] = $fee;
+			$data['postal_fee_formated'] = $this->priceFormat((float) $fee, '€', '', 2);
+			$data['total'] = $total;
+			$data['total_formated'] = $this->priceFormat((float) $total, '€', '', 2);
+		}
 
 		return $data;
 	}

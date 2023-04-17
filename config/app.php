@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+	'eur_rate' => 400,
 	'contents' => [
 		'index_images' => [
 			'image_path' => 'uploads/contents/index_images/',

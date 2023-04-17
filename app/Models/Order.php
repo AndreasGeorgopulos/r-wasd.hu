@@ -20,6 +20,7 @@ class Order extends Model implements IModelDeletable, IModelRules
 
 	protected $fillable = [
 		'postal_parcel_id',
+		'postal_fee',
 		'shipping_country_id',
 		'shipping_zip',
 		'shipping_city',

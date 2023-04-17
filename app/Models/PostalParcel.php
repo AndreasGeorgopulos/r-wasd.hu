@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -112,5 +113,30 @@ class PostalParcel extends Model implements IModelRules, IModelDeletable
 		return static::whereHas('countries', function ($q) use($countryId) {
 			$q->where('countries.id', $countryId);
 		})->first();
+	}
+
+	/**
+	 * @param $countryId
+	 * @param $weight
+	 * @return PostalParcelFee
+	 * @throws Exception
+	 */
+	public static function getFee($countryId, $weight)
+	{
+		$model = static::findByCountry($countryId);
+		if (!$model) {
+			throw new Exception('Postal parcel model not found');
+		}
+
+		$feeModel = $model->fees()->where(function ($q) use($weight) {
+			$q->where('weight_from', '<=', $weight);
+			$q->where('weight_to', '>=', $weight);
+		})->first();
+
+		if (!$feeModel) {
+			throw new Exception('Postal parcel fee model not found');
+		}
+
+		return $feeModel;
 	}
 }

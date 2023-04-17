@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PostalParcel;
@@ -10,10 +11,10 @@ use App\Rules\ReCaptchaRule;
 use App\Traits\TCart;
 use App\Traits\TDbTransaction;
 use App\Traits\TModelValidate;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
@@ -120,6 +121,7 @@ class OrderController extends Controller
 				$model->postal_parcel_id = 1;
 
 				$model->fill($this->getCookieOrder())->save();
+				//$model->postal_fee =
 				$model->order_code = date('Ymd') . '_' . $model->id;
 				$model->save();
 
@@ -250,6 +252,31 @@ class OrderController extends Controller
 		]);
 	}
 
+	public function getPostalFee($country_id)
+	{
+		$cartData = $this->getCartData();
+
+		if (!($countryModel = Country::where('id', $country_id)->first())) {
+			throw new Exception('Country model (ID: ' . $country_id . ') not found');
+		}
+
+		if (!($feeModel = PostalParcel::getFee($countryModel->id, $cartData['weight']))) {
+			throw new Exception('Fee model (Country ID: ' . $countryModel->id  . ', Weight: ' . $cartData['weight'] . ') not found');
+		}
+
+		$fee = round($feeModel->fee / config('app.eur_rate'), 2);
+		$total = $cartData['subtotal'] + $fee;
+
+		return [
+			'country' => $countryModel->name,
+			'weight' => $cartData['weight'],
+			'fee' => $fee,
+			'fee_formated' => $this->priceFormat($fee, '€', '', 2),
+			'total' => $total,
+			'total_formated' => $this->priceFormat($total, '€', '', 2),
+		];
+	}
+
 	private function getCookieOrder()
 	{
 		$orderData = unserialize(base64_decode(Cookie::get('order')));
@@ -259,6 +286,7 @@ class OrderController extends Controller
 
 	private function setCookieOrder(Order $model = null)
 	{
+		$cartData = $this->getCartData();
 		if ($model === null) {
 			Cookie::queue(Cookie::forget('order'));
 			return;
@@ -266,8 +294,12 @@ class OrderController extends Controller
 
 		// set postal parcel
 		$postalParcel = PostalParcel::findByCountry($model->shipping_country_id);
-
-		$model->postal_parcel_id = !empty($postalParcel) ? $postalParcel->id : null;
+		$model->postal_parcel_id = null;
+		if (!empty($postalParcel)) {
+			$model->postal_parcel_id = $postalParcel->id;
+			$feeModel = PostalParcel::getFee($model->shipping_country_id, $cartData['weight']);
+			$model->postal_fee = $feeModel;
+		}
 
 		Cookie::queue(Cookie::make('order', base64_encode(serialize($model->toArray())), 3600));
 	}

@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-	<section class="container cart rounded">
+	<section class="container cart checkout rounded">
 	@include('order._steps')
 		<form method="post" id="order-form">
 			{{csrf_field()}}

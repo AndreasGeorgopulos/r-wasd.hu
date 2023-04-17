@@ -15,6 +15,7 @@ Route::match(['get', 'post'], '/order/checkout_check', 'OrderController@checkout
 Route::match(['get', 'post'], '/order/payment', 'OrderController@payment')->name('order_payment');
 Route::match(['get', 'post'], '/order/success_payment/{order_code}', 'OrderController@successPayment')->name('success_payment');
 Route::match(['get', 'post'], '/order/cancel_payment/{order_code}', 'OrderController@cancelPayment')->name('cancel_payment');
+Route::match(['get'], '/order/get_postal_fee/{country_id}', 'OrderController@getPostalFee')->name('order_get_postal_fee');
 
 Route::match(['get', 'post'], '/contact', 'SiteController@contact')->name('contact');
 Route::match(['get'], '/sitemap.xml', 'SiteController@sitemap')->name('sitemap');
