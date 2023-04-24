@@ -15,7 +15,7 @@ class Product extends Model implements IModelIndexImage
 
 	protected $table = 'products';
 
-	protected $fillable = ['title', 'price'];
+	protected $fillable = ['title', 'price', 'weight'];
 
 	function __construct(array $attributes = [])
 	{

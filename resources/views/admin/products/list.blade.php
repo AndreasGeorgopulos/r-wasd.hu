@@ -16,6 +16,7 @@
                         <th class="@if($sort == 'id') sorting_{{$direction}} @else sorting @endif" data-column="id">#</th>
                         <th class="@if($sort == 'title') sorting_{{$direction}} @else sorting @endif" data-column="title">{{trans('Title')}}</th>
                         <th class="@if($sort == 'price') sorting_{{$direction}} @else sorting @endif" data-column="price">{{trans('Price')}}</th>
+                        <th class="@if($sort == 'weight') sorting_{{$direction}} @else sorting @endif" data-column="weight">{{trans('Weight')}}</th>
                         <th>
                             <a href="{{url(route('admin_products_edit'))}}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-plus"></i> {{trans('Add new product')}}</a>
                         </th>
@@ -32,6 +33,7 @@
                             </td>
                             <td>{{$model->title}}</td>
                             <td>${{number_format($model->price, 2, '.', ',')}}</td>
+                            <td>{{$model->weight}}</td>
                             <td>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-primary btn-sm">{{trans('Operations')}}</button>
