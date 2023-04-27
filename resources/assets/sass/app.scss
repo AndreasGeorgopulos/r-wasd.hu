@@ -111,7 +111,47 @@ a {
   position: relative;
   background-color: black;
   height: calc(100vh - 75px);
-  /*min-height: 25rem;*/
+  width: 100%;
+  overflow: hidden;
+
+  video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+  }
+
+  .video-background-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .video-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+  }
+  .products-link {
+    font-size: 9vh;
+  }
+}
+
+/*.video-background-holder {
+  position: relative;
+  background-color: black;
+  height: calc(100vh - 75px);
   width: 100%;
   overflow: hidden;
 
@@ -148,7 +188,7 @@ a {
   .products-link {
     font-size: 9vh;
   }
-}
+}*/
 
 .container.index {
   max-width: 1260px;
