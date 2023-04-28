@@ -26,6 +26,14 @@ class OrderItem extends Model implements IModelRules
 	}
 
 	/**
+	 * @return float
+	 */
+	public function getTotal(): float
+	{
+		return (float) round($this->unit_price * $this->amount, 2);
+	}
+
+	/**
 	 * A model validálásakor használt mező szabályok
 	 *
 	 * @return array

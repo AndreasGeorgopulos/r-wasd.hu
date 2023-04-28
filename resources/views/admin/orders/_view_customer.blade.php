@@ -1,0 +1,19 @@
+<h3>{{trans('Customer')}}</h3>
+<table class="table table-striped">
+	<tr>
+		<th>{{trans('Name')}}:</th>
+		<td>{{$model->name}}</td>
+	</tr>
+	<tr>
+		<th>{{trans('E-mail')}}:</th>
+		<td>{{$model->email}}</td>
+	</tr>
+	<tr>
+		<th>{{trans('Phone')}}:</th>
+		<td>{{$model->phone}}</td>
+	</tr>
+	<tr>
+		<th>{{trans('Notice')}}:</th>
+		<td>{{$model->notice}}</td>
+	</tr>
+</table>

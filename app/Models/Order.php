@@ -16,6 +16,10 @@ class Order extends Model implements IModelDeletable, IModelRules
 {
     use SoftDeletes;
 
+	const STATUS_NEW = 1;
+	const STATUS_SENT = 2;
+	const STATUS_DONE = 3;
+
 	protected $table = 'orders';
 
 	protected $fillable = [
@@ -28,6 +32,10 @@ class Order extends Model implements IModelDeletable, IModelRules
 		'email',
 		'phone',
 		'notice',
+		'postal_tracking_code',
+		'postal_notice',
+		'finish_notice',
+		'status',
 	];
 
 	/**
@@ -68,6 +76,46 @@ class Order extends Model implements IModelDeletable, IModelRules
 	public function isDeletable(): bool
 	{
 		return true;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getSubTotal(): float
+	{
+		$total = 0.0;
+		foreach ($this->order_items as $orderItem) {
+			$total += $orderItem->getTotal();
+		}
+		return $total;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getTotal(): float
+	{
+		return $this->getSubTotal() + floatval($this->postal_fee);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getBackRouteName(): string
+	{
+		switch ($this->status) {
+			case Order::STATUS_DONE:
+				$backRoute = 'admin_orders_done';
+				break;
+			case Order::STATUS_SENT:
+				$backRoute = 'admin_orders_sent';
+				break;
+			case Order::STATUS_NEW:
+			default:
+				$backRoute = 'admin_orders_new';
+		}
+
+		return $backRoute;
 	}
 
 	/**

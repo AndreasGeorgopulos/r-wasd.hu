@@ -95,9 +95,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 
 		// orders
 		Route::match(['get', 'post'], '/orders', function () {
-			return redirect(route('admin_orders_list'));
+			return redirect(route('admin_orders_new'));
 		})->name('admin_orders_index');
-		Route::match(['get', 'post'], '/orders/list', 'OrderController@index')->name('admin_orders_list');
+		Route::match(['get', 'post'], '/orders/new', 'OrderController@indexNew')->name('admin_orders_new');
+		Route::match(['get', 'post'], '/orders/sent', 'OrderController@indexSent')->name('admin_orders_sent');
+		Route::match(['get', 'post'], '/orders/done', 'OrderController@indexDone')->name('admin_orders_done');
 		Route::match(['get', 'post'], '/orders/edit/{id?}', 'OrderController@edit')->name('admin_orders_edit');
 		Route::match(['get'], '/orders/delete/{id?}', 'OrderController@delete')->name('admin_orders_delete');
 	});
