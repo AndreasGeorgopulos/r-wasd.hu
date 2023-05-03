@@ -74,7 +74,7 @@ class SiteController extends Controller
 
 			$validator = $this->modelValidate($request->all(), $rules, Contact::niceNames(), Contact::customMessages());
 			if ($validator->fails()) {
-				return redirect(route('contact') . '#error')->withErrors($validator)->withInput()->with('form_warning_message', [
+				return redirect(route('contact'))->withErrors($validator)->withInput()->with('form_warning_message', [
 					'title' => trans('Message failed'),
 					'lead' => trans('The message send failed. Errors:'),
 				]);

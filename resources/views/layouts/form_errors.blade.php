@@ -1,5 +1,5 @@
 @if (session('form_warning_message'))
-	<a id="error">
+	<a id="error" class="@if(url()->current() === url('/contact')) contact @endif">
 		@php($arr = session('form_warning_message'))
 		<div class="alert alert-warning alert-dismissible">
 			<h4><i class="icon fa fa-warning"></i> {{$arr['title']}}</h4>
