@@ -15393,8 +15393,12 @@ a {
 }
 
 a#error {
-  padding-top: 0px !important;
+  padding-top: 100px !important;
   display: block;
+}
+
+a#error.contact {
+  padding-top: 0px !important;
 }
 
 .container.cart {
