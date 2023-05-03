@@ -57,7 +57,7 @@
                 </section>
             </section>
         @else
-            <section class="wrapper bg-dark pt-5 pb-5">
+            <section class="wrapper bg-dark bg-opacity-85 pt-5 pb-5">
                 <section class="container index">
                     <div class="product-item">
                         <div class="row">
