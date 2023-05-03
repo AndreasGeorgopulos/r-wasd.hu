@@ -15177,8 +15177,7 @@ textarea.form-control-lg {
 }
 
 .navbar {
-  background-color: #FC7829 !important;
-  opacity: 0.92;
+  background-color: rgba(252, 120, 41, 0.92);
   padding-top: 0px !important;
   padding-bottom: 0px !important;
   border-top: solid 14px #343A40;
@@ -15199,8 +15198,7 @@ main {
 }
 
 footer {
-  opacity: 0.85;
-  background-color: #44494F;
+  background-color: rgba(68, 73, 79, 0.85);
 }
 
 a {
@@ -15353,7 +15351,7 @@ a {
 }
 .container-fluid.page .content,
 .container-fluid.product .content {
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.8);
   /*padding: 20px 70px 20px 70px;*/
   margin-bottom: 70px;
 }
