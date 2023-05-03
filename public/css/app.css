@@ -15278,9 +15278,9 @@ a {
 }
 @media screen and (max-width: 768px) {
   .video-background-holder .video-background-content h1 {
-    font-size: 3vw;
+    font-size: 6vw;
     line-height: 1.2em;
-    max-height: 40px;
+    /*max-height: 40px;*/
   }
 }
 
