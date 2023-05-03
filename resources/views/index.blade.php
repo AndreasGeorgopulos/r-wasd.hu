@@ -25,7 +25,7 @@
 
     <a id="products"></a>
     @if(!empty($pageContentBlock_1))
-        <section class="wrapper bg-light pt-5 pb-5">
+        <section class="wrapper bg-light bg-opacity-85 pt-5 pb-5">
             <section class="container index">
                 {{$pageContentBlock_1}}
             </section>
@@ -34,7 +34,7 @@
 
     @foreach($products as $index => $model)
         @if($index % 2 == 0)
-            <section class="wrapper bg-light pt-5 pb-5">
+            <section class="wrapper bg-light bg-opacity-85 pt-5 pb-5">
                 <section class="container index">
                     <div class="product-item">
                         <div class="row">
@@ -83,7 +83,7 @@
     @endforeach
 
     @if(!empty($pageContentBlock_2))
-        <section class="wrapper bg-light pt-5 pb-5">
+        <section class="wrapper bg-light bg-opacity-85 pt-5 pb-5">
             <section class="container index">
                 {{$pageContentBlock_2}}
             </section>

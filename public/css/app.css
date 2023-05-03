@@ -15171,6 +15171,10 @@ textarea.form-control-lg {
   color: #222222;
 }
 
+.bg-opacity-85 {
+  --bs-bg-opacity: 0.85;
+}
+
 .navbar .navbar-brand {
   font-family: "RussoOne Regular" !important;
   font-size: 3vw;
