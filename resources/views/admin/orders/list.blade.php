@@ -11,7 +11,8 @@
 						<th>{{trans('Order code')}}</th>
 						<th>{{trans('Name')}}</th>
 						<th>{{trans('Shipping')}}</th>
-						<th></th>
+						<th>{{trans('Edit')}}</th>
+						<th>{{trans('Proform invoice')}}</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -26,6 +27,11 @@
 							<td class="text-center">
 								<a href="{{url(route('admin_orders_edit', ['id' => $model->id]))}}">
 									<i class="fa fa-edit"></i>
+								</a>
+							</td>
+							<td class="text-center">
+								<a href="{{url(route('order_proform_invoice', ['hash' => md5($model->order_code)]))}}" target="_blank">
+									<i class="fa fa-file-pdf-o"></i>
 								</a>
 							</td>
 						</tr>

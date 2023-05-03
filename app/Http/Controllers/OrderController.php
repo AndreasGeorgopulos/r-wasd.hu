@@ -14,6 +14,7 @@ use App\Traits\TModelValidate;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
@@ -281,6 +282,26 @@ class OrderController extends Controller
 			'total' => $total,
 			'total_formated' => $this->priceFormat($total, '$', '', 2),
 		];
+	}
+
+	public function getProFormInvoice(string $hash, $output = 'pdf')
+	{
+		if (!($order = Order::where(DB::raw('md5(order_code)'), $hash)->first())) {
+			throw new NotFoundHttpException('Page not found');
+		}
+
+		$view = view('order.proform_invoice', [
+			'order' => $order,
+			'company' => config('app.company'),
+		]);
+
+		if ($output !== 'pdf') {
+			return $view;
+		}
+
+		$pdf = \App::make('dompdf.wrapper');
+		$pdf->loadHtml($view->render(), 'UTF-8');
+		return $pdf->stream('r-wasd-order-' . $order->order_code . '.pdf');
 	}
 
 	private function getCookieOrder()

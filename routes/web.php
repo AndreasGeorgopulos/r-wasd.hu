@@ -10,6 +10,7 @@ Route::get('/cart', 'CartController@index')->name('cart_index');
 Route::get('/cart/get', 'CartController@get')->name('cart_get');
 Route::post('/cart/set', 'CartController@set')->name('cart_set');
 
+Route::match(['get', 'post'], '/order/proform_invoice/{hash}', 'OrderController@getProFormInvoice')->name('order_proform_invoice');
 Route::match(['get', 'post'], '/order/checkout', 'OrderController@checkout')->name('order_checkout');
 Route::match(['get', 'post'], '/order/checkout_check', 'OrderController@checkoutCheck')->name('order_checkout_check');
 Route::match(['get', 'post'], '/order/payment', 'OrderController@payment')->name('order_payment');
