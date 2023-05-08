@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Contact;
 use App\Models\Content;
 use App\Models\Product;
 use App\Rules\ReCaptchaRule;
 use App\Traits\TModelValidate;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SiteController extends Controller
@@ -81,6 +85,15 @@ class SiteController extends Controller
 			}
 
 			$model->save();
+
+			try {
+				Mail::to(config('app.company.email'))->send(new ContactMail($model));
+			} catch (Exception $exception) {
+				return redirect(route('contact'))->withInput()->with('form_warning_message', [
+					'title' => trans('Fatal error'),
+					'lead' => trans('The message sent fail. Please try later!'),
+				]);
+			}
 
 			return redirect(route('contact'))->with('send_success', true);
 		}
