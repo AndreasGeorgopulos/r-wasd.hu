@@ -2,7 +2,7 @@
 
 return [
 	'company' => [
-		'name' => 'r-Wasd Ltd.',
+		'name' => 'r-WASD Ltd.',
 		'address' => '1015 Budapest, Pf 231.',
 		'country' => 'Hungary',
 		'email' => 'info@r-wasd-com',

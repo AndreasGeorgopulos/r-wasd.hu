@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\NotifyShippedOrderMail;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -32,7 +34,8 @@ class OrderController extends Controller
 			$model->fill($request->all());
 			if ($model->status == Order::STATUS_NEW) {
 				$model->status = Order::STATUS_SENT;
-				$this->sendOrderEmail($model);
+				Mail::to($model->email)->send(new NotifyShippedOrderMail($model));
+
 			} elseif ($model->status == Order::STATUS_SENT) {
 				$model->status = Order::STATUS_DONE;
 			}
@@ -85,6 +88,13 @@ class OrderController extends Controller
 
 	private function sendOrderEmail(Order &$model)
 	{
+		try {
+			Mail::to($model->email)->send(new NotifyShippedOrderMail($model));
 
+		} catch (Exception $exception) {
+			echo $exception->getMessage();
+			$this->fail();
+
+		}
 	}
 }

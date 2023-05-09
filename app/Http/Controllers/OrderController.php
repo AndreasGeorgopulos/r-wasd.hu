@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App;
+use App\Mail\NotifyCancelPayOrderMail;
+use App\Mail\NotifySuccessPayOrderMail;
 use App\Models\Content;
 use App\Models\Country;
 use App\Models\Order;
@@ -15,6 +18,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Item;
@@ -24,8 +28,10 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Api\Payment;
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PPConnectionException;
 use PayPal\Rest\ApiContext;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use function config;
 
 class OrderController extends Controller
 {
@@ -35,7 +41,7 @@ class OrderController extends Controller
 
 	public function __construct()
 	{
-		$paypal_configuration = \config('paypal');
+		$paypal_configuration = config('paypal');
 		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
 		$this->_api_context->setConfig($paypal_configuration['settings']);
 	}
@@ -186,7 +192,7 @@ class OrderController extends Controller
 						}
 					}
 
-				} catch (\PayPal\Exception\PPConnectionException $ex) {
+				} catch (PPConnectionException $ex) {
 					throw new Exception($ex->getMessage() . ' on ' . $ex->getFile() . ' line ' . $ex->getLine());
 				}
 
@@ -226,6 +232,12 @@ class OrderController extends Controller
 		$model->paypal_response = $request->get('paymentId', null);
 		$model->save();
 
+		try {
+			Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
+		} catch (Exception $exception) {
+			throw new Exception($exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
+		}
+
 		$pageContentBlock = Content::getBlockContent(12);
 
 		return view('order.finish', [
@@ -246,6 +258,12 @@ class OrderController extends Controller
 
 		if (!$model) {
 			throw new NotFoundHttpException('Order not found');
+		}
+
+		try {
+			Mail::to($model->email)->send(new NotifyCancelPayOrderMail($model));
+		} catch (Exception $exception) {
+			throw new Exception($exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
 		}
 
 		$pageContentBlock = Content::getBlockContent(13);
@@ -299,7 +317,7 @@ class OrderController extends Controller
 			return $view;
 		}
 
-		$pdf = \App::make('dompdf.wrapper');
+		$pdf = App::make('dompdf.wrapper');
 		$pdf->loadHtml($view->render(), 'UTF-8');
 		return $pdf->stream('r-wasd-order-' . $order->order_code . '.pdf');
 	}

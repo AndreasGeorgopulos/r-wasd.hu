@@ -31,11 +31,11 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-	    $subject = '';
+	    $subject = trans('r-Wasd contact: ');
 		collect(Contact::getSubjectDropdownOptions())
 			->where('value', $this->contact->subject)
 			->first(function ($item) use(&$subject) {
-				$subject = $item['title'];
+				$subject .= $item['title'];
 			});
 
         return $this->view('email.contact', [
