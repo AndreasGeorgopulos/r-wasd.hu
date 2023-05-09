@@ -45,6 +45,7 @@ class NotifySuccessPayOrderMail extends Mailable
 			    'companyName' => config('app.company.name'),
 		    ])
 		    ->from(config('app.company.email'), config('app.company.name'))
+			->bcc([config('app.company.email')])
 		    ->subject('r-Wasd Payment Successful / Order No. ' . $this->order->order_code);
     }
 }
