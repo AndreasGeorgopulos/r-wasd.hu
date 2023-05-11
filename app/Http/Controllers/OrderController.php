@@ -343,7 +343,7 @@ class OrderController extends Controller
 		if (!empty($postalParcel)) {
 			$model->postal_parcel_id = $postalParcel->id;
 			$feeModel = PostalParcel::getFee($model->shipping_country_id, $cartData['weight']);
-			$model->postal_fee = floatval(round($feeModel->price, 2));
+			$model->postal_fee = floatval(round($feeModel->fee, 2));
 		}
 
 		Cookie::queue(Cookie::make('order', base64_encode(serialize($model->toArray())), 3600));

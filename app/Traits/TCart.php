@@ -118,7 +118,7 @@ trait TCart {
 		$data['subtotal_formated'] = $this->priceFormat($subtotal, '$', '', 2);
 
 		if (!empty($order['postal_fee'])) {
-			$fee = round(($order['postal_fee'])->fee / config('app.usd_rate'), 2);
+			$fee = round(($order['postal_fee']) / config('app.usd_rate'), 2);
 			$total = $subtotal + $fee;
 			$data['postal_fee'] = $fee;
 			$data['postal_fee_formated'] = $this->priceFormat((float) $fee, '$', '', 2);
