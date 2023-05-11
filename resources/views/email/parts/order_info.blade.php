@@ -51,7 +51,7 @@
 				<td style="text-align: right;">${{number_format($order->getSubTotal(), 2)}}</td>
 			</tr>
 			<tr>
-				<td colspan="3" style="text-align: right;">{{trans('Postal fee')}}:</td>
+				<td colspan="3" style="text-align: right;">{{trans('Shipping cost')}}:</td>
 				<td style="text-align: right;">${{number_format($order->postal_fee, 2)}}</td>
 			</tr>
 			<tr>

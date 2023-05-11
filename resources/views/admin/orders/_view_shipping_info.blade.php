@@ -21,7 +21,7 @@
 		<td>{{$model->postal_parcel->name}}</td>
 	</tr>
 	<tr>
-		<th>{{trans('Postal fee')}}:</th>
+		<th>{{trans('Shipping cost')}}:</th>
 		<td>${{$model->postal_fee}}</td>
 	</tr>
 	<tr>

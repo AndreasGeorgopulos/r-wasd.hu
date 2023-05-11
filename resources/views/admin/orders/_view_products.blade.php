@@ -26,7 +26,7 @@
 		<td class="text-right text-bold">${{number_format($model->getSubTotal(), 2)}}</td>
 	</tr>
 	<tr>
-		<td colspan="3" class="text-right text-bold">{{trans('Postal fee')}}: </td>
+		<td colspan="3" class="text-right text-bold">{{trans('Shipping cost')}}: </td>
 		<td class="text-right text-bold">${{number_format($model->postal_fee, 2)}}</td>
 	</tr>
 	<tr>

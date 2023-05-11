@@ -150,7 +150,7 @@ class OrderController extends Controller
 						->setPrice($cartItem['price']);
 				}
 
-				$items[] = (new Item())->setName('Postal fee')
+				$items[] = (new Item())->setName('Shipping cost')
 					->setDescription('')
 					->setCurrency('USD')
 					->setQuantity(1)

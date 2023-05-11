@@ -43,7 +43,7 @@
 
 <div class="row">
 	<div class="col-6 text-end color-blue price p-1">
-		{{trans('Postal fee')}}:
+		{{trans('Shipping cost')}}:
 	</div>
 	<div class="col-6 text-start color-orange price p-1" id="payment-postal-fee">
 		@if(!empty($cartData['postal_fee'])){{$cartData['postal_fee_formated']}}@endif
