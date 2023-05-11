@@ -120,7 +120,6 @@ class OrderController extends Controller
 		}
 
 		if ($request->isMethod('post')) {
-
 			$this->runDbTransaction(function () use($cartData, &$redirect_url) {
 				$model = new Order();
 
@@ -128,7 +127,7 @@ class OrderController extends Controller
 				$model->postal_parcel_id = 1;
 
 				$model->fill($this->getCookieOrder())->save();
-				//$model->postal_fee =
+				$model->postal_fee = $cartData['postal_fee'];
 				$model->order_code = $model->generateOrderCode();
 				$model->save();
 
