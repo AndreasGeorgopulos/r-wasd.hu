@@ -9,6 +9,28 @@ return [
 		'http.ConnectionTimeOut' => 1000,
 		'log.LogEnabled' => true,
 		'log.FileName' => storage_path() . '/logs/paypal.log',
-		'log.LogLevel' => 'FINE'
+		'log.LogLevel' => 'FINE',
+	],
+
+	'sandbox' => [
+		'settings' => [
+			'mode' => 'sandbox',
+			'http.ConnectionTimeOut' => 1000,
+			// Egyéb beállítások a sandbox környezethez
+			'api' => array(
+				'endpoint' => 'https://api.sandbox.paypal.com/v2/',
+			),
+		],
+	],
+
+	'live' => [
+		'settings' => array(
+			'mode' => 'live',
+			'http.ConnectionTimeOut' => 1000,
+			// Egyéb beállítások az éles környezethez
+			'api' => array(
+				'endpoint' => 'https://api.paypal.com/v2/',
+			),
+		),
 	],
 ];
