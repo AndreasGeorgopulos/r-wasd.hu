@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Rendelés model
@@ -165,5 +167,22 @@ class Order extends Model implements IModelDeletable, IModelRules
 	public static function customMessages(): array
 	{
 		return [];
+	}
+
+	/**
+	 * @param int $orderId
+	 * @return string
+	 */
+	public function generateOrderCode(): string
+	{
+		$date = date('Y-m-d', strtotime($this->created_at));
+		$dailyId = (int) self::where(function ($q) use($date) {
+			$q->where('created_at', '>=', $date . ' 00:00:00');
+			$q->where('created_at', '<=', $date . ' 23:59:00');
+			$q->whereNotNull('order_code');
+			$q->where('id', '<>', $this->id);
+		})->count();
+
+		return date('Ymd', strtotime($this->created_at)) . '-' . str_pad(++$dailyId, 6, '0', STR_PAD_LEFT);
 	}
 }

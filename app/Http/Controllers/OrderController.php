@@ -129,7 +129,7 @@ class OrderController extends Controller
 
 				$model->fill($this->getCookieOrder())->save();
 				//$model->postal_fee =
-				$model->order_code = date('Ymd') . '_' . $model->id;
+				$model->order_code = $model->generateOrderCode();
 				$model->save();
 
 				$payer = new Payer();
