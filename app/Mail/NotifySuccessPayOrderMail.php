@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 /**
  * Mail for success payment after order complete
@@ -40,12 +41,16 @@ class NotifySuccessPayOrderMail extends Mailable
      */
     public function build(): NotifySuccessPayOrderMail
     {
+	    $mailConfig = config('app.mail.order.success_payment');
+	    $subject = Str::replaceFirst('{order-no}', $this->order->order_code, $mailConfig['subject']);
+
 		return $this->view('email.notify_success_pay_order', [
 			    'order' => $this->order,
 			    'companyName' => config('app.company.name'),
 		    ])
-		    ->from(config('app.company.email'), config('app.company.name'))
-			->bcc([config('app.company.email')])
-		    ->subject('r-Wasd Payment Successful / Order No. ' . $this->order->order_code);
+			->from($mailConfig['from']['email'], $mailConfig['from']['name'])
+			->cc($mailConfig['cc'])
+			->bcc($mailConfig['bcc'])
+			->subject($subject);
     }
 }

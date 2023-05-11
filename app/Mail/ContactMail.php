@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
 
 class ContactMail extends Mailable
 {
@@ -31,17 +32,21 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-	    $subject = trans('r-Wasd contact: ');
+		$mailConfig = config('app.mail.contact');
+
+	    $subject = $mailConfig['subject'];
 		collect(Contact::getSubjectDropdownOptions())
 			->where('value', $this->contact->subject)
 			->first(function ($item) use(&$subject) {
-				$subject .= $item['title'];
+				$subject = Str::replaceFirst('{option-title}', $item['title'], $subject);
 			});
 
         return $this->view('email.contact', [
 				'contact' => $this->contact,
 	        ])
 	        ->from($this->contact->email, $this->contact->name)
+	        ->cc($mailConfig['cc'])
+	        ->bcc($mailConfig['bcc'])
 	        ->subject($subject);
     }
 }

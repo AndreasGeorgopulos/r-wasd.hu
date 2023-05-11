@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
 
 class NotifyCancelPayOrderMail extends Mailable
 {
@@ -31,12 +32,16 @@ class NotifyCancelPayOrderMail extends Mailable
      */
     public function build()
     {
+	    $mailConfig = config('app.mail.order.cancel_payment');
+	    $subject = Str::replaceFirst('{order-no}', $this->order->order_code, $mailConfig['subject']);
+
 	    return $this->view('email.notify_cancel_pay_order', [
 			    'order' => $this->order,
 			    'companyName' => config('app.company.name'),
 		    ])
-		    ->from(config('app.company.email'), config('app.company.name'))
-		    ->bcc([config('app.company.email')])
-		    ->subject('r-WASD Payment Unsuccessful / Order No. ' . $this->order->order_code);
+		    ->from($mailConfig['from']['email'], $mailConfig['from']['name'])
+		    ->cc($mailConfig['cc'])
+		    ->bcc($mailConfig['bcc'])
+		    ->subject($subject);
     }
 }

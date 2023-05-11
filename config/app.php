@@ -7,6 +7,43 @@ return [
 		'country' => 'Hungary',
 		'email' => 'info@r-wasd-com',
 	],
+	'mail' => [
+		'contact' => [
+			'to' => 'info@r-wasd-com',
+			'subject' => 'r-WASD contact: {option-title}',
+			'cc' => [],
+			'bcc' => [],
+		],
+		'order' => [
+			'success_payment' => [
+				'from' => [
+					'name' => 'r-WASD Ltd.',
+					'email' => 'info@r-wasd-com',
+				],
+				'subject' => 'r-WASD Payment Successful / Order No. {order-no}',
+				'cc' => ['no-reply@r-wasd-com', 'admin@r-wasd-com'],
+				'bcc' => [],
+			],
+			'cancel_payment' => [
+				'from' => [
+					'name' => 'r-WASD Ltd.',
+					'email' => 'info@r-wasd-com',
+				],
+				'subject' => 'r-WASD Payment Unsuccessful / Order No. {order-no}',
+				'cc' => [],
+				'bcc' => [],
+			],
+			'shipped' => [
+				'from' => [
+					'name' => 'r-WASD Ltd.',
+					'email' => 'info@r-wasd-com',
+				],
+				'subject' => 'r-WASD Shipping Confirmation / Order No. {order-no}',
+				'cc' => [],
+				'bcc' => [],
+			],
+		],
+	],
 	'eur_rate' => 400,
 	'usd_rate' => 360,
 	'contents' => [
