@@ -18,7 +18,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -41,6 +40,14 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+	    'adminer' => [
+		    \App\Http\Middleware\EncryptCookies::class,
+		    \Illuminate\Session\Middleware\StartSession::class,
+		    // TODO: you may create customized middleware to fit your needs
+		    // example uses Laravel default authentication (default protection)
+		    \Illuminate\Auth\Middleware\Authenticate::class,
+	    ],
     ];
 
     /**

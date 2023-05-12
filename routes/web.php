@@ -1,7 +1,5 @@
 <?php
 
-Route::any('adminer', '\Miroc\LaravelAdminer\AdminerController@index');
-
 Route::match(['get'], '/', 'SiteController@index')->name('main-page');
 Route::match(['get'], '/page/{slug}', 'SiteController@page')->name('page');
 Route::match(['get'], '/product/{slug}', 'ProductController@getBySlug')->name('product');

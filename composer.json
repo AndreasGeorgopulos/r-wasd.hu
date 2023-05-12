@@ -7,14 +7,12 @@
     "require": {
         "php": ">=7.0.0",
         "barryvdh/laravel-dompdf": "^0.8.2",
-        "fideloper/proxy": "~3.3",
         "google/recaptcha": "^1.2",
         "illuminate/mail": "*",
         "intervention/image": "^2.7",
-        "jeroennoten/laravel-adminlte": "^1.23",
-        "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-        "miroc/laravel-adminer": "^4.5",
+        "jeroennoten/laravel-adminlte": "^3.9",
+        "laravel/framework": "^8.0.0",
+        "onecentlin/laravel-adminer": "^6.1",
         "paypal/rest-api-sdk-php": "^1.14"
     },
     "require-dev": {

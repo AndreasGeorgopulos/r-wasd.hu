@@ -41,9 +41,12 @@ class OrderController extends Controller
 
 	public function __construct()
 	{
-		$paypal_configuration = config('paypal');
+		//$paypal_configuration = config('paypal');
+		$paypal_configuration = config('paypal.' . config('paypal.settings.mode'));
 		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
 		$this->_api_context->setConfig($paypal_configuration['settings']);
+		//$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
+		//$this->_api_context->setConfig($paypal_configuration['settings']);
 	}
 
     public function checkout(Request $request)
@@ -59,7 +62,7 @@ class OrderController extends Controller
 	    if ($request->isMethod('post')) {
 		    $model->fill($request->all());
 			$rules = Order::rules();
-			$rules['recaptcha_token'] = ['required', new ReCaptchaRule($request->get('recaptcha_token'))];
+			//$rules['recaptcha_token'] = ['required', new ReCaptchaRule($request->get('recaptcha_token'))];
 		    $validator = $this->modelValidate($request->all(), $rules, Order::niceNames(), Order::customMessages());
 		    if ($validator->fails()) {
 			    return redirect(route('order_checkout') . '#error')->withErrors($validator)->withInput()->with('form_warning_message', [
@@ -172,7 +175,7 @@ class OrderController extends Controller
 					->setCancelUrl(url(route('cancel_payment', ['order_code' => $model->order_code])));
 
 				$payment = new Payment();
-				$payment->setIntent('Sale')
+				$payment->setIntent('sale')
 					->setPayer($payer)
 					->setRedirectUrls($redirect_urls)
 					->setTransactions(array($transaction));

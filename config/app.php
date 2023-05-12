@@ -363,9 +363,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 	
-		JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+		//JeroenNoten\LaravelAdminLte\ServiceProvider::class,
 
 	    Intervention\Image\ImageServiceProvider::class,
+
+	    Onecentlin\Adminer\ServiceProvider::class,
     ],
 
     /*

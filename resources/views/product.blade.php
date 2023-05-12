@@ -1,7 +1,23 @@
 @extends('layouts.index')
 @section('content')
+
+	<span itemscope itemtype ="https://schema.org/Product" class="hidden">
+		<span itemprop="name">{{$model->getTitle()}} {{trans('Game Controller')}}</span>
+		<span itemprop="description">{{ strip_tags($model->getLead()) }} {{ strip_tags($model->getBody()) }}</span>
+		<span itemprop="brand">r-WASD</span>
+		<span itemprop="review" itemtype="https://schema.org/Review" itemscope>
+			<span itemprop="author" itemtype="https://schema.org/Person" itemscope>
+				<span itemprop="name">r-wasd.com</span>
+			</span>
+		</span>
+		<span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+			<span itemprop="ratingValue">4</span>
+			<span itemprop="reviewCount">1</span>
+		</span>
+	</span>
+
 	<section class="container-fluid container-md product">
-		<h1 class="font-russo-one color-orange text-center text-md-start">{{$model->getTitle()}}</h1>
+		<h1 class="font-russo-one color-orange text-center text-md-start">{{$model->getTitle()}} {{trans('Game Controller')}}</h1>
 
 		<div class="content p-3 p-md-5 rounded">
 			<div class="row">
