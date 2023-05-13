@@ -23,17 +23,25 @@
 			<div class="row">
 				<div class="col-md-6 mb-2 position-relative image-section">
 					@if($model->hasIndexImage())
-						<a data-fslightbox="gallery" href="{{$model->getIndexImageFileUrl('image_viewer')}}">
+						@php
+						$href = $model->getIndexImageFileUrl('image_viewer');
+						$imageSrc = $model->getIndexImageFileUrl('page');
+						$imageTitle = $model->getTitle();
+						$size = getimagesize($model->getIndexImageFilePath('page'));
+						$imageWidth = $size[0];
+						$imageHeight = $size[1];
+						@endphp
+						<a data-fslightbox="gallery" href="{{ $href }}">
 							<div class="position-absolute opacity-25 caption">
 								<i class="fa fa-arrows-alt color-blue"></i>
 							</div>
-							<img src="{{$model->getIndexImageFileUrl('page')}}" class="img-fluid w-100" alt="{{$model->getTitle()}}" />
+							<img src="{{ $imageSrc }}" class="img-fluid w-100" alt="{{ $imageTitle }}" width="{{ $imageWidth }}" height="{{ $imageHeight }}" />
 						</a>
 					@endif
 
 					@if($model->images->count())
 						@foreach($model->images as $productImage)
-							<a data-fslightbox="gallery" href="{{$productImage->getImageFileUrl('image_viewer')}}" class="hidden"></a>
+							<a data-fslightbox="gallery" href="{{$productImage->getImageFileUrl('image_viewer')}}" class="hidden">{{$productImage->file_name}}</a>
 						@endforeach
 					@endif
 				</div>

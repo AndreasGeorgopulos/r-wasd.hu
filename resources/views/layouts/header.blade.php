@@ -2,7 +2,7 @@
     <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{{url('/')}}">
-                <img src="{{asset('/images/logo.png')}}" alt="r-wasd.com" class="img-responsive" />
+                <img src="{{asset('/images/logo.png')}}" alt="r-WASD.com" class="img-responsive" width="200" height="48" />
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
