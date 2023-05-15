@@ -15,6 +15,7 @@ services:
       - ./docker/php-apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
     environment:
         - max_execution_time=600
+        - upload_max_filesize=128M
     ports:
       - "30000:80"
     depends_on:

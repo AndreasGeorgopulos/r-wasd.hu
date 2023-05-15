@@ -24,14 +24,16 @@ use PayPal\Api\Amount;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
+use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Api\Payment;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Exception\PPConnectionException;
 use PayPal\Rest\ApiContext;
+use Srmklive\PayPal\Facades\PayPal;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use function config;
+use Srmklive\PayPal\Services\ExpressCheckout;
 
 class OrderController extends Controller
 {
@@ -127,7 +129,7 @@ class OrderController extends Controller
 				$model = new Order();
 
 				// postai csomag választás a kiválasztott ország alapján.
-				$model->postal_parcel_id = 1;
+				$model->postal_parcel_id = PostalParcel::findByCountry($model->shipping_country_id);
 
 				$model->fill($this->getCookieOrder())->save();
 				$model->postal_fee = $cartData['postal_fee'];
@@ -146,18 +148,23 @@ class OrderController extends Controller
 						'amount' => $cartItem['amount'],
 					])->save();
 
-					$items[] = (new Item())->setName($cartItem['name'])
+					$item = new Item();
+					$item->setName($cartItem['name'])
 						->setDescription($cartItem['description'])
 						->setCurrency('USD')
 						->setQuantity($cartItem['amount'])
 						->setPrice($cartItem['price']);
+
+					$items[] = $item;
 				}
 
-				$items[] = (new Item())->setName('Shipping cost')
+				$item = new Item();
+				$item->setName('Shipping cost')
 					->setDescription('')
 					->setCurrency('USD')
 					->setQuantity(1)
 					->setPrice($cartData['postal_fee']);
+				$items[] = $item;
 
 				$item_list = new ItemList();
 				$item_list->setItems($items);
@@ -168,7 +175,8 @@ class OrderController extends Controller
 				$transaction = new Transaction();
 				$transaction->setAmount($amount)
 					->setItemList($item_list)
-					->setDescription('Enter Your transaction description');
+					->setDescription('Enter Your transaction description')
+					->setInvoiceNumber(uniqid());
 
 				$redirect_urls = new RedirectUrls();
 				$redirect_urls->setReturnUrl(url(route('success_payment', ['order_code' => $model->order_code])))
@@ -187,12 +195,14 @@ class OrderController extends Controller
 					$this->setCookieOrder(null);
 					$this->eraseCartItems();
 
-					foreach($payment->getLinks() as $link) {
+					$redirect_url = $payment->getApprovalLink();
+
+					/*foreach($payment->getLinks() as $link) {
 						if($link->getRel() == 'approval_url') {
 							$redirect_url = $link->getHref();
 							break;
 						}
-					}
+					}*/
 
 				} catch (PPConnectionException $ex) {
 					throw new Exception($ex->getMessage() . ' on ' . $ex->getFile() . ' line ' . $ex->getLine());
@@ -204,7 +214,7 @@ class OrderController extends Controller
 			});
 
 			if (!empty($redirect_url)) {
-				return redirect($redirect_url);
+				return redirect()->away($redirect_url);
 			}
 		}
 
@@ -234,7 +244,35 @@ class OrderController extends Controller
 		$model->paypal_response = $request->get('paymentId', null);
 		$model->save();
 
+		$paymentId = $request->get('paymentId');
+		$payerId = $request->get('PayerID');
+
+		$payment = Payment::get($paymentId, $this->_api_context);
+
+		$execution = new PaymentExecution();
+		$execution->setPayerId($payerId);
+
 		try {
+			$result = $payment->execute($execution, $this->_api_context);
+
+			Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
+
+			$pageContentBlock = Content::getBlockContent(12);
+
+			return view('order.finish', [
+				'model' => $model,
+				'meta_data' => [
+					'title' => 'я-WASD',
+				],
+				'pageContentBlock' => $pageContentBlock,
+			]);
+
+		} catch (Exception $e) {
+			return redirect()->route('cancel_payment', ['order_code' => $model->order_code]);
+		}
+
+
+		/*try {
 			Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
 		} catch (Exception $exception) {
 			throw new Exception($exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
@@ -248,19 +286,22 @@ class OrderController extends Controller
 				'title' => 'я-WASD',
 			],
 			'pageContentBlock' => $pageContentBlock,
-		]);
+		]);*/
 	}
 
 	public function cancelPayment(Request $request, string $order_code)
 	{
 		$model = Order::where(function ($q) use ($order_code) {
 			$q->where('order_code', $order_code);
-			$q->whereNull('paypal_response');
+			//$q->whereNull('paypal_response');
 		})->first();
 
 		if (!$model) {
 			throw new NotFoundHttpException('Order not found');
 		}
+
+		$model->paypal_response = 'CANCELED: ' . $model->paypal_response;
+		$model->save();
 
 		try {
 			Mail::to($model->email)->send(new NotifyCancelPayOrderMail($model));

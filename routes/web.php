@@ -31,6 +31,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 			return redirect(route('admin_dashboard'));
 		})->name('admin_index_logged_in');*/
 		Route::match(['get'], '/dashboard', 'IndexController@dashboard')->name('admin_dashboard');
+		Route::match(['get'], '/phpinfo/{visible?}', 'IndexController@phpInfo')->name('admin_phpinfo');
 		Route::match(['get','post'], '/logout', 'IndexController@logout')->name('admin_logout');
 
 		// users

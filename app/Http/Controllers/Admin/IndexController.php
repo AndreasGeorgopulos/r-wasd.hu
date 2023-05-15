@@ -97,6 +97,11 @@ class IndexController extends Controller
 	public function dashboard (Request $request) {
 		return view('admin.dashboard');
 	}
+
+	public function phpInfo($visible = null)
+	{
+		phpinfo();
+	}
 	
 	public function changeLanguage (Request $request, $locale) {
 		$request->session()->put('locale', $locale);

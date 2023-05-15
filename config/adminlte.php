@@ -146,6 +146,17 @@ return [
 		    'route' => 'admin_countries_index',
 		    'active' => ['countries/*'],
 	    ],
+	    [
+		    'text'        => 'PHP Info',
+		    'icon'        => 'info',
+		    'route' => 'admin_phpinfo',
+		    'active' => ['phpinfo/*'],
+	    ],
+	    /*[
+		    'text'        => 'Adminer',
+		    'icon'        => 'flag',
+		    'url' => 'adminer',
+	    ],*/
 	    /*[
 		    'text'        => 'Users',
 		    'url'         => 'admin/users/list',
