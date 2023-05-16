@@ -26,6 +26,7 @@ use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
+use PayPal\Api\ShippingAddress;
 use PayPal\Api\Transaction;
 use PayPal\Api\Payment;
 use PayPal\Auth\OAuthTokenCredential;
@@ -165,6 +166,17 @@ class OrderController extends Controller
 
 				$item_list = new ItemList();
 				$item_list->setItems($items);
+
+				$shippingAddress = new ShippingAddress();
+				$shippingAddress->setRecipientName($model->name)
+					->setLine1($model->shipping_address)
+					->setLine2('')
+					->setCity($model->shipping_city)
+					->setCountryCode($model->shipping_country->code)
+					->setPostalCode($model->shipping_zip)
+					->setPhone($model->phone);
+
+				$item_list->setShippingAddress($shippingAddress);
 
 				$amount = new Amount();
 				$amount->setCurrency('USD')->setTotal((float)$cartData['total']);
