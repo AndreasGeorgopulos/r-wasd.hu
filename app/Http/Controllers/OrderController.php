@@ -246,9 +246,7 @@ class OrderController extends Controller
 
 		$paymentId = $request->get('paymentId');
 		$payerId = $request->get('PayerID');
-
 		$payment = Payment::get($paymentId, $this->_api_context);
-
 		$execution = new PaymentExecution();
 		$execution->setPayerId($payerId);
 
