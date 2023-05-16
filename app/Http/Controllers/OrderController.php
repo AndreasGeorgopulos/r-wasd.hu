@@ -39,16 +39,13 @@ class OrderController extends Controller
 {
 	use TCart, TDbTransaction, TModelValidate;
 
-	private $_api_context;
+	private ApiContext $_api_context;
 
 	public function __construct()
 	{
-		//$paypal_configuration = config('paypal');
 		$paypal_configuration = config('paypal.' . config('paypal.settings.mode'));
 		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
 		$this->_api_context->setConfig($paypal_configuration['settings']);
-		//$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
-		//$this->_api_context->setConfig($paypal_configuration['settings']);
 	}
 
     public function checkout(Request $request)
@@ -183,7 +180,7 @@ class OrderController extends Controller
 					->setCancelUrl(url(route('cancel_payment', ['order_code' => $model->order_code])));
 
 				$payment = new Payment();
-				$payment->setIntent('sale')
+				$payment->setIntent('order')
 					->setPayer($payer)
 					->setRedirectUrls($redirect_urls)
 					->setTransactions(array($transaction));
@@ -196,13 +193,6 @@ class OrderController extends Controller
 					$this->eraseCartItems();
 
 					$redirect_url = $payment->getApprovalLink();
-
-					/*foreach($payment->getLinks() as $link) {
-						if($link->getRel() == 'approval_url') {
-							$redirect_url = $link->getHref();
-							break;
-						}
-					}*/
 
 				} catch (PPConnectionException $ex) {
 					throw new Exception($ex->getMessage() . ' on ' . $ex->getFile() . ' line ' . $ex->getLine());
@@ -253,7 +243,7 @@ class OrderController extends Controller
 		try {
 			$result = $payment->execute($execution, $this->_api_context);
 
-			Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
+			//Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
 
 			$pageContentBlock = Content::getBlockContent(12);
 
@@ -268,23 +258,6 @@ class OrderController extends Controller
 		} catch (Exception $e) {
 			return redirect()->route('cancel_payment', ['order_code' => $model->order_code]);
 		}
-
-
-		/*try {
-			Mail::to($model->email)->send(new NotifySuccessPayOrderMail($model));
-		} catch (Exception $exception) {
-			throw new Exception($exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
-		}
-
-		$pageContentBlock = Content::getBlockContent(12);
-
-		return view('order.finish', [
-			'model' => $model,
-			'meta_data' => [
-				'title' => 'я-WASD',
-			],
-			'pageContentBlock' => $pageContentBlock,
-		]);*/
 	}
 
 	public function cancelPayment(Request $request, string $order_code)
@@ -302,7 +275,7 @@ class OrderController extends Controller
 		$model->save();
 
 		try {
-			Mail::to($model->email)->send(new NotifyCancelPayOrderMail($model));
+			//Mail::to($model->email)->send(new NotifyCancelPayOrderMail($model));
 		} catch (Exception $exception) {
 			throw new Exception($exception->getMessage() . ' on ' . $exception->getFile() . ' line ' . $exception->getLine());
 		}
