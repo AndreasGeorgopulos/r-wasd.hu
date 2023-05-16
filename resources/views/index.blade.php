@@ -6,8 +6,9 @@
         <div class="video-background-overlay"></div>
 
         <video id="index-video" playsinline="playsinline" autoplay="autoplay" muted="muted">
-            <source src="{{asset('/images/bcg_video_02.mp4')}}" type="video/mp4">
-            <source src="{{asset('/images/bcg_video.mp4')}}" type="video/mp4">
+            @foreach(\App\Models\IndexVideo::getActiveVideos() as $indexVideo)
+                <source src="{{$indexVideo->getSrc()}}" type="video/mp4">
+            @endforeach
         </video>
 
         <div class="video-background-content container h-100">
