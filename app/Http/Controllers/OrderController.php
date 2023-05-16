@@ -192,7 +192,7 @@ class OrderController extends Controller
 					->setCancelUrl(url(route('cancel_payment', ['order_code' => $model->order_code])));
 
 				$payment = new Payment();
-				$payment->setIntent('order')
+				$payment->setIntent('sale')
 					->setPayer($payer)
 					->setRedirectUrls($redirect_urls)
 					->setTransactions(array($transaction));
