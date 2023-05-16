@@ -26,4 +26,19 @@
 
 	window.addEventListener('resize', resizeVideo);
 	resizeVideo();
+
+	const indexVideo = document.getElementById("index-video");
+	const sourceList = indexVideo.getElementsByTagName("source");
+	const numSources = sourceList.length;
+	let lastIndex = 0;
+
+	indexVideo.onended = function() {
+		lastIndex = (lastIndex + 1) % numSources;
+		if (lastIndex === 0) {
+			indexVideo.src = sourceList[0].src; // Az első videóval folytatódik
+		} else {
+			indexVideo.src = sourceList[lastIndex].src;
+		}
+		indexVideo.play();
+	};
 })();

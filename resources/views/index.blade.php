@@ -4,9 +4,12 @@
     <!-- Background video -->
     <div class="video-background-holder">
         <div class="video-background-overlay"></div>
-        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+
+        <video id="index-video" playsinline="playsinline" autoplay="autoplay" muted="muted">
+            <source src="{{asset('/images/bcg_video_02.mp4')}}" type="video/mp4">
             <source src="{{asset('/images/bcg_video.mp4')}}" type="video/mp4">
         </video>
+
         <div class="video-background-content container h-100">
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">
