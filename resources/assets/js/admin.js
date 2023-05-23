@@ -1,4 +1,6 @@
 require('./components/listTable.js');
+require('tablednd');
+
 const tinymce = require("tinymce");
 
 import { render } from "react-dom";

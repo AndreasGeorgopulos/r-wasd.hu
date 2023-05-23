@@ -102,5 +102,16 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 		Route::match(['get', 'post'], '/orders/done', 'OrderController@indexDone')->name('admin_orders_done');
 		Route::match(['get', 'post'], '/orders/edit/{id?}', 'OrderController@edit')->name('admin_orders_edit');
 		Route::match(['get'], '/orders/delete/{id?}', 'OrderController@delete')->name('admin_orders_delete');
+
+		// videos
+		Route::match(['get', 'post'], '/videos', function () {
+			return redirect(route('admin_videos_list'));
+		})->name('admin_videos_index');
+		Route::match(['get', 'post'], '/videos/list', 'VideoController@index')->name('admin_videos_list');
+		Route::match(['get', 'post'], '/videos/edit/{id?}', 'VideoController@edit')->name('admin_videos_edit');
+		Route::match(['get', 'post'], '/videos/delete/{id?}', 'VideoController@delete')->name('admin_videos_delete');
+		Route::match(['get', 'post'], '/videos/set-status/{id}', 'VideoController@setStatus')->name('admin_videos_set_status');
+		Route::match(['post'], '/videos/upload', 'VideoController@upload')->name('admin_videos_upload');
+		Route::match(['post'], '/videos/reorder', 'VideoController@reorder')->name('admin_videos_reorder');
 	});
 });

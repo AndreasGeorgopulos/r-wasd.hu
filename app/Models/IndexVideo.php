@@ -62,4 +62,9 @@ class IndexVideo extends Model implements IModelRules
 			->orderBy('sort', 'asc')
 			->get();
 	}
+
+	public function getPath($fullPath = false)
+	{
+		return public_path('images/') . ($fullPath ? $this->filename : '');
+	}
 }

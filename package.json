@@ -33,6 +33,7 @@
         "react-modal": "^3.16.1",
         "select2": "*",
         "stream-http": "^2.8.3",
+        "tablednd": "^1.0.5",
         "tinymce": "^6.3.1"
     }
 }

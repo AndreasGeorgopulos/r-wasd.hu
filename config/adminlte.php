@@ -147,6 +147,12 @@ return [
 		    'active' => ['countries/*'],
 	    ],
 	    [
+		    'text'        => 'Videos',
+		    'icon'        => 'video',
+		    'route' => 'admin_videos_index',
+		    'active' => ['videos/*'],
+	    ],
+	    [
 		    'text'        => 'PHP Info',
 		    'icon'        => 'info',
 		    'route' => 'admin_phpinfo',
