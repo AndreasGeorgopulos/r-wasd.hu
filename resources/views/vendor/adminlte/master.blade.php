@@ -68,7 +68,8 @@
         tinymce.init({
             selector:'textarea.tinymce',
             menubar:false,
-            toolbar: 'code|bold italic underline strikethrough superscript subscript|forecolor backcolor|alignleft aligncenter alignright alignjustify|numlist bullist|link anchor|charmap|image media',
+            toolbar: 'code|bold italic underline fontsize strikethrough superscript subscript|forecolor backcolor|alignleft aligncenter alignright alignjustify|numlist bullist|link anchor|charmap|image media',
+            font_size_formats: '10px 12px 14px 16px 18px 20px 22px 24px 26px 28px',
             plugins: 'code lists link anchor charmap image media textcolor',
             color_map: [
                 "000000", "Black",
