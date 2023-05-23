@@ -51,7 +51,9 @@
                         <div class="row">
                             <div class="col-md-5 text-center">
                                 @if($model->hasIndexImage())
-                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    <a href="{{url(route('product', ['slug' => $model->getSlug()]))}}">
+                                        <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    </a>
                                 @endif
                             </div>
                             <div class="col-md-7 pt-3">
@@ -74,7 +76,9 @@
                         <div class="row">
                             <div class="col-md-5 text-center order-md-last">
                                 @if($model->hasIndexImage())
-                                    <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    <a href="{{url(route('product', ['slug' => $model->getSlug()]))}}">
+                                        <img src="{{$model->getIndexImageFileUrl('index')}}" class="img-responsive" alt="{{$model->getTitle()}}" />
+                                    </a>
                                 @endif
                             </div>
                             <div class="col-md-7 pt-3">
