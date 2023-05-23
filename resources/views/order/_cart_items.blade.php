@@ -11,7 +11,6 @@
 							<div class="col-md-8">
 								<h5 class="color-orange text-center text-md-start">{{$item['product']['name']}}</h5>
 								{!! $item['product']['description'] !!}
-								{!! $item['product']['description'] !!}
 							</div>
 
 							<div class="col-4 pt-3 text-center">
