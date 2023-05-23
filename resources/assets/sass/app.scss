@@ -118,34 +118,41 @@ a {
   padding-bottom: 56.25%;
   overflow: hidden;
 
-  #prev-button {
+  #prev-button, #next-button {
     position: absolute;
-    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 1;
+    z-index: 9999;
     color: rgb(255, 255, 255, 0.3);
     border: solid 1px rgb(255, 255, 255, 0.3);
-    font-size: 40px;
+    font-size: 36px;
     padding: 0px 15px 0px 15px;
     background-color: rgba(0, 0, 0, 0.3);
-    display: block;
     cursor: pointer;
   }
 
+  #prev-button {
+    left: 10px;
+  }
+
   #next-button {
-    position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-    color: rgb(255, 255, 255, 0.5);
-    border: solid 1px rgb(255, 255, 255, 0.3);
-    font-size: 40px;
-    padding: 0px 15px 0px 15px;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: block;
-    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    #prev-button,
+    #next-button {
+      font-size: 16px;
+      padding: 5px 10px 5px 10px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    #prev-button,
+    #next-button {
+      font-size: 14px;
+      padding: 5px 10px 5px 10px;
+    }
   }
 
   video {
