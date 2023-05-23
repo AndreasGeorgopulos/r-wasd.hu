@@ -16,6 +16,7 @@ services:
     environment:
         - max_execution_time=600
         - upload_max_filesize=128M
+        - upload_max_filesize=1024M
     ports:
       - "30000:80"
     depends_on:
