@@ -118,6 +118,36 @@ a {
   padding-bottom: 56.25%;
   overflow: hidden;
 
+  #prev-button {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: rgb(255, 255, 255, 0.3);
+    border: solid 1px rgb(255, 255, 255, 0.3);
+    font-size: 40px;
+    padding: 0px 15px 0px 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    cursor: pointer;
+  }
+
+  #next-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: rgb(255, 255, 255, 0.5);
+    border: solid 1px rgb(255, 255, 255, 0.3);
+    font-size: 40px;
+    padding: 0px 15px 0px 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: block;
+    cursor: pointer;
+  }
+
   video {
     position: absolute;
     top: 0;
@@ -125,6 +155,7 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    padding: 0px 0px 0px 0px;
   }
 
   .video-background-content {

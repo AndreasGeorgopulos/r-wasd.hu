@@ -11,6 +11,13 @@
             @endforeach
         </video>
 
+        <a id="prev-button">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a id="next-button">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+
         <div class="video-background-content container h-100">
             <div class="d-flex h-100 text-center align-items-center">
                 <div class="w-100 text-white">

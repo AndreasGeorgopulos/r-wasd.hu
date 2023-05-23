@@ -43,4 +43,27 @@ if ($('.video-background-holder video').length) {
 			indexVideo.play();
 		};
 	})();
+
+	(function () {
+		const video = document.getElementById('index-video');
+		const prevButton = document.getElementById('prev-button');
+		const nextButton = document.getElementById('next-button');
+
+		const videos = Array.from(document.querySelectorAll('#index-video source'));
+
+		let currentVideoIndex = 0;
+		video.src = videos[currentVideoIndex].src;
+
+		prevButton.addEventListener('click', function() {
+			currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+			video.src = videos[currentVideoIndex].src;
+			video.play();
+		});
+
+		nextButton.addEventListener('click', function() {
+			currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+			video.src = videos[currentVideoIndex].src;
+			video.play();
+		});
+	})();
 }
