@@ -79,8 +79,6 @@ class Kernel extends HttpKernel
 					return app('translator');
 				}
 				
-				echo 'a kurca';
-				
 				$translated = app('translator')->trans($id, $replace, $locale);
 				
 				if (strpos($translated, 'common.') === 0)
