@@ -81,7 +81,11 @@
             image_class_list: [
                 {title: 'None', value: ''},
                 {title: 'Img fluid', value: 'img-fluid'},
-            ]
+                {title: 'Img fluid with 100% width', value: 'img-fluid w-100'},
+            ],
+            images_file_types: 'jpg,png,svg,webp',
+            automatic_uploads: true,
+            images_upload_url: '{{route('image_upload')}}'
         });
     </script>
 

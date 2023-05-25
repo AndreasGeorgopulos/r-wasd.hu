@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Rules\ReCaptchaRule;
 use App\Traits\TModelValidate;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -140,5 +141,21 @@ class SiteController extends Controller
 		header('Content-type: application/xml');
 		echo $xml;
 		exit;
+	}
+
+	/**
+	 * @param Request $request
+	 * @return JsonResponse
+	 */
+	public function imageUpload(Request $request): JsonResponse
+	{
+		if(!($uploadedFile = $request->file('file'))) {
+			abort(404);
+		}
+
+		$fileName = $uploadedFile->getClientOriginalName();
+		$uploadedFile->move(public_path('uploads/'), $fileName);
+
+		return response()->json(['location'=>asset('/uploads/' . $fileName)]);
 	}
 }

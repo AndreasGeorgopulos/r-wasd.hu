@@ -19,6 +19,8 @@ Route::match(['get'], '/order/get_postal_fee/{country_id}', 'OrderController@get
 Route::match(['get', 'post'], '/contact', 'SiteController@contact')->name('contact');
 Route::match(['get'], '/sitemap.xml', 'SiteController@sitemap')->name('sitemap');
 
+Route::match(['post'], '/image-upload', 'SiteController@imageUpload')->name('image_upload');
+
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function() {
 	Route::match(['get'], '/', function () {
 		return redirect(route('login'));
