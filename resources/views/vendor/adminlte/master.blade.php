@@ -66,20 +66,25 @@
     <script src="{{asset('js/tinymce/tinymce.js')}}"></script>
     <script>
         tinymce.init({
-            selector:'textarea.tinymce',
-            menubar:false,
+            selector: 'textarea.tinymce',
+            menubar: false,
             toolbar: 'code|bold italic underline fontsize strikethrough superscript subscript|forecolor backcolor|alignleft aligncenter alignright alignjustify|numlist bullist|link anchor|charmap|image media',
             font_size_formats: '10px 12px 14px 16px 18px 20px 22px 24px 26px 28px',
-            plugins: 'code lists link anchor charmap image media textcolor',
+            plugins: 'code lists link anchor charmap image media',
             color_map: [
                 "000000", "Black",
                 "ffffff", "White",
                 "fe784f", "Orange",
                 "3396a8", "Blue",
                 "222222", "Gray",
+            ],
+            image_class_list: [
+                {title: 'None', value: ''},
+                {title: 'Img fluid', value: 'img-fluid'},
             ]
         });
     </script>
+
 @endif
 
 @yield('adminlte_js')
