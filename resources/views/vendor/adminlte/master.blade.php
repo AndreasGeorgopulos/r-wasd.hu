@@ -91,6 +91,8 @@
 
 @endif
 
+<script src="{{asset('/js/admin.js')}}"></script>
+
 @yield('adminlte_js')
 
 </body>

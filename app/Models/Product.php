@@ -30,7 +30,7 @@ class Product extends Model implements IModelIndexImage
 
 	public function images()
 	{
-		return $this->hasMany(ProductImage::class);
+		return $this->hasMany(ProductImage::class)->orderBy('sort', 'asc');
 	}
 
 	public function getTitle()

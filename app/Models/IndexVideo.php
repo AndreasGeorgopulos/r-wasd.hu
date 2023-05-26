@@ -63,6 +63,14 @@ class IndexVideo extends Model implements IModelRules
 			->get();
 	}
 
+	/**
+	 * @return int
+	 */
+	public static function getNextSort(): int
+	{
+		return static::all()->max('sort') + 1;
+	}
+
 	public function getPath($fullPath = false)
 	{
 		return public_path('images/') . ($fullPath ? $this->filename : '');

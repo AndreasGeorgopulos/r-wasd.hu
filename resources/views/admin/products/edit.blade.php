@@ -3,6 +3,33 @@
     <h1>{{trans('Product')}}: @if($model->id) {{$model->title}} [{{$model->id}}] @else {{trans('New')}} @endif</h1>
 @stop
 
+@section('css')
+    <style>
+        .dragHandle {
+            cursor: move;
+        }
+
+        .onDragClass td {
+            border: solid 1px #3C8DBC !important;
+            background-color: #6e97af !important;
+            color: #ffffff !important;
+        }
+    </style>
+@endsection
+
+@section('adminlte_js')
+    <script>
+        $(document).ready(function () {
+            $('#reorderable-table').tableDnD({
+                onDragClass: 'onDragClass',
+                dragHandle: '.dragHandle',
+                onDrop: function(table, row) {
+                }
+            });
+        });
+    </script>
+@endsection
+
 @section('content')
     <form method="post" enctype="multipart/form-data">
         {{csrf_field()}}

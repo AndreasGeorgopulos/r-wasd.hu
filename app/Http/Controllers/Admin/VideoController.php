@@ -51,7 +51,7 @@ class VideoController extends Controller
 
 		foreach ($uploadedFiles as $file) {
 			(new IndexVideo())->fill([
-				'sort' => (IndexVideo::all()->max('sort') + 1),
+				'sort' => IndexVideo::getNextSort(),
 				'filename' => $file->getClientOriginalName(),
 				'is_active' => false,
 			])->save();

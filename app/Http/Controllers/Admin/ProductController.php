@@ -92,6 +92,18 @@ class ProductController extends Controller implements ICrudController
 				$productImage->deleteImageFile();
 			}
 
+			// Reorder product images
+			$sort = 1;
+			foreach ($request->get('product_image_ids', []) as $productImageId) {
+				if (!($productImageModel = ProductImage::find($productImageId))) {
+					continue;
+				}
+
+				$productImageModel->sort = $sort++;
+				$productImageModel->save();
+			}
+
+			// Uploaded product images
 			$uploadedFiles = $request->file('images', []);
 			foreach ($uploadedFiles as $file) {
 				$productImage = new ProductImage();

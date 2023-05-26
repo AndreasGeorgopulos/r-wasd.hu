@@ -1,16 +1,16 @@
 require('./components/listTable.js');
 require('tablednd');
 
-const tinymce = require("tinymce");
+/*const tinymce = require("tinymce");*/
 
-import { render } from "react-dom";
+/*import { render } from "react-dom";*/
 
-const loadComponent = (componentId, elementId) => {
+/*const loadComponent = (componentId, elementId) => {
 	const element = document.getElementById(elementId)
 	if (element !== null) {
 		render(componentId, element)
 	}
-}
+}*/
 
 $('.select2').select2();
 

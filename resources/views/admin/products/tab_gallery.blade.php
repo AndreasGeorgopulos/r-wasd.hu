@@ -71,9 +71,10 @@
 	@if($model->images->count())
 		<hr />
 		<h3>{{trans('Uploaded gallery images')}}</h3>
-		<table class="table table-striped">
+		<table class="table table-bordered table-striped" id="reorderable-table">
 			<thead>
 			<tr>
+				<th class="text-center">#</th>
 				<th>{{trans('Image')}}</th>
 				<th>{{trans('File name')}}</th>
 				<th>{{trans('Mime type')}}</th>
@@ -84,6 +85,10 @@
 			<tbody>
 			@foreach($model->images as $productImage)
 				<tr>
+					<td class="dragHandle text-center">
+						<i class="fa fa-reorder"></i>
+						<input type="hidden" name="product_image_ids[]" value="{{$productImage->id}}" />
+					</td>
 					<td>
 						<img src="{{$productImage->getImageFileUrl('thumb_admin')}}">
 					</td>
